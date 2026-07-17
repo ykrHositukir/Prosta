@@ -1,0 +1,3128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中3 総合テスト予想問題 3教科対応</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@400;700&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f9f8f3;
+  --paper2:#f2f0e6;
+  --ink:#22242e;
+  --ink-soft:#565a6b;
+  --grid:#d8d3c0;
+  --red:#c23b2e;
+  --red-deep:#a12318;
+  --stamp:#b5202f;
+  --navy:#1f3b57;
+  --navy-soft:#3c5c78;
+  --gold:#b3892f;
+  --ok:#2c6e49;
+  --teal:#1f6f6a;
+  --brown:#7a4a2b;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 34px 34px;
+  color:var(--ink);
+  font-family:"Zen Kaku Gothic New", sans-serif;
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{ max-width:860px; margin:0 auto; padding:28px 18px 90px; }
+
+/* ---------- header ---------- */
+.paper-head{
+  background:var(--paper);
+  border:2px solid var(--ink);
+  border-radius:2px;
+  padding:18px 20px 14px;
+  position:relative;
+  margin-bottom:22px;
+  box-shadow: 4px 4px 0 rgba(34,36,46,0.08);
+  animation: fadeInUp .5s ease both;
+}
+.paper-head::before{
+  content:"総合";
+  position:absolute; top:-16px; left:16px;
+  background:var(--navy); color:#fff;
+  font-family:"Kaisei Decol",serif;
+  font-size:13px; padding:4px 10px; border-radius:2px; letter-spacing:.1em;
+}
+.paper-head h1{ font-family:"Kaisei Decol",serif; font-size:25px; margin:6px 0 4px; letter-spacing:.03em; }
+.paper-head p{ margin:0; color:var(--ink-soft); font-size:13px; line-height:1.7; }
+.meta-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; font-size:12px; color:var(--ink-soft); }
+.meta-row span{ border:1px solid var(--grid); padding:3px 9px; border-radius:999px; background:var(--paper2); }
+
+/* ---------- mode tabs (normal vs weak point) ---------- */
+.mode-row{ display:flex; gap:10px; margin-bottom:18px; }
+.mode-btn{
+  flex:1; font-family:"Kaisei Decol",serif; font-size:14px;
+  padding:13px 10px; border:1.5px solid var(--ink); background:#fff; color:var(--ink);
+  border-radius:2px; cursor:pointer; position:relative; overflow:hidden;
+  transition:transform .15s ease, box-shadow .15s ease, background .2s ease, color .2s ease;
+}
+.mode-btn small{ display:block; font-family:"Zen Kaku Gothic New",sans-serif; font-size:10.5px; margin-top:2px; font-weight:400; opacity:.75; }
+.mode-btn:hover{ transform:translateY(-2px); }
+.mode-btn.active{ background:var(--ink); color:#fff; box-shadow:4px 4px 0 var(--red); }
+.mode-btn.weak.active{ box-shadow:4px 4px 0 var(--gold); }
+.weak-badge{
+  position:absolute; top:-8px; right:-8px;
+  background:var(--red); color:#fff; font-size:10px; font-family:"Zen Kaku Gothic New";
+  min-width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  border:2px solid var(--paper); animation: popIn .3s ease both;
+}
+
+/* ---------- subject tabs ---------- */
+.subject-tabs{ display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap; }
+.subject-tab{
+  font-family:"Kaisei Decol",serif; font-size:13.5px;
+  padding:9px 16px; border:1.5px solid var(--ink); border-radius:999px;
+  background:#fff; cursor:pointer; transition:all .18s ease;
+  display:flex; align-items:center; gap:6px;
+}
+.subject-tab .dot{ width:8px; height:8px; border-radius:50%; background:var(--ink-soft); }
+.subject-tab.active{ color:#fff; transform:translateY(-1px); box-shadow:3px 3px 0 rgba(34,36,46,0.18); }
+.subject-tab .cnt{ font-size:10px; opacity:.8; }
+
+/* ---------- unit cards ---------- */
+.unit-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:18px; }
+@media(max-width:560px){ .unit-grid{grid-template-columns:1fr;} }
+.unit-card{
+  border:1.5px solid var(--ink); background:#fff; border-radius:2px;
+  padding:16px 16px 14px; cursor:pointer; position:relative;
+  transition:transform .15s ease, box-shadow .15s ease; text-align:left;
+  animation: fadeInUp .45s ease both;
+}
+.unit-card:hover{ transform:translate(-2px,-2px); box-shadow:5px 5px 0 var(--navy); }
+.unit-card.selected{ box-shadow:5px 5px 0 var(--red); border-color:var(--red); }
+.unit-num{
+  font-family:"Kaisei Decol",serif; font-size:12px; color:#fff; background:var(--navy);
+  display:inline-block; width:22px;height:22px; line-height:22px; text-align:center;
+  border-radius:50%; margin-bottom:8px;
+}
+.unit-card h3{ margin:0 0 4px; font-size:16px; font-family:"Kaisei Decol",serif; }
+.unit-card p{ margin:0; font-size:12px; color:var(--ink-soft); }
+.unit-count{ position:absolute; top:12px; right:12px; font-size:11px; color:var(--ink-soft); }
+.check-mark{ position:absolute; bottom:10px; right:12px; width:18px;height:18px; border:1.5px solid var(--ink); border-radius:50%; transition:all .15s ease; }
+.unit-card.selected .check-mark{ background:var(--red); border-color:var(--red); }
+.unit-card.selected .check-mark::after{ content:""; display:block; width:5px;height:9px; border:solid #fff; border-width:0 2px 2px 0; transform:rotate(45deg); margin:2px auto; }
+
+.select-all-row{ display:flex; gap:8px; margin-bottom:14px; }
+.mini-btn{
+  font-size:11.5px; font-family:"Zen Kaku Gothic New"; border:1px solid var(--grid); background:var(--paper2);
+  color:var(--ink-soft); padding:5px 11px; border-radius:999px; cursor:pointer; transition:all .15s ease;
+}
+.mini-btn:hover{ background:#fff; border-color:var(--ink); color:var(--ink); }
+
+.controls{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:18px; }
+.count-select{ display:flex; align-items:center; gap:8px; font-size:13px; }
+select{ font-family:inherit; font-size:13px; border:1.5px solid var(--ink); background:#fff; padding:6px 8px; border-radius:2px; }
+.start-btn{
+  font-family:"Kaisei Decol",serif; font-size:17px; letter-spacing:.08em;
+  background:var(--ink); color:#fff; border:none; padding:14px 30px; border-radius:2px;
+  cursor:pointer; box-shadow:4px 4px 0 var(--red); transition:transform .12s ease; width:100%;
+}
+.start-btn:hover{ transform:translate(-2px,-2px); }
+.start-btn:active{ transform:translate(2px,2px); box-shadow:0 0 0 var(--red); }
+.start-btn:disabled{ opacity:.4; cursor:not-allowed; box-shadow:none; }
+
+/* ---------- weak panel ---------- */
+.weak-panel{
+  background:#fff; border:2px dashed var(--gold); border-radius:4px; padding:20px; margin-bottom:18px;
+  animation: fadeInUp .4s ease both;
+}
+.weak-panel h2{ font-family:"Kaisei Decol",serif; font-size:18px; margin:0 0 8px; color:var(--red-deep); }
+.weak-panel p{ font-size:13px; color:var(--ink-soft); line-height:1.7; margin:0 0 12px; }
+.weak-list{ display:grid; gap:6px; margin-bottom:14px; max-height:260px; overflow-y:auto; }
+.weak-row{
+  display:flex; justify-content:space-between; align-items:center; gap:10px;
+  background:var(--paper2); border-radius:3px; padding:8px 12px; font-size:12.5px;
+}
+.weak-row .w-text{ flex:1; }
+.weak-row .w-badge{ font-size:11px; color:#fff; background:var(--red); padding:2px 8px; border-radius:999px; flex-shrink:0; }
+.weak-empty{ text-align:center; padding:30px 10px; color:var(--ink-soft); font-size:13px; }
+
+/* ---------- quiz screen ---------- */
+.hidden{display:none !important;}
+.quiz-topbar{ display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; font-size:12px; color:var(--ink-soft); }
+.progress-track{ height:6px; background:var(--paper2); border:1px solid var(--grid); border-radius:99px; overflow:hidden; flex:1; margin:0 12px; }
+.progress-fill{ height:100%; background:var(--navy); width:0%; transition:width .4s cubic-bezier(.4,0,.2,1); }
+
+.qcard{
+  background:#fff; border:2px solid var(--ink); border-radius:2px; padding:22px 22px 20px;
+  position:relative; box-shadow:5px 5px 0 rgba(34,36,46,0.10); min-height:200px;
+}
+.qcard.enter{ animation: cardIn .4s cubic-bezier(.2,.9,.3,1.1) both; }
+.qcard.shake{ animation: shakeCard .4s ease; }
+
+.qtop{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; margin-bottom:14px; }
+.qnum{
+  font-family:"Kaisei Decol",serif; font-size:20px; border:2px solid var(--ink); width:34px;height:34px;
+  border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.tagwrap{ display:flex; gap:6px; align-items:center; }
+.tag{ font-size:11px; border:1px solid var(--ink-soft); color:var(--ink-soft); padding:2px 7px; border-radius:2px; background:var(--paper2); }
+.tag.chi{ border-color:var(--navy); color:var(--navy); }
+.tag.shi{ border-color:var(--gold); color:var(--gold); }
+.pts{ font-size:11px; color:var(--ink-soft); }
+.weak-flag{ font-size:11px; color:#fff; background:var(--red); padding:2px 8px; border-radius:999px; margin-left:6px; }
+
+.unit-badge{ font-size:11px; letter-spacing:.05em; color:#fff; padding:3px 9px; border-radius:99px; display:inline-block; margin-bottom:10px; }
+
+.qtext{ font-size:17px; line-height:1.75; margin:4px 0 16px; font-weight:500; }
+.qsvg-wrap{ background:var(--paper2); border:1px dashed var(--grid); border-radius:4px; padding:12px; display:flex; justify-content:center; margin-bottom:16px; }
+.qsvg-wrap svg{ max-width:100%; height:auto; }
+
+.choices{ display:grid; gap:10px; }
+.choice-btn{
+  text-align:left; font-family:inherit; font-size:14.5px; padding:12px 14px;
+  border:1.5px solid var(--ink); background:#fff; border-radius:2px; cursor:pointer;
+  display:flex; gap:10px; align-items:center; transition:background .12s, transform .12s;
+}
+.choice-btn:hover:not(:disabled){ background:var(--paper2); transform:translateX(2px); }
+.choice-btn .letter{
+  font-family:"Kaisei Decol",serif; width:22px; height:22px; border-radius:50%; border:1.5px solid var(--ink);
+  display:flex; align-items:center; justify-content:center; font-size:12px; flex-shrink:0;
+}
+.choice-btn.correct{ background:#e7f2ea; border-color:var(--ok); animation: pulseGreen .5s ease; }
+.choice-btn.correct .letter{ background:var(--ok); border-color:var(--ok); color:#fff; }
+.choice-btn.wrong{ background:#fbe9e6; border-color:var(--red); animation: shakeCard .4s ease; }
+.choice-btn.wrong .letter{ background:var(--red); border-color:var(--red); color:#fff; }
+.choice-btn:disabled{ cursor:default; }
+
+.text-input-row{ display:flex; gap:10px; }
+.text-input-row input{ flex:1; font-family:inherit; font-size:15px; padding:12px 14px; border:1.5px solid var(--ink); border-radius:2px; background:#fff; }
+.text-input-row input:focus{ outline:2px solid var(--navy-soft); outline-offset:1px; }
+.hint-row{ font-size:11.5px; color:var(--ink-soft); margin-top:6px; }
+.judge-btn{
+  font-family:"Kaisei Decol",serif; font-size:14px; padding:0 20px; border:1.5px solid var(--ink);
+  background:var(--ink); color:#fff; border-radius:2px; cursor:pointer; transition:transform .12s ease;
+}
+.judge-btn:hover{ transform:translateY(-2px); }
+
+.answer-panel{ margin-top:16px; padding-top:14px; border-top:1.5px dashed var(--grid); position:relative; }
+.stamp{
+  position:absolute; top:8px; right:6px; width:64px; height:64px; border-radius:50%;
+  border:4px solid var(--stamp); color:var(--stamp); display:flex; align-items:center; justify-content:center;
+  font-family:"Kaisei Decol",serif; font-size:30px; transform:rotate(-14deg) scale(0);
+  animation: stampIn .4s cubic-bezier(.2,1.4,.5,1) forwards; opacity:.88;
+}
+.stamp.wrong{ border-color:var(--red-deep); color:var(--red-deep); font-size:26px; }
+.correct-line{ font-size:14px; color:var(--ink-soft); margin:0 0 6px; }
+.correct-line b{ color:var(--red-deep); font-size:15px; }
+.explain{ font-size:13.5px; color:var(--ink-soft); line-height:1.7; background:var(--paper2); padding:10px 12px; border-radius:3px; animation: fadeInUp .35s ease both; }
+.next-row{ margin-top:16px; text-align:right; }
+.next-btn{
+  font-family:"Kaisei Decol",serif; font-size:14px; padding:10px 22px; border:none;
+  background:var(--navy); color:#fff; border-radius:2px; cursor:pointer; transition:transform .12s ease;
+}
+.next-btn:hover{ background:var(--navy-soft); transform:translateY(-2px); }
+
+/* ---------- result screen ---------- */
+.result-head{ text-align:center; margin-bottom:20px; position:relative; }
+.result-head h2{ font-family:"Kaisei Decol",serif; font-size:24px; margin-bottom:4px; }
+.result-badge{
+  display:inline-block; font-family:"Kaisei Decol",serif; font-size:13px; padding:4px 14px;
+  border-radius:999px; margin-top:6px; animation: popIn .4s ease both;
+}
+.score-table{ width:100%; border-collapse:collapse; background:#fff; border:2px solid var(--ink); margin-bottom:22px; }
+.score-table th, .score-table td{ border:1px solid var(--ink); padding:12px 10px; text-align:center; font-size:13px; }
+.score-table th{ background:var(--paper2); font-weight:700; }
+.score-table td.big{ font-family:"Kaisei Decol",serif; font-size:22px; }
+.score-table td.total{ font-family:"Kaisei Decol",serif; font-size:26px; color:var(--red-deep); }
+.unit-breakdown{ display:grid; gap:8px; margin-bottom:22px; }
+.ub-row{ display:flex; align-items:center; gap:10px; background:#fff; border:1px solid var(--grid); border-radius:2px; padding:10px 12px; }
+.ub-row .ub-name{ width:150px; font-size:13px; flex-shrink:0; }
+.ub-bar-track{ flex:1; height:10px; background:var(--paper2); border-radius:99px; overflow:hidden; }
+.ub-bar-fill{ height:100%; width:0%; transition:width 1s cubic-bezier(.2,.8,.3,1); }
+.ub-frac{ font-size:12px; color:var(--ink-soft); width:52px; text-align:right; flex-shrink:0; }
+
+.miss-list{ margin-bottom:24px; }
+.miss-list h3{ font-family:"Kaisei Decol",serif; font-size:16px; margin-bottom:10px; }
+.miss-item{ background:#fff; border:1px solid var(--grid); border-left:4px solid var(--red); border-radius:2px; padding:10px 12px; margin-bottom:8px; font-size:13px; }
+.miss-item .q{ font-weight:700; margin-bottom:3px;}
+.miss-item .a{ color:var(--red-deep); }
+
+.result-actions{ display:flex; gap:10px; flex-wrap:wrap; }
+.result-actions button{ flex:1; min-width:140px; }
+.secondary-btn{
+  font-family:"Kaisei Decol",serif; font-size:13.5px; padding:14px; border:1.5px solid var(--ink);
+  background:#fff; color:var(--ink); border-radius:2px; cursor:pointer; transition:transform .12s ease;
+}
+.secondary-btn:hover{ transform:translateY(-2px); }
+.secondary-btn.retry-wrong{ border-color:var(--red); color:var(--red-deep); }
+
+footer{ text-align:center; font-size:11px; color:var(--ink-soft); margin-top:36px; letter-spacing:.04em; line-height:1.8; }
+
+/* ---------- animations ---------- */
+@keyframes fadeInUp{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:translateY(0); } }
+@keyframes cardIn{ from{ opacity:0; transform:translateY(18px) scale(.98); } to{ opacity:1; transform:translateY(0) scale(1); } }
+@keyframes stampIn{ to{ transform:rotate(-14deg) scale(1); } }
+@keyframes popIn{ from{ transform:scale(0); } 70%{ transform:scale(1.15); } to{ transform:scale(1); } }
+@keyframes shakeCard{
+  10%,90%{ transform:translateX(-2px); }
+  20%,80%{ transform:translateX(4px); }
+  30%,50%,70%{ transform:translateX(-8px); }
+  40%,60%{ transform:translateX(8px); }
+}
+@keyframes pulseGreen{ 0%{ box-shadow:0 0 0 0 rgba(44,110,73,.4);} 100%{ box-shadow:0 0 0 10px rgba(44,110,73,0);} }
+.confetti-piece{ position:fixed; top:-20px; z-index:999; pointer-events:none; border-radius:1px; }
+@keyframes confettiFall{ to{ transform: translateY(110vh) rotate(540deg); opacity:0.2; } }
+
+/* ---------- fraction display ---------- */
+.frac{ display:inline-flex; flex-direction:column; vertical-align:middle; text-align:center; margin:0 3px; font-size:0.92em; line-height:1.05; position:relative; top:0.12em; }
+.frac .num{ border-bottom:1.4px solid currentColor; padding:0 3px 1px; }
+.frac .den{ padding:1px 3px 0; }
+
+/* ---------- formula box ---------- */
+.formula-box{
+  margin-top:10px; background:#eef2ea; border:1px solid var(--ok); border-left:4px solid var(--ok);
+  border-radius:3px; padding:9px 12px; font-size:13px; color:#2c4a35;
+  animation: fadeInUp .35s ease both;
+}
+.formula-box .flabel{ font-family:"Kaisei Decol",serif; font-size:11.5px; color:var(--ok); margin-bottom:3px; letter-spacing:.04em; }
+.formula-box .fbody{ font-weight:700; letter-spacing:.02em; }
+
+/* ---------- quiz nav row ---------- */
+.nav-row{ display:flex; gap:10px; margin-top:14px; }
+.nav-btn{
+  font-family:"Kaisei Decol",serif; font-size:13.5px; padding:12px 18px; border:1.5px solid var(--ink);
+  background:#fff; color:var(--ink); border-radius:2px; cursor:pointer; transition:transform .12s ease, opacity .12s ease;
+  flex-shrink:0;
+}
+.nav-btn:hover:not(:disabled){ transform:translateY(-2px); }
+.nav-btn:disabled{ opacity:.35; cursor:not-allowed; }
+.nav-btn.prev{ margin-right:auto; }
+.reviewed-flag{ font-size:11px; color:#fff; background:var(--navy-soft); padding:2px 8px; border-radius:999px; margin-left:6px; }
+
+/* ---------- gold & achievements ---------- */
+.gold-bar{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:14px; padding:10px 14px; background:#fff; border:1.5px solid var(--gold); border-radius:4px; }
+.gold-bar .gold-amt{ font-family:"Kaisei Decol",serif; font-size:18px; color:var(--gold); }
+.gold-bar .gold-amt::before{ content:"🪙 "; }
+.ach-toggle{ font-size:11.5px; border:1px solid var(--grid); background:var(--paper2); padding:5px 11px; border-radius:999px; cursor:pointer; margin-left:auto; }
+.ach-panel{ background:#fff; border:1.5px solid var(--ink); border-radius:4px; padding:14px; margin-bottom:14px; max-height:320px; overflow-y:auto; display:none; }
+.ach-panel.open{ display:block; animation:fadeInUp .35s ease both; }
+.ach-grid{ display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+@media(max-width:560px){ .ach-grid{ grid-template-columns:1fr; } }
+.ach-item{ border:1px solid var(--grid); border-radius:3px; padding:8px 10px; font-size:11.5px; background:var(--paper2); opacity:.55; }
+.ach-item.unlocked{ opacity:1; background:#fff; border-color:var(--gold); box-shadow:2px 2px 0 rgba(179,137,47,.15); }
+.ach-item .ach-name{ font-weight:700; font-size:12px; margin-bottom:2px; }
+.ach-item .ach-reward{ color:var(--gold); font-size:10.5px; }
+.shop-row{ display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; align-items:center; font-size:12px; }
+.color-swatch{ width:22px; height:22px; border-radius:50%; border:2px solid var(--ink); cursor:pointer; transition:transform .12s; }
+.color-swatch:hover{ transform:scale(1.15); }
+.color-swatch.active{ box-shadow:0 0 0 2px var(--gold); }
+
+/* ---------- note pad ---------- */
+.quiz-topbar{ position:relative; }
+.note-btn{
+  font-family:"Kaisei Decol",serif; font-size:12px; padding:6px 12px; border:1.5px solid var(--ink);
+  background:#fff; border-radius:2px; cursor:pointer; flex-shrink:0; transition:transform .12s;
+}
+.note-btn:hover{ transform:translateY(-2px); background:var(--paper2); }
+.note-overlay{
+  position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(34,36,46,.25); z-index:900;
+  display:flex; align-items:center; justify-content:center; padding:16px;
+}
+.note-popup{
+  background:#fffef8; border:2px solid var(--ink); border-radius:4px; box-shadow:8px 8px 0 rgba(34,36,46,.12);
+  width:min(340px,92vw); animation:cardIn .3s ease both;
+}
+.note-head{ display:flex; align-items:center; justify-content:space-between; padding:10px 12px; border-bottom:1.5px dashed var(--grid); font-family:"Kaisei Decol",serif; font-size:14px; }
+.note-tools{ display:flex; gap:6px; padding:8px 12px; border-bottom:1px solid var(--grid); flex-wrap:wrap; align-items:center; }
+.note-tool{ font-size:11px; padding:4px 10px; border:1px solid var(--grid); background:#fff; border-radius:999px; cursor:pointer; }
+.note-tool.active{ background:var(--ink); color:#fff; border-color:var(--ink); }
+#note-canvas{ display:block; width:100%; height:220px; cursor:crosshair; touch-action:none; }
+.note-foot{ padding:8px 12px; text-align:right; font-size:11px; color:var(--ink-soft); }
+
+/* ---------- math input pad ---------- */
+.math-pad{ display:flex; flex-wrap:wrap; gap:5px; margin-top:8px; padding:10px; background:var(--paper2); border:1px dashed var(--grid); border-radius:4px; }
+.math-key{
+  font-family:inherit; font-size:13px; min-width:32px; height:32px; padding:0 8px;
+  border:1px solid var(--ink); background:#fff; border-radius:2px; cursor:pointer; transition:background .1s;
+}
+.math-key:hover{ background:var(--paper2); }
+.math-key.wide{ min-width:48px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="paper-head">
+    <h1>中学3年 総合テスト予想問題</h1>
+    <p>理科・社会・数学の3教科に対応。過去の解答用紙の出題傾向をもとに予想問題を作成しました。ひらがな解答もOK、答えがわからない問題はそのまま丸つけボタンで答えを確認できます。</p>
+    <div class="meta-row">
+      <span>知＝知識・技能</span>
+      <span>思＝思考・判断・表現</span>
+      <span id="total-q-count">全0問収録</span>
+    </div>
+  </div>
+
+  <!-- ============ HOME SCREEN ============ -->
+  <div id="home-screen">
+
+    <div class="mode-row">
+      <button class="mode-btn normal active" id="mode-normal-btn">通常モード<small>単元を選んで練習</small></button>
+      <button class="mode-btn weak" id="mode-weak-btn">ニガテ改善モード<small>間違えた問題だけ集中特訓</small>
+        <span class="weak-badge hidden" id="weak-badge">0</span>
+      </button>
+    </div>
+
+    <!-- normal mode UI -->
+    <div id="normal-mode-ui">
+      <div class="gold-bar">
+        <span class="gold-amt" id="gold-display">0</span>
+        <span style="font-size:12px;color:var(--ink-soft);">ゴールドでノート・ペンの色を変更できます</span>
+        <button class="ach-toggle" id="ach-toggle-btn">称号・ショップ ▼</button>
+      </div>
+      <div class="ach-panel" id="ach-panel">
+        <div style="font-family:'Kaisei Decol',serif;font-size:15px;margin-bottom:8px;">称号 <span id="ach-count">0/0</span></div>
+        <div class="ach-grid" id="ach-grid"></div>
+        <div class="shop-row">
+          <span>ノート色：</span><span id="note-colors"></span>
+          <span style="margin-left:8px;">ペン色：</span><span id="pen-colors"></span>
+        </div>
+      </div>
+      <div class="subject-tabs" id="subject-tabs"></div>
+      <div class="select-all-row">
+        <button class="mini-btn" id="select-all-btn">表示中の単元をすべて選択</button>
+        <button class="mini-btn" id="select-none-btn">表示中の単元の選択を解除</button>
+      </div>
+      <div class="unit-grid" id="unit-grid"></div>
+
+      <div class="controls">
+        <div class="count-select">
+          <label for="count-input">出題数：</label>
+          <select id="count-input">
+            <option value="10">10問</option>
+            <option value="20" selected>20問</option>
+            <option value="30">30問</option>
+            <option value="50">50問</option>
+            <option value="9999">選んだ範囲を全問</option>
+          </select>
+        </div>
+        <div class="count-select">
+          <label for="order-input">出題順：</label>
+          <select id="order-input">
+            <option value="random" selected>ランダム</option>
+            <option value="order">単元順</option>
+          </select>
+        </div>
+        <div class="count-select">
+          <label for="repeat-input">出た問題：</label>
+          <select id="repeat-input">
+            <option value="normal" selected>出るようにする</option>
+            <option value="hard">出にくくする</option>
+            <option value="exclude">出ない</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="start-btn" id="start-btn">テストを始める ▶</button>
+    </div>
+
+    <!-- weak mode UI -->
+    <div id="weak-mode-ui" class="hidden">
+      <div class="weak-panel">
+        <h2>ニガテ改善モード</h2>
+        <p>これまでこの画面で間違えた問題だけを集めて出題します。同じ問題を何度も間違えるほど優先的に出てきます。（このリストはタブを閉じると消えるので、まとめて復習したいときに使いましょう。）</p>
+        <div class="weak-list" id="weak-list"></div>
+      </div>
+      <button class="start-btn" id="weak-start-btn" style="box-shadow:4px 4px 0 var(--gold);">ニガテ問題に挑戦する ▶</button>
+    </div>
+  </div>
+
+  <!-- ============ QUIZ SCREEN ============ -->
+  <div id="quiz-screen" class="hidden">
+    <div class="quiz-topbar">
+      <span id="progress-label">1 / 20</span>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+      <span id="score-live">正解 0</span>
+      <button class="note-btn" id="note-btn" type="button">📝 ノート</button>
+    </div>
+    <div class="note-overlay hidden" id="note-overlay">
+      <div class="note-popup" id="note-popup">
+        <div class="note-head"><span>計算ノート</span><button class="note-tool" id="note-close" type="button">✕ 閉じる</button></div>
+        <div class="note-tools">
+          <button class="note-tool active" id="note-pen" type="button">ペン</button>
+          <button class="note-tool" id="note-eraser" type="button">消しゴム</button>
+          <button class="note-tool" id="note-clear" type="button">全消去</button>
+        </div>
+        <canvas id="note-canvas" width="316" height="220"></canvas>
+        <div class="note-foot">指やマウスで手書きできます</div>
+      </div>
+    </div>
+
+    <div class="qcard" id="qcard">
+      <div class="qtop">
+        <div class="qnum" id="qnum">1</div>
+        <div class="tagwrap">
+          <span class="pts" id="qpts">2点</span>
+          <span class="tag" id="qtag">知</span>
+          <span class="weak-flag hidden" id="qweakflag">前回ニガテ</span>
+          <span class="reviewed-flag hidden" id="qreviewedflag">回答済み</span>
+        </div>
+      </div>
+      <div class="unit-badge" id="qunit">生命の連続性</div>
+      <div class="qtext" id="qtext">問題文</div>
+      <div class="qsvg-wrap hidden" id="qsvg-wrap"></div>
+
+      <div id="answer-area"></div>
+
+      <div id="answer-panel" class="answer-panel hidden">
+        <div class="correct-line">正解：<b id="correct-answer"></b></div>
+        <div class="explain" id="explain"></div>
+        <div class="formula-box hidden" id="formula-box">
+          <div class="flabel">使う公式</div>
+          <div class="fbody" id="formula-body"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="nav-btn prev" id="prev-btn">◀ 前の問題</button>
+      <button class="nav-btn" id="next-btn" disabled>次の問題 ▶</button>
+    </div>
+  </div>
+
+  <!-- ============ RESULT SCREEN ============ -->
+  <div id="result-screen" class="hidden">
+    <div class="result-head">
+      <h2>採点結果</h2>
+      <p id="result-sub" style="color:var(--ink-soft); font-size:13px;"></p>
+      <span class="result-badge" id="result-badge"></span>
+    </div>
+
+    <table class="score-table">
+      <thead><tr><th>知識・技能</th><th>思考・判断・表現</th><th>合計</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="big" id="score-chi">0/0</td>
+          <td class="big" id="score-shi">0/0</td>
+          <td class="total" id="score-total">0/0</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="unit-breakdown" id="unit-breakdown"></div>
+
+    <div class="miss-list" id="miss-list-wrap">
+      <h3>間違えた問題の復習</h3>
+      <div id="miss-list"></div>
+    </div>
+
+    <div class="result-actions">
+      <button class="secondary-btn retry-wrong hidden" id="retry-wrong-btn">間違えた問題だけもう一度</button>
+      <button class="secondary-btn" id="retry-btn">もう一度同じ範囲で</button>
+      <button class="start-btn" id="home-btn" style="box-shadow:4px 4px 0 var(--navy); flex:1; min-width:140px;">単元選択に戻る</button>
+    </div>
+  </div>
+
+  <footer>手書きの解答用紙・プリントの出題傾向から作成した予想問題です。実際のテスト内容とは異なる場合があります。ニガテ改善モードの記録はタブを開いている間だけ保存されます。称号・ゴールド・出題履歴はこの端末のブラウザに保存されます。</footer>
+</div>
+
+<script>
+/* ======================================================================
+   SUBJECTS & UNITS
+   ====================================================================== */
+const SUBJECTS = [
+  {id:"science", name:"理科", color:"#3c5c78"},
+  {id:"social",  name:"社会", color:"#7a4a2b"},
+  {id:"math",    name:"数学", color:"#1f6f6a"},
+  {id:"english", name:"英語", color:"#8a2f5a"},
+];
+
+const UNITS = [
+  // science - 1年
+  {id:"obs-micro", subject:"science", name:"身近な生物の観察", sub:"双眼実体顕微鏡の使い方・倍率", color:"#4a7a5c"},
+  {id:"plant-class", subject:"science", name:"植物の分類", sub:"花のつくり・被子/裸子植物・単子葉/双子葉", color:"#5a8a3c"},
+  {id:"animal-class", subject:"science", name:"動物の分類", sub:"セキツイ動物・無セキツイ動物", color:"#3c8a6a"},
+  {id:"cell-bio", subject:"science", name:"生物と細胞", sub:"細胞のつくり・単細胞生物・組織", color:"#6a9c4a"},
+  {id:"photosynthesis", subject:"science", name:"光合成", sub:"対照実験・BTB溶液・気体の出入り", color:"#3f9e56"},
+  {id:"plant-structure", subject:"science", name:"植物の体のつくり", sub:"根・茎・葉のつくりとはたらき", color:"#2e8b57"},
+  {id:"digestion", subject:"science", name:"消化と吸収", sub:"消化酵素・柔毛・栄養分の分解", color:"#c2703b"},
+  {id:"circulation", subject:"science", name:"呼吸・血液・排出", sub:"血液循環・じん臓・肝臓", color:"#b5482e"},
+  {id:"nervous", subject:"science", name:"刺激と反応", sub:"感覚器官・神経系・反射", color:"#8a4a9c"},
+  {id:"matter-lab", subject:"science", name:"物質の性質と実験器具", sub:"ガスバーナー・電子てんびん・有機物と無機物", color:"#4a6a9c"},
+  {id:"solution", subject:"science", name:"水溶液", sub:"質量パーセント濃度・溶解度・再結晶", color:"#2f7a9c"},
+  {id:"state-change", subject:"science", name:"状態変化", sub:"融点・沸点・蒸留・混合物", color:"#3a6a8c"},
+  {id:"gas", subject:"science", name:"気体の性質", sub:"酸素・二酸化炭素・水素・アンモニアの集め方", color:"#5c7ab5"},
+  {id:"atom-molecule", subject:"science", name:"物質をつくっているもの", sub:"原子・分子・元素記号・単体と化合物", color:"#7a5ca0"},
+  {id:"lens-light", subject:"science", name:"光の性質と凸レンズ", sub:"反射・屈折・実像と虚像", color:"#3f8ca1"},
+  {id:"sound", subject:"science", name:"音", sub:"振動数・振幅・音の速さ", color:"#5c9cae"},
+  // science - 2年
+  {id:"chem-decompose", subject:"science", name:"化学変化：分解", sub:"炭酸水素ナトリウム・酸化銀の分解", color:"#9c5a7a"},
+  {id:"chem-heat-mass", subject:"science", name:"化学変化と熱・質量", sub:"発熱反応・吸熱反応・質量保存の法則", color:"#a15a3f"},
+  {id:"force", subject:"science", name:"力のはたらき", sub:"フックの法則・力のつり合い", color:"#6a5c9c"},
+  {id:"circuit", subject:"science", name:"電流・電圧・抵抗", sub:"オームの法則・回路計算", color:"#9c7a3f"},
+  // science - 3年
+  {id:"life",   subject:"science", name:"生命の連続性", sub:"細胞分裂・生殖・遺伝", color:"#3c5c78"},
+  {id:"evo",    subject:"science", name:"多様性と進化", sub:"セキツイ動物の分類・進化", color:"#2c6e49"},
+  {id:"ion",    subject:"science", name:"化学変化とイオン", sub:"電気分解・イオン式", color:"#a12318"},
+  {id:"water",  subject:"science", name:"水の電気分解", sub:"H₂O→H₂＋O₂", color:"#2c7a99"},
+  {id:"space",  subject:"science", name:"地球と宇宙", sub:"太陽・惑星・太陽系", color:"#b3892f"},
+  {id:"elec-power", subject:"science", name:"電流のはたらき", sub:"電力・電力量・熱量", color:"#ae6a3f"},
+  // social
+  {id:"hist1",  subject:"social", name:"世界恐慌とファシズム", sub:"世界恐慌〜満州事変", color:"#7a4a2b"},
+  {id:"hist2",  subject:"social", name:"日中戦争への道", sub:"二・二六事件〜日中戦争", color:"#9c5a2e"},
+  {id:"hist3",  subject:"social", name:"太平洋戦争と戦後", sub:"太平洋戦争〜冷戦・朝鮮戦争", color:"#a1341f"},
+  {id:"hist4",  subject:"social", name:"戦後改革", sub:"GHQ・農地改革・日本国憲法", color:"#6a3f8f"},
+  // math
+  {id:"expand", subject:"math", name:"式の展開と因数分解", sub:"多項式の計算・因数分解", color:"#1f6f6a"},
+  {id:"sqrt",   subject:"math", name:"平方根", sub:"根号の計算・有理化", color:"#237a6e"},
+  // english - grade 1
+  {id:"eng1-verb",  subject:"english", name:"【1年】be動詞・一般動詞", sub:"am/is/are・3人称単数現在", color:"#8a2f5a"},
+  {id:"eng1-quest", subject:"english", name:"【1年】疑問文・命令文", sub:"疑問詞・否定文・命令文", color:"#9c3a68"},
+  {id:"eng1-tense", subject:"english", name:"【1年】進行形・過去形など", sub:"現在進行形・過去形・can・There is/are", color:"#ac4676"},
+  // english - grade 2
+  {id:"eng2-future",subject:"english", name:"【2年】未来表現・助動詞", sub:"will・be going to・must など", color:"#7a3564"},
+  {id:"eng2-infgen",subject:"english", name:"【2年】不定詞・動名詞", sub:"to＋動詞の原形／動詞のing形", color:"#6b3a72"},
+  {id:"eng2-comppass",subject:"english", name:"【2年】比較・受け身", sub:"比較級・最上級・受け身", color:"#5c4080"},
+  {id:"eng2-conjperf",subject:"english", name:"【2年】接続詞・現在完了", sub:"that/when/if・have＋過去分詞", color:"#4d478e"},
+  // english - grade 3
+  {id:"eng3-passperf",subject:"english", name:"【3年】受け身・現在完了進行形", sub:"応用の受け身・have been ~ing", color:"#39518f"},
+  {id:"eng3-participle",subject:"english", name:"【3年】分詞の後置修飾", sub:"現在分詞・過去分詞で名詞を説明", color:"#2c5c8a"},
+  {id:"eng3-relative",subject:"english", name:"【3年】関係代名詞", sub:"who/which/that", color:"#26677d"},
+  {id:"eng3-others", subject:"english", name:"【3年】間接疑問文・仮定法など", sub:"間接疑問文・仮定法・原形不定詞", color:"#1f7270"},
+];
+
+/* ======================================================================
+   SVG DIAGRAMS
+   ====================================================================== */
+const svgChromosome = `<svg width="260" height="140" viewBox="0 0 260 140">
+  <g stroke="#22242e" stroke-width="4" fill="none" stroke-linecap="round">
+    <path d="M70 20 L100 60 M100 60 L70 100 M100 60 L130 20 M100 60 L130 100" transform="translate(-10,0)"/>
+    <path d="M160 20 L190 60 M190 60 L160 100 M190 60 L220 20 M190 60 L220 100" transform="translate(-10,0)"/>
+  </g>
+  <text x="90" y="130" font-size="12" fill="#565a6b" text-anchor="middle" font-family="sans-serif">染色体A</text>
+  <text x="185" y="130" font-size="12" fill="#565a6b" text-anchor="middle" font-family="sans-serif">染色体A</text>
+</svg>`;
+
+const svgLimbs = `<svg width="360" height="150" viewBox="0 0 360 150">
+  <g font-family="sans-serif" font-size="12" fill="#565a6b" text-anchor="middle">
+    <text x="55" y="145">コウモリ（翼）</text>
+    <text x="180" y="145">クジラ（ひれ）</text>
+    <text x="300" y="145">ヒト（うで）</text>
+  </g>
+  <g stroke="#22242e" stroke-width="3" fill="none" stroke-linecap="round">
+    <path d="M55 20 L55 60"/><path d="M55 60 L20 55"/><path d="M55 60 L30 75"/><path d="M55 60 L35 95"/><path d="M55 60 L45 105"/><path d="M55 60 L60 108"/>
+    <path d="M180 25 L180 55" stroke="#c23b2e" stroke-width="5"/><path d="M180 55 L150 65" stroke="#c23b2e" stroke-width="5"/><path d="M180 55 L200 68" stroke="#c23b2e" stroke-width="5"/>
+    <path d="M300 15 L300 55"/><path d="M300 55 L285 100"/><path d="M300 55 L295 105"/><path d="M300 55 L305 105"/><path d="M300 55 L315 100"/>
+  </g>
+</svg>`;
+
+const svgPlanets = `<svg width="420" height="90" viewBox="0 0 420 90">
+  <line x1="10" y1="45" x2="410" y2="45" stroke="#d8d3c0" stroke-width="3"/>
+  <circle cx="30" cy="45" r="12" fill="#b3892f"/>
+  <circle cx="90" cy="45" r="9" fill="#22242e"/>
+  <circle cx="150" cy="45" r="9" fill="#3c5c78"/>
+  <circle cx="210" cy="45" r="10" fill="#2c6e49"/>
+  <circle cx="270" cy="45" r="9" fill="#c23b2e"/>
+  <circle cx="340" cy="45" r="14" fill="#a12318" stroke="#22242e" stroke-width="2"/>
+  <text x="30" y="72" font-size="10" text-anchor="middle" fill="#565a6b" font-family="sans-serif">太陽</text>
+  <text x="90" y="72" font-size="10" text-anchor="middle" fill="#565a6b" font-family="sans-serif">水星</text>
+  <text x="150" y="72" font-size="10" text-anchor="middle" fill="#565a6b" font-family="sans-serif">金星</text>
+  <text x="210" y="72" font-size="10" text-anchor="middle" fill="#565a6b" font-family="sans-serif">地球</text>
+  <text x="340" y="72" font-size="10" text-anchor="middle" fill="#22242e" font-family="sans-serif" font-weight="bold">？</text>
+</svg>`;
+
+const svgElectrolysis = `<svg width="300" height="160" viewBox="0 0 300 160">
+  <path d="M40 40 L40 140 L260 140 L260 40" fill="none" stroke="#22242e" stroke-width="3"/>
+  <rect x="40" y="90" width="220" height="50" fill="#dce8ec" opacity="0.6"/>
+  <rect x="90" y="20" width="10" height="100" fill="#565a6b"/>
+  <rect x="200" y="20" width="10" height="100" fill="#c23b2e"/>
+  <text x="95" y="15" font-size="12" text-anchor="middle" fill="#22242e" font-family="sans-serif">電極A</text>
+  <text x="205" y="15" font-size="12" text-anchor="middle" fill="#22242e" font-family="sans-serif">電極B</text>
+  <text x="95" y="135" font-size="11" text-anchor="middle" fill="#565a6b" font-family="sans-serif">赤色の付着物</text>
+  <text x="150" y="155" font-size="11" text-anchor="middle" fill="#565a6b" font-family="sans-serif">塩化銅水溶液</text>
+  <path d="M110 55 h30 M110 65 a10 10 0 0 0 20 0" fill="none" stroke="#22242e" stroke-width="2"/>
+  <line x1="70" y1="55" x2="230" y2="55" stroke="#22242e" stroke-width="2"/>
+</svg>`;
+
+const svgWaterElectrolysis = `<svg width="280" height="170" viewBox="0 0 280 170">
+  <rect x="30" y="60" width="220" height="90" fill="#dce8ec" opacity="0.5" stroke="#22242e" stroke-width="2"/>
+  <rect x="85" y="20" width="20" height="110" fill="#eef0f2" stroke="#22242e" stroke-width="2"/>
+  <rect x="175" y="35" width="20" height="95" fill="#eef0f2" stroke="#22242e" stroke-width="2"/>
+  <rect x="88" y="70" width="14" height="55" fill="#a9c9d6"/>
+  <rect x="178" y="80" width="14" height="45" fill="#a9c9d6"/>
+  <text x="95" y="14" font-size="12" text-anchor="middle" fill="#22242e" font-family="sans-serif">A管</text>
+  <text x="185" y="14" font-size="12" text-anchor="middle" fill="#22242e" font-family="sans-serif">B管</text>
+  <text x="140" y="163" font-size="11" text-anchor="middle" fill="#565a6b" font-family="sans-serif">水（うすい水酸化ナトリウム水溶液）</text>
+</svg>`;
+
+const svgPunnett = `<svg width="220" height="180" viewBox="0 0 220 180">
+  <g stroke="#22242e" stroke-width="2" fill="none">
+    <rect x="40" y="40" width="70" height="70"/>
+    <rect x="110" y="40" width="70" height="70"/>
+    <rect x="40" y="110" width="70" height="70"/>
+    <rect x="110" y="110" width="70" height="70"/>
+  </g>
+  <g font-family="sans-serif" font-size="15" text-anchor="middle" fill="#22242e">
+    <text x="75" y="30">A</text><text x="145" y="30">a</text>
+    <text x="20" y="80">A</text><text x="20" y="150">a</text>
+    <text x="75" y="82">AA</text><text x="145" y="82">Aa</text>
+    <text x="75" y="152">Aa</text><text x="145" y="152">aa</text>
+  </g>
+</svg>`;
+
+const svgMicroscope = `<svg width="280" height="220" viewBox="0 0 280 220">
+  <g stroke="#22242e" stroke-width="2.5" fill="none" stroke-linecap="round">
+    <line x1="100" y1="30" x2="140" y2="70"/>
+    <line x1="180" y1="30" x2="140" y2="70"/>
+    <circle cx="140" cy="80" r="14"/>
+    <line x1="140" y1="94" x2="120" y2="150"/>
+    <rect x="60" y="150" width="140" height="12" rx="2"/>
+    <path d="M60 162 q70 30 140 0" />
+    <line x1="150" y1="110" x2="185" y2="120"/>
+    <circle cx="188" cy="122" r="5"/>
+  </g>
+  <g font-family="sans-serif" font-size="11" fill="#565a6b">
+    <text x="60" y="20">接眼レンズ</text>
+    <text x="180" y="55">鏡筒</text>
+    <text x="195" y="80">視度調節リング</text>
+    <text x="200" y="115">粗動ねじ</text>
+    <text x="205" y="135">微動ねじ</text>
+    <text x="65" y="145">クリップ</text>
+    <text x="75" y="185">ステージ</text>
+  </g>
+</svg>`;
+
+const svgFlowerDetail = `<svg width="260" height="180" viewBox="0 0 260 180">
+  <ellipse cx="130" cy="130" rx="55" ry="16" fill="#e7f2ea" stroke="#2c6e49" stroke-width="2"/>
+  <text x="130" y="112" font-size="11" text-anchor="middle" fill="#22242e" font-family="sans-serif">Q（子房）</text>
+  <circle cx="130" cy="130" r="7" fill="#c23b2e"/>
+  <text x="165" y="150" font-size="11" fill="#565a6b" font-family="sans-serif">P（胚珠）</text>
+  <line x1="150" y1="140" x2="132" y2="132" stroke="#565a6b" stroke-width="1"/>
+  <path d="M130 30 L130 108" stroke="#2c6e49" stroke-width="4"/>
+  <ellipse cx="130" cy="25" rx="10" ry="16" fill="#8a2f5a"/>
+  <text x="130" y="10" font-size="11" text-anchor="middle" fill="#565a6b" font-family="sans-serif">柱頭</text>
+  <path d="M90 60 L60 40" stroke="#22242e" stroke-width="3" fill="none"/>
+  <circle cx="58" cy="38" r="8" fill="#b3892f"/>
+  <text x="35" y="30" font-size="11" fill="#565a6b" font-family="sans-serif">やく</text>
+  <g fill="#f0d8e0" stroke="#8a2f5a" stroke-width="1.5">
+    <path d="M130 108 C90 100 80 60 105 45 C115 70 120 95 130 108"/>
+    <path d="M130 108 C170 100 180 60 155 45 C145 70 140 95 130 108"/>
+  </g>
+  <text x="195" y="60" font-size="11" fill="#565a6b" font-family="sans-serif">花弁</text>
+  <path d="M110 130 C95 145 95 160 110 165" stroke="#4a7a5c" stroke-width="2" fill="none"/>
+  <text x="80" y="170" font-size="11" fill="#565a6b" font-family="sans-serif">がく</text>
+</svg>`;
+
+const svgVillus = `<svg width="220" height="180" viewBox="0 0 220 180">
+  <path d="M110 20 C70 20 60 70 80 110 C90 140 130 140 140 110 C160 70 150 20 110 20 Z" fill="#f7ded8" stroke="#22242e" stroke-width="2"/>
+  <path d="M100 40 C90 60 90 90 100 115" stroke="#b3892f" stroke-width="3" fill="none"/>
+  <path d="M120 40 C130 60 130 90 120 115" stroke="#c23b2e" stroke-width="3" fill="none"/>
+  <text x="20" y="35" font-size="11" fill="#565a6b" font-family="sans-serif">リンパ管</text>
+  <line x1="60" y1="38" x2="97" y2="45" stroke="#565a6b" stroke-width="1"/>
+  <text x="150" y="60" font-size="11" fill="#565a6b" font-family="sans-serif">a（毛細血管）</text>
+  <line x1="148" y1="62" x2="122" y2="70" stroke="#565a6b" stroke-width="1"/>
+  <text x="70" y="165" font-size="11" fill="#565a6b" font-family="sans-serif">柔毛（小腸の壁）</text>
+</svg>`;
+
+const svgBloodCirc = `<svg width="240" height="260" viewBox="0 0 240 260">
+  <g stroke="#22242e" stroke-width="2.5" fill="none">
+    <rect x="70" y="10" width="100" height="30" rx="3"/>
+    <rect x="70" y="70" width="100" height="30" rx="3"/>
+    <path d="M120 100 q-20 25 0 40 q20 -15 0 -40 Z" fill="#f7ded8"/>
+    <rect x="70" y="165" width="100" height="30" rx="3"/>
+    <rect x="70" y="205" width="100" height="30" rx="3"/>
+    <rect x="70" y="240" width="100" height="16" rx="3"/>
+  </g>
+  <g font-family="sans-serif" font-size="11" text-anchor="middle" fill="#22242e">
+    <text x="120" y="28">体の上部</text>
+    <text x="120" y="88">肺</text>
+    <text x="120" y="128">心臓</text>
+    <text x="120" y="183">肝臓</text>
+    <text x="120" y="223">じん臓</text>
+    <text x="120" y="251">体の下部</text>
+  </g>
+  <g font-family="sans-serif" font-size="10" fill="#565a6b">
+    <text x="185" y="55">a</text>
+    <text x="45" y="60">c</text>
+    <text x="185" y="145">b</text>
+    <text x="185" y="180">d</text>
+    <text x="45" y="200">e</text>
+  </g>
+</svg>`;
+
+const svgReflexArc = `<svg width="260" height="200" viewBox="0 0 260 200">
+  <g font-family="sans-serif" font-size="11" fill="#22242e">
+    <text x="35" y="20">A（脳）</text>
+    <text x="195" y="35">C（皮膚）</text>
+    <text x="195" y="150">D（筋肉）</text>
+  </g>
+  <ellipse cx="55" cy="45" rx="30" ry="20" fill="#f0e6d8" stroke="#22242e" stroke-width="2"/>
+  <rect x="190" y="40" width="55" height="25" fill="#f7ded8" stroke="#22242e" stroke-width="2"/>
+  <rect x="195" y="100" width="20" height="70" fill="#e6d8c8" stroke="#22242e" stroke-width="2"/>
+  <ellipse cx="90" cy="130" rx="40" ry="25" fill="#f0e6d8" stroke="#22242e" stroke-width="2"/>
+  <text x="70" y="175" font-size="11" fill="#22242e" font-family="sans-serif">B（脊髄）</text>
+  <path d="M60 60 Q65 100 90 120" stroke="#22242e" stroke-width="2" fill="none"/>
+  <path d="M195 55 Q140 90 110 118" stroke="#c23b2e" stroke-width="2" fill="none"/>
+  <text x="140" y="95" font-size="10" fill="#565a6b">a</text>
+  <path d="M110 140 Q160 150 195 140" stroke="#3c5c78" stroke-width="2" fill="none"/>
+  <text x="150" y="155" font-size="10" fill="#565a6b">b</text>
+</svg>`;
+
+const svgLeafCross = `<svg width="240" height="160" viewBox="0 0 240 160">
+  <g stroke="#22242e" stroke-width="1.2">
+    <rect x="20" y="15" width="200" height="18" fill="#dfe6d0"/>
+    <rect x="20" y="33" width="200" height="45" fill="#c7dcb0"/>
+    <rect x="20" y="78" width="200" height="45" fill="#eaf2df"/>
+    <rect x="20" y="123" width="200" height="18" fill="#dfe6d0"/>
+  </g>
+  <circle cx="150" cy="132" r="6" fill="#fff" stroke="#22242e" stroke-width="1.5"/>
+  <text x="10" y="12" font-size="11" fill="#565a6b" font-family="sans-serif">X</text>
+  <text x="10" y="155" font-size="11" fill="#565a6b" font-family="sans-serif">Y</text>
+  <text x="230" y="45" font-size="11" fill="#565a6b" font-family="sans-serif">A</text>
+  <text x="230" y="95" font-size="11" fill="#565a6b" font-family="sans-serif">B/C</text>
+  <text x="150" y="155" font-size="11" fill="#565a6b" font-family="sans-serif">D</text>
+</svg>`;
+
+const svgGasCollect = `<svg width="380" height="140" viewBox="0 0 380 140">
+  <g font-family="sans-serif" font-size="11" fill="#22242e" text-anchor="middle">
+    <text x="60" y="15">A（水上置換法）</text>
+    <text x="190" y="15">B（下方置換法）</text>
+    <text x="310" y="15">C（上方置換法）</text>
+  </g>
+  <g stroke="#22242e" stroke-width="2" fill="none">
+    <rect x="30" y="30" width="60" height="60" fill="#dce8ec" opacity="0.5"/>
+    <rect x="45" y="20" width="30" height="55"/>
+    <rect x="170" y="25" width="35" height="70"/>
+    <rect x="295" y="25" width="35" height="70"/>
+  </g>
+  <path d="M60 100 L45 60" stroke="#565a6b" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <path d="M190 100 L188 90" stroke="#565a6b" stroke-width="2" fill="none"/>
+  <path d="M312 100 L312 30" stroke="#565a6b" stroke-width="2" fill="none"/>
+</svg>`;
+
+const svgConvexLens = `<svg width="320" height="150" viewBox="0 0 320 150">
+  <line x1="10" y1="75" x2="310" y2="75" stroke="#d8d3c0" stroke-width="1.5"/>
+  <ellipse cx="160" cy="75" rx="14" ry="55" fill="#dce8ec" opacity="0.5" stroke="#22242e" stroke-width="1.5"/>
+  <line x1="60" y1="75" x2="60" y2="30" stroke="#22242e" stroke-width="2.5"/>
+  <polygon points="60,30 55,40 65,40" fill="#22242e"/>
+  <circle cx="120" cy="75" r="2.5" fill="#22242e"/>
+  <circle cx="200" cy="75" r="2.5" fill="#22242e"/>
+  <text x="118" y="92" font-size="10" fill="#565a6b" font-family="sans-serif">F</text>
+  <text x="198" y="92" font-size="10" fill="#565a6b" font-family="sans-serif">F</text>
+  <line x1="60" y1="35" x2="160" y2="75" stroke="#c23b2e" stroke-width="1.3"/>
+  <line x1="160" y1="75" x2="270" y2="105" stroke="#c23b2e" stroke-width="1.3"/>
+  <line x1="60" y1="35" x2="245" y2="75" stroke="#3c5c78" stroke-width="1.3"/>
+  <line x1="245" y1="75" x2="270" y2="105" stroke="#3c5c78" stroke-width="1.3"/>
+  <line x1="270" y1="75" x2="270" y2="105" stroke="#22242e" stroke-width="2.5"/>
+  <polygon points="270,105 265,95 275,95" fill="#22242e"/>
+  <text x="45" y="20" font-size="10" fill="#565a6b" font-family="sans-serif">物体</text>
+  <text x="272" y="120" font-size="10" fill="#565a6b" font-family="sans-serif">実像</text>
+</svg>`;
+
+const svgCircuit = `<svg width="260" height="140" viewBox="0 0 260 140">
+  <g stroke="#22242e" stroke-width="2.5" fill="none">
+    <rect x="30" y="40" width="200" height="60"/>
+    <line x1="30" y1="70" x2="10" y2="70"/>
+    <rect x="80" y="30" width="30" height="20"/>
+    <rect x="160" y="30" width="30" height="20"/>
+    <circle cx="10" cy="70" r="6"/>
+  </g>
+  <g font-family="sans-serif" font-size="10" fill="#565a6b">
+    <text x="80" y="25">電熱線</text>
+    <text x="160" y="25">電熱線</text>
+    <text x="2" y="95">電源</text>
+  </g>
+</svg>`;
+
+const svgSpringGraph = `<svg width="260" height="200" viewBox="0 0 260 200">
+  <g stroke="#d8d3c0" stroke-width="1">
+    <line x1="40" y1="20" x2="40" y2="170"/>
+    <line x1="40" y1="170" x2="240" y2="170"/>
+  </g>
+  <line x1="40" y1="170" x2="220" y2="30" stroke="#c23b2e" stroke-width="2"/>
+  <text x="10" y="100" font-size="11" fill="#565a6b" font-family="sans-serif">ばね</text>
+  <text x="10" y="115" font-size="11" fill="#565a6b" font-family="sans-serif">ののび</text>
+  <text x="140" y="190" font-size="11" fill="#565a6b" font-family="sans-serif">力の大きさ</text>
+</svg>`;
+
+const svgPhotoExp = `<svg width="300" height="160" viewBox="0 0 300 160">
+  <ellipse cx="150" cy="80" rx="110" ry="55" fill="#5a9e3c" stroke="#22242e" stroke-width="2"/>
+  <rect x="55" y="45" width="55" height="70" fill="#888" opacity="0.75" stroke="#22242e" stroke-width="1.5"/>
+  <text x="82" y="88" font-size="14" fill="#fff" font-weight="bold" font-family="sans-serif">B</text>
+  <text x="195" y="88" font-size="14" fill="#fff" font-weight="bold" font-family="sans-serif">A</text>
+  <path d="M120 30 Q150 10 180 30" fill="none" stroke="#888" stroke-width="8" opacity="0.6"/>
+  <text x="150" y="145" font-size="11" fill="#565a6b" text-anchor="middle" font-family="sans-serif">アルミ箔でおおった部分(B)と、光が当たる部分(A)</text>
+</svg>`;
+
+const svgPhotoVariegated = `<svg width="300" height="160" viewBox="0 0 300 160">
+  <ellipse cx="150" cy="80" rx="110" ry="55" fill="#5a9e3c" stroke="#22242e" stroke-width="2"/>
+  <ellipse cx="150" cy="80" rx="45" ry="55" fill="#d4c4a0" stroke="#22242e" stroke-width="1.5"/>
+  <text x="150" y="88" font-size="14" fill="#22242e" font-weight="bold" text-anchor="middle" font-family="sans-serif">C</text>
+  <text x="220" y="70" font-size="14" fill="#fff" font-weight="bold" font-family="sans-serif">A</text>
+  <text x="150" y="145" font-size="11" fill="#565a6b" text-anchor="middle" font-family="sans-serif">緑色の部分(A)と、ふ(非緑色)の部分(C)</text>
+</svg>`;
+
+/* ======================================================================
+   QUESTION BANK
+   ====================================================================== */
+let qid = 0;
+function Q(unit, tag, pts, text, opts){
+  qid++;
+  return Object.assign({id:qid, unit, tag, pts, text}, opts);
+}
+
+const QUESTIONS = [
+  /* =====================================================================
+     理科：生命の連続性
+     ===================================================================== */
+  Q("life","知",2,"体細胞分裂の前後で、細胞の染色体の数はどうなるか。",{
+    choices:["変化しない（同じ数のまま）","半分になる","2倍になる","0になる"], answer:0,
+    explain:"体細胞分裂では染色体が複製されてから2つの細胞に分かれるため、分裂後も染色体の数は変化しません。"}),
+  Q("life","知",2,"生殖細胞をつくるときに行われる、染色体の数が半分になる特別な細胞分裂を何というか。",{
+    accept:["減数分裂","げんすうぶんれつ"], explain:"卵や精子などの生殖細胞がつくられるときは減数分裂が行われ、染色体の数がもとの細胞の半分になります。"}),
+  Q("life","知",2,"減数分裂によってできる生殖細胞の染色体の数は、もとの細胞と比べてどうなるか。",{
+    choices:["半分になる","2倍になる","変化しない","3倍になる"], answer:0,
+    explain:"減数分裂の最大の特徴は染色体数が半分になることです。受精によって再びもとの数に戻ります。"}),
+  Q("life","思",4,"受精によって、受精卵の染色体の数はどうなるか説明せよ。",{
+    accept:["もとの体細胞と同じ数にもどる","親の体細胞と同じ数になる","半分になった染色体が合わさりもとの数にもどる"],
+    explain:"減数分裂で半分になった精細胞と卵細胞の染色体が受精で合わさるため、受精卵の染色体数はもとの体細胞と同じ数に戻ります。"}),
+  Q("life","知",2,"無性生殖でふえた子の形質は、親の形質と比べてどうなるか。",{
+    choices:["親と全く同じになる","親と大きく異なる","半分だけ似る","形質は現れない"], answer:0,
+    explain:"無性生殖は体細胞分裂によって子をつくるため、親と全く同じ遺伝子を受けつぎ、形質も同じになります。"}),
+  Q("life","思",4,"有性生殖によって生まれた子の形質が、親の形質と異なることがあるのはなぜか。",{
+    accept:["減数分裂と受精によって両親の遺伝子が新しい組み合わせになるから","両親それぞれの遺伝子を半分ずつ受けつぎ組み合わさるから"],
+    explain:"減数分裂で染色体（遺伝子）が半分になり、受精で両親の遺伝子が新しい組み合わせになるため、子には親とは異なる形質が現れることがあります。"}),
+  Q("life","知",2,"おしべの先端でつくられ、めしべの柱頭につく粒を何というか。",{
+    accept:["花粉","かふん"], explain:"花粉が柱頭につくことを受粉といいます。"}),
+  Q("life","知",2,"花粉管の中を移動し、卵細胞と合体する生殖細胞を何というか。",{
+    accept:["精細胞","せいさいぼう"], explain:"花粉管が胚珠に達すると、中を移動してきた精細胞の核と卵細胞の核が合体します。"}),
+  Q("life","知",2,"胚珠の中にある、卵細胞と精細胞が合体してできる新しい細胞を何というか。",{
+    accept:["受精卵","じゅせいらん"], explain:"精細胞の核と卵細胞の核が合体（受精）してできる細胞を受精卵といいます。"}),
+  Q("life","知",2,"受精卵が体細胞分裂を繰り返して、個体としての体のつくりが完成していく過程を何というか。",{
+    accept:["発生","はっせい"], explain:"受精卵が分裂と分化を繰り返し、親と同じような体のつくりが完成するまでの過程を発生といいます。"}),
+  Q("life","知",2,"生物のもつ、形や性質などの特徴を何というか。",{
+    accept:["形質","けいしつ"], explain:"丸形・しわ形のように、生物がもつ形や性質の特徴を形質といいます。"}),
+  Q("life","知",2,"対になっている遺伝子のうち、子に現れる形質を伝える方の遺伝子を何というか。",{
+    accept:["顕性の遺伝子","優性の遺伝子","顕性遺伝子","けんせいのいでんし","ゆうせいのいでんし"],
+    explain:"かけ合わせたときに子に現れる形質を顕性（優性）の形質といい、それを伝える遺伝子を顕性の遺伝子といいます。"}),
+  Q("life","知",2,"対になっている遺伝子のうち、子には現れない形質を伝える方の遺伝子を何というか。",{
+    accept:["潜性の遺伝子","劣性の遺伝子","潜性遺伝子","せんせいのいでんし","れっせいのいでんし"],
+    explain:"子には現れないが遺伝子としては受けつがれる形質を潜性（劣性）の形質といいます。"}),
+  Q("life","知",2,"遺伝子の本体である物質をアルファベット3文字で答えよ。",{
+    accept:["DNA","dna"], explain:"遺伝子の本体はDNA（デオキシリボ核酸）という物質です。"}),
+  Q("life","知",2,"エンドウの丸形（顕性、遺伝子A）としわ形（潜性、遺伝子a）の純系どうしをかけ合わせてできた子（雑種第一代）の遺伝子の組み合わせを答えよ。",{
+    accept:["Aa"], explain:"純系AAとaaをかけ合わせると、子はすべてAaの遺伝子の組み合わせになります。"}),
+  Q("life","思",4,"遺伝子の組み合わせがAaである子どうしをかけ合わせたとき、孫の代の遺伝子の組み合わせの数の比（AA：Aa：aa）を答えよ。",{
+    svg:svgPunnett, accept:["1:2:1","1：2：1"], explain:"Aaどうしのかけ合わせでは、AA:Aa:aa=1:2:1の比で現れます。"}),
+  Q("life","思",4,"上と同じかけ合わせで、孫の代に現れる形質の数の比（丸形：しわ形）を答えよ。",{
+    accept:["3:1","3：1"], explain:"AA・Aaはどちらも丸形の形質が現れるため、丸形：しわ形＝3：1になります。"}),
+  Q("life","知",2,"図のように対になっている、形も大きさも同じ染色体を何というか。",{
+    svg:svgChromosome, accept:["相同染色体","そうどうせんしょくたい"],
+    explain:"体細胞には、形や大きさが同じ染色体が2本ずつ対になって存在しており、これを相同染色体といいます。"}),
+  Q("life","知",2,"シダ植物やコケ植物などが、なかまをふやすためにつくる生殖細胞にあたる粒を何というか。",{
+    accept:["胞子","ほうし"], explain:"シダ植物やコケ植物、菌類などは種子をつくらず、胞子によってなかまをふやします。"}),
+
+  /* =====================================================================
+     理科：生物の多様性と進化
+     ===================================================================== */
+  Q("evo","知",2,"セキツイ動物のうち、地球上に最も古い時代から生息していたと考えられるなかまはどれか。",{
+    choices:["魚類","両生類","ハチュウ類","ホニュウ類"], answer:0,
+    explain:"セキツイ動物は魚類→両生類→ハチュウ類→ホニュウ類・鳥類の順に出現したと考えられています。"}),
+  Q("evo","知",2,"セキツイ動物が出現した順に並べたとき、両生類の次に出現したと考えられるなかまはどれか。",{
+    choices:["ハチュウ類","鳥類","ホニュウ類","魚類"], answer:0,
+    explain:"魚類→両生類→ハチュウ類の順に出現し、ハチュウ類からホニュウ類と鳥類がそれぞれ進化したと考えられています。"}),
+  Q("evo","知",2,"ハチュウ類と鳥類の両方の特徴をあわせもつ、進化の証拠とされる化石動物を何というか。",{
+    accept:["シソチョウ","始祖鳥","ししょちょう","しそちょう","ししょとう","しそとう"], explain:"シソチョウ（始祖鳥）は、つばさと羽毛をもつ一方で、口に歯があり、つばさの先に爪があるなどハチュウ類的な特徴もあわせもちます。"}),
+  Q("evo","思",4,"シソチョウがもつ、ハチュウ類的な特徴を1つ答えよ。",{
+    accept:["口に歯がある","つばさの先に爪がある","長い尾に骨がある","歯がある"],
+    explain:"シソチョウには羽毛やつばさなど鳥類の特徴だけでなく、口に歯がある、つばさの先に爪があるなどのハチュウ類的な特徴も見られます。"}),
+  Q("evo","知",2,"現在の形やはたらきは異なっていても、もとは同じ器官であったと考えられる器官を何というか。",{
+    accept:["相同器官","そうどうきかん"], explain:"コウモリの翼、クジラのひれ、ヒトのうでのように、起源が同じと考えられる器官を相同器官といい、進化の証拠の一つです。"}),
+  Q("evo","知",2,"図のコウモリの翼・クジラのひれ・ヒトのうでの骨格に共通していえることは何か。",{
+    svg:svgLimbs, choices:["相同器官である（もとは同じ器官と考えられる）","全く別の起源をもつ器官である","すべて同じはたらきをする","進化とは関係がない"], answer:0,
+    explain:"見た目やはたらきは異なりますが、骨の基本的なつくりや配置が似ているため、共通の起源をもつ相同器官と考えられます。"}),
+  Q("evo","知",2,"陸上に殻のある卵を産んでなかまをふやすセキツイ動物のなかまを2つ答えよ。",{
+    accept:["ハチュウ類と鳥類","鳥類とハチュウ類"], explain:"ハチュウ類と鳥類は陸上に殻のある卵を産みます。殻があることで乾燥から卵を守ることができます。"}),
+  Q("evo","知",2,"子が母親の体内である程度育ってから生まれる、なかまのふやし方を何というか。",{
+    accept:["胎生","たいせい"], explain:"ホニュウ類に見られる、子が母体内で育ってから生まれるふえ方を胎生といいます。"}),
+  Q("evo","知",2,"卵を産んでなかまをふやすふやし方を何というか。",{
+    accept:["卵生","らんせい"], explain:"魚類・両生類・ハチュウ類・鳥類は卵を産んでなかまをふやす卵生です。"}),
+  Q("evo","知",2,"周囲の温度が変化しても体温がほぼ一定に保たれる動物のなかまを2つ答えよ。",{
+    accept:["鳥類とホニュウ類","ホニュウ類と鳥類"], explain:"鳥類とホニュウ類は恒温動物で、周囲の温度が変わっても体温をほぼ一定に保つことができます。"}),
+  Q("evo","知",2,"周囲の温度によって体温が変化する動物を何というか。",{
+    accept:["変温動物","へんおんどうぶつ"], explain:"魚類・両生類・ハチュウ類は変温動物で、周囲の温度によって体温が変化します。"}),
+  Q("evo","知",2,"両生類の幼生（子、例：オタマジャクシ）は主に何で呼吸するか。",{
+    choices:["えらと皮膚","肺と皮膚","肺のみ","肺とえら"], answer:0,
+    explain:"両生類の幼生は水中で生活するため、えらと皮膚で呼吸します。"}),
+  Q("evo","知",2,"両生類の成体（親）は主に何で呼吸するか。",{
+    choices:["肺と皮膚","えらと皮膚","肺のみ","えらのみ"], answer:0,
+    explain:"両生類は成体になると陸上生活が可能になり、肺と皮膚で呼吸するようになります。"}),
+  Q("evo","知",2,"長い年月をかけて、生物のもつ形質が世代を重ねる間に変化していくことを何というか。",{
+    accept:["進化","しんか"], explain:"生物が長い年月をかけて世代を重ねる間に、その形質が変化していくことを進化といいます。"}),
+  Q("evo","知",2,"コウモリ（ホニュウ類）が翼をもち空を飛ぶが、胎生で子を乳で育てることから何のなかまに分類されるか。",{
+    choices:["ホニュウ類","鳥類","ハチュウ類","両生類"], answer:0,
+    explain:"コウモリは翼をもち空を飛びますが、胎生で子を乳で育てるためホニュウ類に分類されます。"}),
+  Q("evo","思",4,"相同器官の存在から、生物についてどのようなことが考えられるか説明せよ。",{
+    accept:["現在の形やはたらきが異なる生物も、もとは同じ祖先から進化してきたと考えられる","共通の祖先から進化した","もとは同じ祖先をもつ生物が進化して現在の形になった"],
+    explain:"骨格の基本的なつくりが似ている相同器官の存在は、これらの生物が共通の祖先から進化してきたことの証拠と考えられています。"}),
+
+  /* =====================================================================
+     理科：化学変化とイオン
+     ===================================================================== */
+  Q("ion","知",2,"水に溶かしたときに電流が流れる物質を何というか。",{
+    accept:["電解質","でんかいしつ"], explain:"塩化ナトリウムや塩化銅のように、水に溶かすと電流が流れる物質を電解質といいます。"}),
+  Q("ion","知",2,"水に溶かしても電流が流れない物質を何というか。",{
+    accept:["非電解質","ひでんかいしつ"], explain:"砂糖やエタノールのように、水に溶かしても電離せず電流が流れない物質を非電解質といいます。"}),
+  Q("ion","知",2,"図のように塩化銅水溶液を電気分解したとき、赤色の物質が付着した電極Aは陽極・陰極のどちらか、また付着した物質は何か。",{
+    svg:svgElectrolysis, choices:["陰極・銅","陽極・銅","陰極・塩素","陽極・塩素"], answer:0,
+    explain:"塩化銅水溶液の電気分解では、陰極に赤色の銅（Cu）が付着し、陽極からは刺激臭のある塩素が発生します。"}),
+  Q("ion","知",2,"塩化銅水溶液を電気分解したとき、陽極から発生する気体は何か。",{
+    choices:["塩素","水素","酸素","二酸化炭素"], answer:0,
+    explain:"陽極では塩化物イオンが電子を失って塩素原子になり、塩素の気体が発生します。"}),
+  Q("ion","知",2,"塩酸を電気分解したとき、陽極から発生する気体は何か。",{
+    choices:["塩素","水素","酸素","窒素"], answer:0,
+    explain:"塩酸（塩化水素の水溶液）の電気分解では、陽極から塩素、陰極から水素が発生します。"}),
+  Q("ion","知",2,"塩酸を電気分解したとき、陰極から発生する気体は何か。",{
+    choices:["水素","塩素","酸素","二酸化炭素"], answer:0,
+    explain:"陰極では水素イオンが電子を受け取って水素原子になり、水素の気体が発生します。"}),
+  Q("ion","知",2,"原子が電子を失ってできる、+の電気を帯びた粒子を何というか。",{
+    accept:["陽イオン","よういおん"], explain:"原子が電子を失うと、+の電気を帯びた陽イオンになります。"}),
+  Q("ion","知",2,"原子が電子を受け取ってできる、-の電気を帯びた粒子を何というか。",{
+    accept:["陰イオン","いんいおん"], explain:"原子が電子を受け取ると、-の電気を帯びた陰イオンになります。"}),
+  Q("ion","知",2,"ナトリウム原子Naが電子を1個失ってできるイオンを化学式で答えよ。",{
+    accept:["Na+","Na＋","na+"], explain:"ナトリウム原子が電子を1個失うとNa+（ナトリウムイオン）になります。"}),
+  Q("ion","知",2,"塩化物イオンを化学式で答えよ。",{
+    accept:["Cl-","Cl−","Cl－","cl-"], explain:"塩素原子が電子を1個受け取るとCl-（塩化物イオン）になります。"}),
+  Q("ion","知",2,"マグネシウムイオンを化学式で答えよ。",{
+    accept:["Mg2+","Mg2＋","mg2+"], explain:"マグネシウム原子は電子を2個失い、Mg2+（マグネシウムイオン）になります。"}),
+  Q("ion","知",2,"水酸化物イオンを化学式で答えよ。",{
+    accept:["OH-","OH−","OH－","oh-"], explain:"水酸化物イオンはOH-と表され、-の電気を1個帯びた陰イオンです。"}),
+  Q("ion","思",4,"塩化ナトリウムが水に溶けて電離するようすをイオン式で表せ。",{
+    accept:["NaCl→Na++Cl-","NaCl→Na+ + Cl-","NaCl→Na＋＋Cl－","nacl→na++cl-"],
+    explain:"塩化ナトリウムNaClは水中でNa+とCl-に電離します。NaCl→Na++Cl-。"}),
+  Q("ion","思",4,"硫酸が水に溶けて電離するようすをイオン式で表せ。",{
+    accept:["H2SO4→2H++SO42-","H2SO4→2H+ + SO42-","H2SO4→2H＋＋SO4 2－","h2so4→2h++so42-"],
+    explain:"硫酸H2SO4は水中で水素イオン2個と硫酸イオン1個に電離します。H2SO4→2H++SO42-。"}),
+  Q("ion","知",2,"原子の中心にある、+の電気をもつ部分を何というか。",{
+    accept:["原子核","げんしかく"], explain:"原子の中心には+の電気をもつ原子核があり、そのまわりを電子が回っています。"}),
+  Q("ion","知",2,"原子核を構成する2種類の粒子を答えよ。",{
+    accept:["陽子と中性子","陽子・中性子","ようしとちゅうせいし"], explain:"原子核は+の電気をもつ陽子と、電気をもたない中性子からできています。"}),
+  Q("ion","知",2,"電気を帯びておらず、原子核のまわりを回っている、-の電気をもつ粒子を何というか。",{
+    accept:["電子","でんし"], explain:"原子核のまわりには-の電気をもつ電子が存在し、その数は陽子の数と等しくなっています。"}),
+
+  /* =====================================================================
+     理科：水の電気分解
+     ===================================================================== */
+  Q("water","知",2,"水を電気分解すると、陰極から発生する気体は何か。",{
+    choices:["水素","酸素","塩素","窒素"], answer:0,
+    explain:"水の電気分解では、陰極から水素、陽極から酸素が発生します。"}),
+  Q("water","知",2,"水を電気分解すると、陽極から発生する気体は何か。",{
+    choices:["酸素","水素","塩素","二酸化炭素"], answer:0,
+    explain:"陽極からは酸素が発生します。陰極からは水素が発生します。"}),
+  Q("water","思",4,"水の電気分解のようすを化学反応式で表せ。",{
+    accept:["2H2O→2H2+O2","2H2O→2H2＋O2","2h2o→2h2+o2"],
+    explain:"水（H2O）は電気分解によって水素（H2）と酸素（O2）に分解されます。反応式は2H2O→2H2+O2です。"}),
+  Q("water","知",2,"水の電気分解で発生する気体の体積比（水素：酸素）を答えよ。",{
+    accept:["2:1","2：1"], explain:"化学反応式2H2O→2H2+O2からわかるように、発生する水素と酸素の体積比は2：1になります。"}),
+  Q("water","知",2,"純粋な水は電流が流れにくいため、電気分解のときに少量とかす物質として使われるものを1つ答えよ。",{
+    accept:["水酸化ナトリウム","硫酸","すいさんかナトリウム"], explain:"純粋な水はほとんど電離しないため、電流を流しやすくするために水酸化ナトリウムなどの電解質を少量とかして電気分解を行います。"}),
+  Q("water","知",2,"陰極付近に集まった気体に、火のついたマッチを近づけるとどうなるか。",{
+    accept:["ポンと音を立てて燃える","音を立てて燃える","爆発するように燃える"],
+    explain:"陰極に集まる気体は水素で、火を近づけるとポンと音を立てて燃えます。これは水素の性質を確かめる代表的な方法です。"}),
+  Q("water","知",2,"陽極付近に集まった気体に、火のついた線香を入れるとどうなるか。",{
+    accept:["線香が炎を上げて激しく燃える","線香が激しく燃える","線香が炎を上げて燃える"],
+    explain:"陽極に集まる気体は酸素で、ものを燃やすはたらき（助燃性）があるため、線香が炎を上げて激しく燃えます。"}),
+  Q("water","知",2,"図のように水を電気分解すると、A管に集まった気体の体積はB管の2倍であった。A管に集まった気体は何か。",{
+    svg:svgWaterElectrolysis, choices:["水素","酸素","塩素","二酸化炭素"], answer:0,
+    explain:"水の電気分解では水素と酸素が体積比2：1で発生するため、体積が多いA管に集まっているのは水素です。"}),
+
+  /* =====================================================================
+     理科：地球と宇宙
+     ===================================================================== */
+  Q("space","知",2,"太陽のように、みずから光を放つ天体を何というか。",{
+    accept:["恒星","こうせい"], explain:"太陽のようにみずから光や熱を出す天体を恒星といいます。"}),
+  Q("space","知",2,"太陽の表面に見られる、周囲より黒っぽく見える斑点を何というか。",{
+    accept:["黒点","こくてん"], explain:"太陽の表面に見られる黒い斑点を黒点といいます。"}),
+  Q("space","思",4,"黒点が周囲より黒く見える理由を説明せよ。",{
+    accept:["周囲より温度が低いから","まわりより温度が低いから"],
+    explain:"黒点は周囲（約6000℃）よりも温度が低い（約4000℃）ため、相対的に黒っぽく見えます。"}),
+  Q("space","知",2,"太陽は主に何という状態の物質でできているか。",{
+    choices:["気体","固体","液体","プラズマのみで気体ではない"], answer:0,
+    explain:"太陽は非常に高温の気体（ガス）でできています。"}),
+  Q("space","知",2,"太陽をとりまく、非常に高温で希薄なガスの層を何というか。",{
+    accept:["コロナ","ころな"], explain:"太陽の周囲に広がる高温のガスの層をコロナといい、皆既日食のときに観察できます。"}),
+  Q("space","知",2,"太陽表面から炎のように吹き出すガスを何というか。",{
+    accept:["プロミネンス","紅炎","こうえん"], explain:"太陽表面から炎のように高く吹き上がるガスの動きをプロミネンス（紅炎）といいます。"}),
+  Q("space","思",2,"太陽を観察するとき、望遠鏡などで直接肉眼で見てはいけない理由を答えよ。",{
+    accept:["太陽の光が非常に強く、目をいためるから","強い光で目をいためるから"],
+    explain:"太陽の光や熱は非常に強いため、直接見ると目を痛めてしまう危険があります。観察には必ず遮光板などを使います。"}),
+  Q("space","知",2,"地球や火星のように、直径や質量が小さく、密度が大きい惑星のなかまを何というか。",{
+    accept:["地球型惑星","ちきゅうがたわくせい"], explain:"水星・金星・地球・火星は、小型で密度が大きい地球型惑星に分類されます。"}),
+  Q("space","知",2,"木星や土星のように、直径や質量が大きく、密度が小さい惑星のなかまを何というか。",{
+    accept:["木星型惑星","もくせいがたわくせい"], explain:"木星・土星・天王星・海王星は、大型で密度が小さい木星型惑星に分類されます。"}),
+  Q("space","知",2,"次の惑星のうち、地球型惑星に分類されないものはどれか。",{
+    choices:["木星","水星","金星","火星"], answer:0,
+    explain:"木星は大型で密度が小さいため、木星型惑星に分類されます。地球型惑星は水星・金星・地球・火星です。"}),
+  Q("space","知",2,"太陽から近い順に惑星を並べたとき、地球のすぐ次（外側）にある惑星はどれか。",{
+    choices:["火星","金星","木星","水星"], answer:0,
+    explain:"太陽から近い順に、水星・金星・地球・火星・木星・土星・天王星・海王星と並んでいます。"}),
+  Q("space","知",2,"図の太陽系の惑星の並びのうち、「？」で示された太陽から6番目の惑星は何か。",{
+    svg:svgPlanets, choices:["土星","木星","天王星","海王星"], answer:0,
+    explain:"太陽に近い順に、太陽・水星・金星・地球・（火星）・木星・土星と続きます。図の6番目の位置にあたるのは土星です。"}),
+  Q("space","知",2,"主に火星と木星の軌道の間に多く分布する、小型の天体を何というか。",{
+    accept:["小惑星","しょうわくせい"], explain:"火星と木星の軌道の間には小惑星帯と呼ばれる領域があり、多数の小惑星が分布しています。"}),
+  Q("space","知",2,"氷やちりでできていて、太陽に近づくと尾を引いて見える天体を何というか。",{
+    accept:["すい星","彗星","すいせい"], explain:"すい星は氷やちりでできた天体で、太陽に近づくと熱でガスやちりが吹き出し、尾を引いて見えます。"}),
+  Q("space","思",4,"すい星が太陽に近づいたときにできる尾は、太陽に対してどの向きにできるか。",{
+    choices:["太陽と反対の向き","太陽に向かう向き","進行方向と同じ向き","地球に向かう向き"], answer:0,
+    explain:"太陽の光や太陽風の影響で、すい星の尾は常に太陽と反対の向きにできます。"}),
+  Q("space","知",2,"太陽と、そのまわりを公転する惑星やその他の天体の集まり全体を何というか。",{
+    accept:["太陽系","たいようけい"], explain:"太陽を中心として、惑星・小惑星・すい星などが集まった天体の集団全体を太陽系といいます。"}),
+  Q("space","知",2,"惑星が太陽のまわりを回る運動を何というか。",{
+    accept:["公転","こうてん"], explain:"惑星が太陽のまわりを回る運動を公転といい、地球は約1年かけて1周します。"}),
+  Q("space","思",2,"太陽から遠い惑星ほど、公転周期（1周するのにかかる時間）はどうなるか。",{
+    choices:["長くなる","短くなる","変わらない","惑星によってばらばらで規則性はない"], answer:0,
+    explain:"太陽から遠い惑星ほど公転する軌道が長く、公転速度も遅くなるため、公転周期は長くなります。"}),
+
+  /* =====================================================================
+     社会：世界恐慌とファシズム
+     ===================================================================== */
+  Q("hist1","知",2,"1929年、ニューヨークの株価暴落をきっかけに世界に広がった深刻な不況を何というか。",{
+    accept:["世界恐慌","せかいきょうこう"], explain:"1929年にニューヨーク株式市場で株価が大暴落し、その影響は世界中に広がって深刻な不況（世界恐慌）となりました。"}),
+  Q("hist1","知",2,"本国と植民地の間の貿易を拡大し、他国の商品には高い関税をかけるという、イギリスなどが行った政策を何というか。",{
+    accept:["ブロック経済","ぶろっくけいざい"], explain:"イギリスやフランスは、自国と植民地を囲い込んで貿易するブロック経済を行い、他国の商品を締め出しました。"}),
+  Q("hist1","知",2,"アメリカのローズベルト大統領が行った、政府が公共事業を増やすなどして積極的に不況に対応した政策を何というか。",{
+    accept:["ニューディール政策","にゅーでぃーるせいさく"], explain:"アメリカでは、政府が公共事業をおこして雇用を生み出すなど、積極的に不況に対応するニューディール政策が行われました。"}),
+  Q("hist1","知",2,"ファシスト党を率いてイタリアで独裁政治を行った人物は誰か。",{
+    accept:["ムッソリーニ","むっそりーに"], explain:"イタリアではムッソリーニがファシスト党を率いて独裁政治を行いました。"}),
+  Q("hist1","知",2,"ドイツで独裁政治を行い、ユダヤ人を迫害した人物は誰か。",{
+    accept:["ヒトラー","ひとらー"], explain:"ドイツではヒトラーが独裁政治を行い、ユダヤ人を激しく迫害しました。"}),
+  Q("hist1","知",2,"ヒトラーが率いた、ドイツ民族の優秀さを唱えた政党を略称で何というか。",{
+    accept:["ナチス","なちす"], explain:"ヒトラーが率いた政党はナチス（国家社会主義ドイツ労働者党）といい、ドイツ民族の優秀さを唱えました。"}),
+  Q("hist1","知",2,"イタリアやドイツなどで広がった、対外侵略や独裁を正当化する全体主義的な政治運動を何というか。",{
+    accept:["ファシズム","ふぁしずむ"], explain:"個人の自由よりも国家を優先し、対外侵略や独裁を正当化する政治運動をファシズムといいます。"}),
+  Q("hist1","知",2,"世界恐慌の影響を受けて日本で始まった深刻な不況を何というか。",{
+    accept:["昭和恐慌","しょうわきょうこう"], explain:"世界恐慌の影響で日本の輸出も大きく落ち込み、深刻な不況（昭和恐慌）が起こりました。"}),
+  Q("hist1","知",2,"1931年、南満州鉄道の線路爆破事件をきっかけに関東軍が中国東北部で起こした軍事行動を何というか。",{
+    accept:["満州事変","まんしゅうじへん"], explain:"1931年、関東軍が南満州鉄道の線路を爆破し（柳条湖事件）、これをきっかけに満州事変が始まりました。"}),
+  Q("hist1","知",2,"満州事変の後、関東軍が中国東北部に建てた国を何というか。",{
+    accept:["満州国","まんしゅうこく"], explain:"満州事変の後、関東軍は清の最後の皇帝溥儀を元首として満州国を建てました。"}),
+  Q("hist1","思",4,"世界恐慌に対して、アメリカ・イギリス・フランスなどが行ったブロック経済のねらいを説明せよ。",{
+    accept:["植民地との貿易を拡大し、他国の商品を締め出して自国の経済を守るため","自国と植民地との貿易を優先し他国製品を締め出すため"],
+    explain:"本国と植民地の間の貿易を拡大する一方、それ以外の国の商品には高い関税をかけて締め出すことで、自国の産業と経済を守ろうとしました。"}),
+  Q("hist1","思",4,"満州国の建国を認めなかった国際連盟に対して、日本がとった行動は何か。",{
+    accept:["国際連盟を脱退した","国際連盟脱退"], explain:"国際連盟が満州国を認めず、日本軍の撤兵を求める勧告を採択したため、日本は1933年に国際連盟を脱退しました。"}),
+  Q("hist1","知",2,"世界恐慌が起こった年（西暦）を答えよ。",{
+    accept:["1929","1929年"], explain:"世界恐慌は1929年、ニューヨークのウォール街での株価暴落をきっかけに始まりました。"}),
+
+  /* =====================================================================
+     社会：日中戦争への道
+     ===================================================================== */
+  Q("hist2","知",2,"1932年、海軍の青年将校らが首相官邸で犬養毅首相を殺害した事件を何というか。",{
+    accept:["五・一五事件","ごいちごじけん"], explain:"1932年5月15日、海軍の青年将校らが首相官邸を襲い、犬養毅首相を殺害しました。この事件により政党内閣の時代は終わりを迎えました。"}),
+  Q("hist2","知",2,"1936年、陸軍の青年将校らが大臣らを殺傷し、東京の中心部を占拠した事件を何というか。",{
+    accept:["二・二六事件","にいにいろくじけん"], explain:"1936年2月26日、陸軍の青年将校らがクーデターを起こし、大臣らを殺傷して東京の中心部を占拠しました。"}),
+  Q("hist2","知",2,"孫文の後継者で、中国国民党（国民政府）を率いた指導者は誰か。",{
+    accept:["蒋介石","しょうかいせき"], explain:"孫文の死後、中国国民党を率いたのは蒋介石で、国民政府の指導者として中国を統一しようとしました。"}),
+  Q("hist2","知",2,"中国共産党を率い、のちに中華人民共和国の主席となった人物は誰か。",{
+    accept:["毛沢東","もうたくとう"], explain:"毛沢東は中国共産党の指導者で、のちに成立した中華人民共和国の初代主席となりました。"}),
+  Q("hist2","知",2,"1937年、北京郊外の盧溝橋での日中両軍の武力衝突をきっかけに始まった戦争を何というか。",{
+    accept:["日中戦争","にっちゅうせんそう"], explain:"1937年の盧溝橋事件をきっかけに、日本と中国の全面戦争である日中戦争が始まりました。"}),
+  Q("hist2","知",2,"日中戦争のきっかけとなった、北京郊外での日中両軍の武力衝突事件を何というか。",{
+    accept:["盧溝橋事件","ろこうきょうじけん"], explain:"1937年、北京郊外の盧溝橋で日本軍と中国軍が武力衝突し、これが日中戦争のきっかけとなりました。"}),
+  Q("hist2","知",2,"議会の承認なしに、政府が労働力や物資を戦争のために動員できると定めた1938年の法律を何というか。",{
+    accept:["国家総動員法","こっかそうどういんほう"], explain:"1938年に制定された国家総動員法により、政府は議会の承認なしに労働力や物資を戦争のために動員できるようになりました。"}),
+  Q("hist2","知",2,"戦時体制が強まる中、ほとんどの政党が解散して1940年に結成された組織を何というか。",{
+    accept:["大政翼賛会","たいせいよくさんかい"], explain:"1940年、ほとんどの政党が解散して大政翼賛会に合流し、戦争に協力する体制がつくられました。"}),
+  Q("hist2","知",2,"1939年、ドイツがポーランドに侵攻する直前に、ドイツとソ連が結んだ条約を何というか。",{
+    accept:["独ソ不可侵条約","どくそふかしんじょうやく"], explain:"1939年、ドイツとソ連は独ソ不可侵条約を結び、互いに侵攻しないことを約束しました。その直後にドイツはポーランドに侵攻しました。"}),
+  Q("hist2","知",2,"1939年、ドイツのポーランド侵攻をきっかけに始まり、世界中に広がった戦争を何というか。",{
+    accept:["第二次世界大戦","だいにじせかいたいせん"], explain:"1939年のドイツによるポーランド侵攻をきっかけに、第二次世界大戦が始まりました。"}),
+  Q("hist2","知",2,"1940年、日本がドイツ・イタリアと結んだ軍事同盟を何というか。",{
+    accept:["日独伊三国同盟","にちどくいさんごくどうめい"], explain:"1940年、日本はドイツ・イタリアと日独伊三国同盟を結び、三国の結びつきを強めました。"}),
+  Q("hist2","思",4,"五・一五事件によって終わりを迎えたとされる、日本の政治のあり方を何というか。",{
+    accept:["政党政治","せいとうせいじ"], explain:"五・一五事件で犬養毅首相が暗殺されたことにより、政党の党首が内閣を組織する政党政治は終わりを迎えました。"}),
+  Q("hist2","思",4,"日中戦争が長期化した理由を、中国側への支援の観点から説明せよ。",{
+    accept:["アメリカやイギリスなどが援蒋ルートを通じて中国を支援したから","アメリカやイギリスが中国を支援したから","援蒋ルートによる支援があったから"],
+    explain:"アメリカやイギリスなどが援蒋ルートを通じて蒋介石の国民政府を支援したため、日本は戦争を優位に進められず、日中戦争は長期化しました。"}),
+
+  /* =====================================================================
+     社会：太平洋戦争と戦後
+     ===================================================================== */
+  Q("hist3","知",2,"1941年、日本が北方の安全を確保するためにソ連と結んだ条約を何というか。",{
+    accept:["日ソ中立条約","にっそちゅうりつじょうやく"], explain:"1941年、日本は北方の安全を確保するため、ソ連と日ソ中立条約を結びました。"}),
+  Q("hist3","知",2,"1941年から1945年にかけて、日本がアメリカ・イギリスなどと戦った戦争を何というか。",{
+    accept:["太平洋戦争","たいへいようせんそう"], explain:"1941年12月の真珠湾攻撃などから始まり、1945年まで続いた日本とアメリカ・イギリスなどとの戦争を太平洋戦争といいます。"}),
+  Q("hist3","知",2,"徴兵されていなかった大学生などを軍隊に召集したことを何というか。",{
+    accept:["学徒出陣","がくとしゅつじん"], explain:"戦争が激化する中、それまで徴兵を猶予されていた大学生なども軍隊に召集されました。これを学徒出陣といいます。"}),
+  Q("hist3","知",2,"労働力不足を補うため、中学生・女学生などを工場で働かせたことを何というか。",{
+    accept:["勤労動員","きんろうどういん"], explain:"成人男性が戦場に出て労働力が不足したため、中学生や女学生なども工場で働かされました。これを勤労動員といいます。"}),
+  Q("hist3","知",2,"空襲を避けるため、都市の小学生を農村へ避難させたことを何というか。",{
+    accept:["学童疎開","がくどうそかい"], explain:"アメリカ軍による空襲が激しくなると、都市の小学生は農村部などへ集団で避難させられました。これを学童疎開といいます。"}),
+  Q("hist3","知",2,"1945年3月、アメリカ軍が上陸し、激しい地上戦が行われた都道府県はどこか。",{
+    accept:["沖縄県","おきなわけん"], explain:"1945年3月末からアメリカ軍が沖縄に上陸し、住民をまきこむ激しい地上戦が行われました。"}),
+  Q("hist3","知",2,"1945年7月、アメリカ・イギリス・中国などが日本に無条件降伏を求めて発表した宣言を何というか。",{
+    accept:["ポツダム宣言","ぽつだむせんげん"], explain:"1945年7月、連合国はポツダム宣言を発表し、日本に無条件降伏を求めました。日本は8月にこれを受け入れました。"}),
+  Q("hist3","知",2,"1945年8月、アメリカ軍が広島・長崎に投下した兵器を漢字4字で何というか。",{
+    accept:["原子爆弾","げんしばくだん"], explain:"1945年8月6日に広島、9日に長崎に原子爆弾が投下され、多くの人命が失われました。"}),
+  Q("hist3","知",2,"日本国憲法の3つの基本原理のうち、二度と戦争をしないことを定めた原理を何というか。",{
+    accept:["平和主義","へいわしゅぎ"], explain:"日本国憲法は国民主権・基本的人権の尊重とあわせて、戦争を放棄する平和主義を基本原理としています。"}),
+  Q("hist3","知",2,"1945年10月、世界平和の維持を目的として連合国が結成した国際組織を何というか。",{
+    accept:["国際連合","こくさいれんごう"], explain:"第二次世界大戦後の1945年10月、世界の平和と安全を維持するために国際連合が発足しました。"}),
+  Q("hist3","知",2,"アメリカを中心とする資本主義陣営と、ソ連を中心とする社会主義陣営が対立した状態を何というか。",{
+    accept:["冷戦","れいせん"], explain:"実際の戦火を交えないまま厳しく対立したアメリカ陣営とソ連陣営の関係を冷戦（冷たい戦争）といいます。"}),
+  Q("hist3","知",2,"1948年、朝鮮半島南部に成立した国の正式名称は何か。",{
+    accept:["大韓民国","だいかんみんこく"], explain:"1948年、朝鮮半島南部にアメリカの支援を受けて大韓民国（韓国）が成立しました。"}),
+  Q("hist3","知",2,"1948年、朝鮮半島北部に成立した国の正式名称は何か。",{
+    accept:["朝鮮民主主義人民共和国","ちょうせんみんしゅしゅぎじんみんきょうわこく"], explain:"1948年、朝鮮半島北部にソ連の支援を受けて朝鮮民主主義人民共和国（北朝鮮）が成立しました。"}),
+  Q("hist3","知",2,"1949年、毛沢東を主席として成立した国の正式名称は何か。",{
+    accept:["中華人民共和国","ちゅうかじんみんきょうわこく"], explain:"国共内戦に勝利した中国共産党の毛沢東を主席として、1949年に中華人民共和国が成立しました。"}),
+  Q("hist3","知",2,"1950年から1953年にかけて起こった、アメリカ中心の国連軍と中国の義勇軍が介入したアジアの戦争を何というか。",{
+    accept:["朝鮮戦争","ちょうせんせんそう"], explain:"1950年、北朝鮮が韓国に侵攻して朝鮮戦争が始まり、アメリカ中心の国連軍と中国の義勇軍がそれぞれ介入しました。"}),
+  Q("hist3","知",2,"日本の敗戦後、多くの日本兵などがソ連軍に捕らえられ、ソ連東部などで強制労働をさせられたことを何というか。",{
+    accept:["シベリア抑留","しべりあよくりゅう"], explain:"敗戦後、満州などにいた多くの日本兵や民間人がソ連軍に捕らえられ、シベリアなどに送られて強制労働をさせられました（シベリア抑留）。"}),
+
+  /* =====================================================================
+     社会：戦後改革
+     ===================================================================== */
+  Q("hist4","知",2,"戦後、日本の戦後改革を指令した連合国軍の機関をアルファベットで何というか。",{
+    accept:["GHQ","ghq","連合国軍最高司令官総司令部"], explain:"連合国軍最高司令官総司令部（GHQ）が日本を占領し、戦後改革を指令しました。"}),
+  Q("hist4","知",2,"連合国軍最高司令官として戦後改革を指令したアメリカ人は誰か。",{
+    accept:["マッカーサー","まっかーさー"], explain:"GHQのトップである連合国軍最高司令官には、アメリカのマッカーサーが就任しました。"}),
+  Q("hist4","知",2,"戦争に責任があるとされた日本の軍人・政治家が裁かれた裁判を何というか。",{
+    accept:["極東国際軍事裁判","東京裁判","きょくとうこくさいぐんじさいばん","とうきょうさいばん"],
+    explain:"戦争を指導した責任を問うため、極東国際軍事裁判（東京裁判）が開かれ、多くの軍人・政治家が裁かれました。"}),
+  Q("hist4","知",2,"日本の産業・経済を支配してきた三井・三菱などの財閥を解体した政策を何というか。",{
+    accept:["財閥解体","ざいばつかいたい"], explain:"GHQは日本経済を支配していた財閥の力をそぐため、財閥解体を指令しました。"}),
+  Q("hist4","知",2,"地主がもつ小作地を政府が買い上げ、小作人に安く売り渡した政策を何というか。",{
+    accept:["農地改革","のうちかいかく"], explain:"地主制度をなくすため、政府が地主の土地を買い上げて小作人に安く売り渡す農地改革が行われました。"}),
+  Q("hist4","知",2,"民主主義的な教育の方針を示した法律を何というか。",{
+    accept:["教育基本法","きょういくきほんほう"], explain:"戦後の教育改革により、民主主義的な教育の理念を示す教育基本法が制定されました。"}),
+  Q("hist4","知",2,"1946年11月3日に公布された、日本の新しい憲法を何というか。",{
+    accept:["日本国憲法","にほんこくけんぽう"], explain:"1946年11月3日に日本国憲法が公布され、翌1947年5月3日に施行されました。"}),
+  Q("hist4","知",2,"日本国憲法の3つの基本原理のうち、主権が国民にあることを定めた原理を何というか。",{
+    accept:["国民主権","こくみんしゅけん"], explain:"日本国憲法は、政治のあり方を最終的に決める権限が国民にあるという国民主権を基本原理の一つとしています。"}),
+  Q("hist4","知",2,"日本国憲法の3つの基本原理のうち、人が生まれながらにもつ権利を保障する原理を何というか。",{
+    accept:["基本的人権の尊重","きほんてきじんけんのそんちょう"], explain:"日本国憲法は、人が生まれながらにしてもつ侵すことのできない権利を保障する基本的人権の尊重を基本原理としています。"}),
+  Q("hist4","思",4,"農地改革によって、多くの小作人はどのような立場になったか答えよ。",{
+    accept:["自作農になった","自分の土地をもつ自作農になった"], explain:"農地改革により地主から安く土地を買った小作人は、自分の土地をもつ自作農になりました。"}),
+
+  /* =====================================================================
+     数学：式の展開と因数分解
+     ===================================================================== */
+  Q("expand","知",2,"7a(3a-2b+1)を展開しなさい。",{
+    formula:"a(b+c)=ab+ac",
+    accept:["21a²-14ab+7a","21a^2-14ab+7a"], explain:"分配法則を使って各項に7aをかけると、21a²-14ab+7aになります。"}),
+  Q("expand","知",2,"(15x²y+20xy)÷\\frac{5}{6}xy を計算しなさい。",{
+    formula:"A÷\\frac{b}{c}＝A×\\frac{c}{b}",
+    accept:["18x+24"], explain:"わる数の逆数をかけて計算すると、15x²y×(6/5xy)+20xy×(6/5xy)=18x+24になります。"}),
+  Q("expand","知",2,"(x+4)(y-2)を展開しなさい。",{
+    formula:"(a+b)(c+d)=ac+ad+bc+bd",
+    accept:["xy-2x+4y-8"], explain:"分配法則で展開すると、xy-2x+4y-8になります。"}),
+  Q("expand","知",2,"(2x+y)(3x-5y-1)を展開しなさい。",{
+    formula:"(a+b)(c+d+e)=ac+ad+ae+bc+bd+be",
+    accept:["6x²-7xy-2x-5y²-y","6x^2-7xy-2x-5y^2-y"], explain:"分配法則で展開し同類項をまとめると、6x²-10xy-2x+3xy-5y²-y=6x²-7xy-2x-5y²-yになります。"}),
+  Q("expand","知",2,"(x+6)(x+3)を展開しなさい。",{
+    formula:"(x+a)(x+b)=x²+(a+b)x+ab",
+    accept:["x²+9x+18","x^2+9x+18"], explain:"乗法公式(x+a)(x+b)=x²+(a+b)x+abより、x²+9x+18になります。"}),
+  Q("expand","知",2,"(x+5y)(x-8y)を展開しなさい。",{
+    formula:"(x+a)(x+b)=x²+(a+b)x+ab",
+    accept:["x²-3xy-40y²","x^2-3xy-40y^2"], explain:"乗法公式を使うと、x²+(5-8)xy-40y²=x²-3xy-40y²になります。"}),
+  Q("expand","知",2,"(x+8)²を展開しなさい。",{
+    formula:"(a+b)²=a²+2ab+b²",
+    accept:["x²+16x+64","x^2+16x+64"], explain:"乗法公式(x+a)²=x²+2ax+a²より、x²+16x+64になります。"}),
+  Q("expand","知",2,"(6x-y)²を展開しなさい。",{
+    formula:"(a-b)²=a²-2ab+b²",
+    accept:["36x²-12xy+y²","36x^2-12xy+y^2"], explain:"乗法公式(a-b)²=a²-2ab+b²より、36x²-12xy+y²になります。"}),
+  Q("expand","知",2,"(x-6)(x+6)を展開しなさい。",{
+    formula:"(a+b)(a-b)=a²-b²",
+    accept:["x²-36","x^2-36"], explain:"乗法公式(x+a)(x-a)=x²-a²より、x²-36になります。"}),
+  Q("expand","知",2,"(a+\\frac{1}{3}b)(a-\\frac{1}{3}b)を展開しなさい。",{
+    accept:["a²-1/9b²","a²-(1/9)b²","a^2-1/9b^2"], display:"a²-\\frac{1}{9}b²",
+    formula:"(a+b)(a-b)＝a²-b²",
+    explain:"乗法公式(a+b)(a-b)=a²-b²より、a²-\\frac{1}{3}b の2乗＝a²-\\frac{1}{9}b²になります。"}),
+  Q("expand","思",4,"(x+3)²-(x+4)(x-7)を計算しなさい。",{
+    formula:"(a+b)²=a²+2ab+b²、(x+a)(x+b)=x²+(a+b)x+ab",
+    accept:["9x+37"], explain:"それぞれ展開すると(x²+6x+9)-(x²-3x-28)=x²+6x+9-x²+3x+28=9x+37になります。"}),
+  Q("expand","思",4,"(a+5b-1)(a-5b-1)を、M=a-1とおいて計算しなさい。",{
+    formula:"(M+b)(M-b)=M²-b²（おきかえの利用）",
+    accept:["(a-1)²-25b²","(a-1)^2-25b^2"], explain:"M=a-1とおくと(M+5b)(M-5b)=M²-25b²=(a-1)²-25b²になります。"}),
+  Q("expand","知",2,"9x-3xyを因数分解しなさい。",{
+    formula:"ab+ac=a(b+c)（共通因数でくくる）",
+    accept:["3x(3-y)"], explain:"共通因数3xでくくると、3x(3-y)になります。"}),
+  Q("expand","知",2,"4x²-81を因数分解しなさい。",{
+    formula:"a²-b²=(a+b)(a-b)",
+    accept:["(2x+9)(2x-9)"], explain:"4x²=(2x)²、81=9²より、a²-b²=(a+b)(a-b)を使うと(2x+9)(2x-9)になります。"}),
+  Q("expand","知",2,"x²-2x+1を因数分解しなさい。",{
+    formula:"a²-2ab+b²=(a-b)²",
+    accept:["(x-1)²","(x-1)^2"], explain:"a²-2ab+b²=(a-b)²の形なので、(x-1)²になります。"}),
+  Q("expand","知",2,"16x²+24xy+9y²を因数分解しなさい。",{
+    formula:"a²+2ab+b²=(a+b)²",
+    accept:["(4x+3y)²","(4x+3y)^2"], explain:"a²+2ab+b²=(a+b)²の形なので、(4x+3y)²になります。"}),
+  Q("expand","知",2,"x²+7x-18を因数分解しなさい。",{
+    formula:"x²+(a+b)x+ab=(x+a)(x+b)",
+    accept:["(x+9)(x-2)"], explain:"かけて-18、たして7になる2数は9と-2なので、(x+9)(x-2)になります。"}),
+  Q("expand","知",2,"x²-12x+35を因数分解しなさい。",{
+    formula:"x²+(a+b)x+ab=(x+a)(x+b)",
+    accept:["(x-5)(x-7)"], explain:"かけて35、たして-12になる2数は-5と-7なので、(x-5)(x-7)になります。"}),
+  Q("expand","知",2,"2ax²-16ax+32aを因数分解しなさい。",{
+    formula:"共通因数でくくってから a²-2ab+b²=(a-b)² を利用する",
+    accept:["2a(x-4)²","2a(x-4)^2"], explain:"共通因数2aをくくり出すと2a(x²-8x+16)=2a(x-4)²になります。"}),
+  Q("expand","思",4,"(x+1)²-5(x+1)-6を、M=x+1とおいて因数分解しなさい。",{
+    formula:"x²+(a+b)x+ab=(x+a)(x+b)（おきかえの利用）",
+    accept:["(x-5)(x+2)"], explain:"M=x+1とおくとM²-5M-6=(M-6)(M+1)となり、Mをもどすと(x+1-6)(x+1+1)=(x-5)(x+2)になります。"}),
+  Q("expand","知",4,"6.2²-3.8²を、くふうして計算しなさい。",{
+    formula:"a²-b²=(a+b)(a-b)",
+    accept:["24"], explain:"a²-b²=(a+b)(a-b)を使うと、(6.2+3.8)(6.2-3.8)=10×2.4=24になります。"}),
+  Q("expand","思",4,"x=25, y=3のとき、x(x+3y)-(x+y)(x-2y)の値を求めなさい。",{
+    formula:"先に式を展開・整理してから数を代入する",
+    accept:["318"], explain:"式を展開して簡単にすると4xy+2y²になります。代入すると4×25×3+2×3²=300+18=318になります。"}),
+  Q("expand","思",4,"a=197のとき、a²+6a+9の値を求めなさい。",{
+    formula:"a²+2ab+b²=(a+b)²",
+    accept:["40000"], explain:"a²+6a+9=(a+3)²と因数分解できるので、(197+3)²=200²=40000になります。"}),
+  Q("expand","思",4,"nを整数として連続する2つの整数をn, n+1とするとき、それらの積に大きい方の整数をたした式n(n+1)+(n+1)を計算して簡単にせよ。",{
+    formula:"共通因数でくくる：n(n+1)+(n+1)=(n+1)(n+1)",
+    accept:["(n+1)²","(n+1)^2","n²+2n+1","n^2+2n+1"],
+    explain:"n(n+1)+(n+1)=n²+n+n+1=n²+2n+1=(n+1)²となり、大きい方の整数(n+1)の2乗になることが示されます。"}),
+
+  /* =====================================================================
+     数学：平方根
+     ===================================================================== */
+  Q("sqrt","知",2,"「36の平方根は6である」の下線部の誤りを正しくなおすとどうなるか。",{
+    formula:"aの平方根は±√a",
+    accept:["±6"], explain:"36の平方根は2乗して36になる数なので、+6と-6の両方があり、±6と表します。"}),
+  Q("sqrt","知",2,"「√1600を√を使わないで表すと、±40である」の誤りを正しくなおすとどうなるか。",{
+    formula:"√の記号は0以上の値（正の平方根）だけを表す",
+    accept:["40"], explain:"√の記号は正の平方根（0以上の値）を表すので、√1600=40（-40ではなく40のみ）です。"}),
+  Q("sqrt","知",2,"「√0.49は0.07である」の誤りを正しくなおすとどうなるか。",{
+    formula:"√(a²)=a（a≧0のとき）",
+    accept:["0.7"], explain:"0.7²=0.49なので、√0.49=0.7です。"}),
+  Q("sqrt","知",2,"「√((-3)²)は-3である」の誤りを正しくなおすとどうなるか。",{
+    formula:"√(a²)=|a|",
+    accept:["3"], explain:"√(x²)=|x|なので、√((-3)²)=|-3|=3です。"}),
+  Q("sqrt","知",2,"√37と6の大小を不等号を使って表せ。",{
+    formula:"a,bが正の数でa<bならば√a<√b",
+    accept:["√37>6"], explain:"6=√36なので、37>36より√37>6になります。"}),
+  Q("sqrt","知",2,"-5, -6, -√30を小さい順に並べよ。",{
+    formula:"負の数は絶対値が大きいほど小さい",
+    accept:["-6<-√30<-5","-6,-√30,-5","-6、-√30、-5"], explain:"√30は約5.48なので-√30は約-5.48。よって-6<-√30<-5の順になります。"}),
+  Q("sqrt","知",2,"√a<7となる自然数aのうち、もっとも大きいものを求めよ。",{
+    formula:"√a<bのとき a<b²",
+    accept:["48"], explain:"7²=49なので、a<49となる自然数のうち最も大きいものは48です。"}),
+  Q("sqrt","知",2,"√7, 2/3, 0, √9, √(8/36) のうち、無理数をすべて選べ。",{
+    formula:"分数で表せない数（循環しない無限小数）が無理数",
+    accept:["√7と√(8/36)","√7、√(8/36)","√7,√(8/36)"], explain:"√9=3、2/3や0は有理数です。√(8/36)=√2/3は無理数、√7も無理数なので、この2つが答えです。"}),
+  Q("sqrt","知",2,"√63の√の中をできるだけ簡単にせよ。",{
+    formula:"√(a²×b)=a√b",
+    accept:["3√7"], explain:"63=9×7なので、√63=√9×√7=3√7になります。"}),
+  Q("sqrt","知",2,"√216の√の中をできるだけ簡単にせよ。",{
+    formula:"√(a²×b)=a√b",
+    accept:["6√6"], explain:"216=36×6なので、√216=√36×√6=6√6になります。"}),
+  Q("sqrt","知",2,"√5/√2 の分母を有理化せよ。",{
+    formula:"分母の有理化：\frac{√a}{√b}=\frac{√a×√b}{b}",
+    accept:["√10/2"], explain:"分母・分子に√2をかけると、√5×√2/(√2×√2)=√10/2になります。"}),
+  Q("sqrt","知",2,"4/√18 の分母を有理化せよ。",{
+    formula:"分母の有理化：\frac{a}{√b}=\frac{a√b}{b}",
+    accept:["2√2/3"], explain:"√18=3√2なので4/(3√2)。分母・分子に√2をかけると4√2/6=2√2/3になります。"}),
+  Q("sqrt","知",2,"\\frac{√8}{2√3} の分母を有理化せよ。",{
+    formula:"分母の有理化：\frac{a}{√b}=\frac{a√b}{b}",
+    accept:["√6/3"], explain:"√8=2√2なので2√2/(2√3)=√2/√3。分母・分子に√3をかけると√6/3になります。"}),
+  Q("sqrt","思",2,"√2=1.414, √20=4.472として、√200の値を求めよ。",{
+    formula:"√(a²×b)=a√b にしてから近似値を代入する",
+    accept:["14.14"], explain:"√200=√(100×2)=10√2=10×1.414=14.14になります。"}),
+  Q("sqrt","思",2,"√2=1.414, √20=4.472として、√2000の値を求めよ。",{
+    formula:"√(a²×b)=a√b にしてから近似値を代入する",
+    accept:["44.72"], explain:"√2000=√(100×20)=10√20=10×4.472=44.72になります。"}),
+  Q("sqrt","思",2,"√2=1.414, √20=4.472として、√0.2の値を求めよ。",{
+    formula:"√(a/100)=√a/10",
+    accept:["0.4472"], explain:"√0.2=√(20/100)=√20/10=4.472÷10=0.4472になります。"}),
+  Q("sqrt","知",2,"√3×(-√27)を計算せよ。",{
+    formula:"√a×√b=√(ab)",
+    accept:["-9"], explain:"√3×√27=√81=9なので、√3×(-√27)=-9になります。"}),
+  Q("sqrt","知",2,"√120÷√5÷√3を計算せよ。",{
+    formula:"√a÷√b=√(a/b)",
+    accept:["2√2"], explain:"√120÷√5÷√3=√(120/5/3)=√8=2√2になります。"}),
+  Q("sqrt","知",2,"5√5-√5を計算せよ。",{
+    formula:"a√c+b√c=(a+b)√c（同類項のようにまとめる）",
+    accept:["4√5"], explain:"√5を1つの文字のように考えると、5√5-√5=(5-1)√5=4√5になります。"}),
+  Q("sqrt","知",2,"√27+√48を計算せよ。",{
+    formula:"√(a²×b)=a√b にしてから同類項をまとめる",
+    accept:["7√3"], explain:"√27=3√3、√48=4√3なので、3√3+4√3=7√3になります。"}),
+  Q("sqrt","思",4,"6/√3 - √3/2 を計算せよ。",{
+    formula:"分母を有理化してから通分する",
+    accept:["3√3/2"], explain:"6/√3=2√3になおすと、2√3-√3/2=(4√3-√3)/2=3√3/2になります。"}),
+  Q("sqrt","思",4,"√5(4√5-√3)を計算せよ。",{
+    formula:"a(b+c)=ab+ac、√a×√b=√(ab)",
+    accept:["20-√15"], explain:"分配法則で展開すると、4×5-√15=20-√15になります。"}),
+  Q("sqrt","思",4,"(√3-√7)(√3+2√7)を計算せよ。",{
+    formula:"分配法則で展開し、√a×√a=aを利用する",
+    accept:["-11+√21","√21-11"], explain:"展開すると3+2√21-√21-14=3+√21-14=-11+√21になります。"}),
+  Q("sqrt","思",4,"(3√2-√5)²を計算せよ。",{
+    formula:"(a-b)²=a²-2ab+b²",
+    accept:["23-6√10"], explain:"(a-b)²=a²-2ab+b²より、18-2×3√2×√5+5=18-6√10+5=23-6√10になります。"}),
+  Q("sqrt","思",4,"x=√3+5のとき、x²-6x+5の値を求めよ。",{
+    formula:"x²-6x+5=(x-1)(x-5)と因数分解してから代入する",
+    accept:["4√3+3","3+4√3"], explain:"x²-6x+5=(x-1)(x-5)と考えると、x-5=√3、x-1=√3+4なので、√3(√3+4)=3+4√3になります。"}),
+  Q("sqrt","思",4,"√(12-a)の値が自然数となるような自然数aをすべて求めよ。",{
+    formula:"√の中が0以上の平方数になるときだけ自然数になる",
+    accept:["3,8,11","a=3,8,11","3、8、11"], explain:"12-aが1,4,9のとき√(12-a)は自然数になります。12-a=1→a=11、12-a=4→a=8、12-a=9→a=3。よってa=3,8,11です。"}),
+  Q("sqrt","知",2,"直径30cmの丸太から、切り口ができるだけ大きな正方形の角材をとるとき、切り口の正方形の対角線の長さは何cmにすればよいか。",{
+    formula:"正方形の対角線の長さは、それがぴったり入る円の直径に等しい",
+    accept:["30cm","30"], explain:"正方形の対角線の長さは円の直径と等しくなるので、対角線は30cmにします。"}),
+  Q("sqrt","知",2,"上の問題で、切り口の正方形の面積を求めよ。",{
+    formula:"正方形の面積＝対角線×対角線÷2",
+    accept:["450cm²","450cm2","450"], explain:"対角線の長さが30cmの正方形の面積は、対角線×対角線÷2=30×30÷2=450cm²になります。"}),
+  Q("sqrt","思",4,"上の問題で、切り口の正方形の1辺の長さを求めよ。",{
+    formula:"正方形の面積＝1辺×1辺 → 1辺＝√面積",
+    accept:["15√2cm","15√2"], explain:"面積が450cm²の正方形の1辺は√450=√(225×2)=15√2cmになります。"}),
+
+  /* =====================================================================
+     英語【1年】be動詞・一般動詞
+     ===================================================================== */
+  Q("eng1-verb","知",2,"「I ( ) a student.」に入る適切なbe動詞を選べ。",{
+    choices:["am","is","are","be"], answer:0, formula:"<主語＋be動詞＋補語>",
+    explain:"主語がIのときのbe動詞はamです。<主語＋be動詞＋補語>の形になります。"}),
+  Q("eng1-verb","知",2,"「She ( ) from Osaka.」に入る適切なbe動詞を選べ。",{
+    choices:["is","am","are","do"], answer:0, formula:"<主語＋be動詞＋補語>",
+    explain:"主語が3人称単数(She)のときのbe動詞はisです。"}),
+  Q("eng1-verb","知",2,"「They ( ) my friends.」に入る適切なbe動詞を選べ。",{
+    choices:["are","am","is","does"], answer:0, formula:"<主語＋be動詞＋補語>",
+    explain:"主語が複数(They)のときのbe動詞はareです。"}),
+  Q("eng1-verb","知",2,"「He ( ) tennis every Sunday.」（playを適切な形にせよ）",{
+    accept:["plays"], formula:"<3人称単数の主語＋動詞に s/es を付ける>",
+    explain:"主語Heは3人称単数なので、一般動詞playにsを付けてplaysにします。"}),
+  Q("eng1-verb","知",2,"「My mother ( ) breakfast every morning.」（cookを適切な形に）",{
+    accept:["cooks"], formula:"<3人称単数の主語＋動詞に s/es を付ける>",
+    explain:"主語My motherは3人称単数なので、cookにsを付けてcooksにします。"}),
+  Q("eng1-verb","知",2,"「I ( ) like fish.」（一般動詞の否定文）に入る語を選べ。",{
+    choices:["don't","doesn't","am not","isn't"], answer:0, formula:"<主語＋don't/doesn't＋動詞の原形>",
+    explain:"主語Iの一般動詞の否定文はdon'tを使います。"}),
+  Q("eng1-verb","知",2,"「He ( ) like fish.」（一般動詞の否定文）に入る語を選べ。",{
+    choices:["doesn't","don't","isn't","not"], answer:0, formula:"<3人称単数の主語＋doesn't＋動詞の原形>",
+    explain:"主語Heは3人称単数なので、否定文はdoesn'tを使い、動詞は原形（likeのまま）になります。"}),
+  Q("eng1-verb","知",2,"「Is that your bag?」への応答「Yes, ( ).」に入る語句を選べ。",{
+    choices:["it is","it does","this is","that is"], answer:0, formula:"<Yes, 主語＋be動詞．>",
+    explain:"be動詞の疑問文にはbe動詞を使って答えます。thatをitで受けてYes, it is.と答えます。"}),
+
+  /* =====================================================================
+     英語【1年】疑問文・命令文
+     ===================================================================== */
+  Q("eng1-quest","思",4,"「これは何ですか」を英語にせよ。",{
+    accept:["What is this","Whats this"], formula:"<What is/are＋主語?>",
+    explain:"「何ですか」とたずねる疑問文はWhat is this?の形になります。"}),
+  Q("eng1-quest","思",4,"「あなたはどこに住んでいますか」を英語にせよ。",{
+    accept:["Where do you live"], formula:"<疑問詞＋do/does＋主語＋動詞の原形?>",
+    explain:"場所をたずねる疑問詞Whereを文頭に置き、一般動詞の疑問文の形（do you live）を続けます。"}),
+  Q("eng1-quest","思",4,"「彼は誰ですか」を英語にせよ。",{
+    accept:["Who is he"], formula:"<Who is/are＋主語?>",
+    explain:"人をたずねる疑問詞Whoを使い、Who is he?とします。"}),
+  Q("eng1-quest","思",4,"「あなたはなぜ忙しいのですか」を英語にせよ。",{
+    accept:["Why are you busy"], formula:"<Why＋be動詞＋主語~?>",
+    explain:"理由をたずねる疑問詞Whyを使い、be動詞の疑問文の形を続けます。"}),
+  Q("eng1-quest","知",2,"「( ) you like dogs?」に入る語を選べ。",{
+    choices:["Do","Does","Are","Is"], answer:0, formula:"<Do/Does＋主語＋動詞の原形~?>",
+    explain:"主語youの一般動詞の疑問文はDoで始めます。"}),
+  Q("eng1-quest","知",2,"「( ) she play tennis?」に入る語を選べ。",{
+    choices:["Does","Do","Is","Are"], answer:0, formula:"<Does＋3人称単数の主語＋動詞の原形~?>",
+    explain:"主語sheは3人称単数なので、一般動詞の疑問文はDoesで始め、動詞は原形（play）になります。"}),
+  Q("eng1-quest","思",4,"「ここで走ってはいけません」を英語にせよ。",{
+    accept:["Dont run here"], formula:"<Don't＋動詞の原形~．>",
+    explain:"禁止の命令文はDon'tのあとに動詞の原形を続けます。"}),
+  Q("eng1-quest","思",4,"「窓を開けてください」を英語にせよ。",{
+    accept:["Open the window please","Please open the window"], formula:"<動詞の原形~．>（頼むときはpleaseを付ける）",
+    explain:"命令文は動詞の原形で文を始めます。ていねいにするときはpleaseを付けます。"}),
+
+  /* =====================================================================
+     英語【1年】進行形・過去形・There is/are・can
+     ===================================================================== */
+  Q("eng1-tense","知",2,"「He is ( ) soccer now.」（playを適切な形に）",{
+    accept:["playing"], formula:"<be動詞＋動詞のing形>",
+    explain:"現在進行形は<be動詞＋動詞のing形>で表します。playはplayingになります。"}),
+  Q("eng1-tense","知",2,"「I ( ) my homework yesterday.」（doを過去形に）",{
+    accept:["did"], formula:"<主語＋動詞の過去形>",
+    explain:"doの過去形は不規則変化でdidになります。"}),
+  Q("eng1-tense","知",2,"「She ( ) the piano last night.」（playを過去形に）",{
+    accept:["played"], formula:"<主語＋動詞の過去形>（規則動詞はedを付ける）",
+    explain:"playは規則動詞なので、edを付けてplayedにします。"}),
+  Q("eng1-tense","知",2,"「( ) a cat under the desk.」に入る語句を選べ。",{
+    choices:["There is","There are","It is","This is"], answer:0, formula:"<There is/are＋名詞(＋場所)>",
+    explain:"「机の下に1匹のねこがいます」という文なので、単数のa catに合わせてThere isを使います。"}),
+  Q("eng1-tense","思",4,"「私は泳ぐことができます」を英語にせよ。",{
+    accept:["I can swim"], formula:"<主語＋can＋動詞の原形>",
+    explain:"「～できる」という可能を表すcanのあとには動詞の原形を続けます。"}),
+  Q("eng1-tense","思",4,"「あなたはピアノを弾くことができますか」を英語にせよ。",{
+    accept:["Can you play the piano"], formula:"<Can＋主語＋動詞の原形~?>",
+    explain:"canの疑問文はCanを主語の前に出します。"}),
+  Q("eng1-tense","知",2,"「( ) she reading a book now?」に入る語を選べ。",{
+    choices:["Is","Does","Do","Are"], answer:0, formula:"<be動詞＋主語＋動詞のing形~?>",
+    explain:"現在進行形の疑問文はbe動詞を主語の前に出します。主語sheに合わせてIsを使います。"}),
+  Q("eng1-tense","知",2,"「( ) you watch TV last night?」に入る語を選べ。",{
+    choices:["Did","Do","Does","Were"], answer:0, formula:"<Did＋主語＋動詞の原形~?>",
+    explain:"一般動詞の過去の疑問文はDidを主語の前に置き、動詞は原形にします。"}),
+  Q("eng1-tense","知",2,"「go」の過去形を答えよ。",{
+    accept:["went"], formula:"不規則動詞は1つずつ形を覚える（go→went）",
+    explain:"goは不規則動詞で、過去形はwentになります。"}),
+
+  /* =====================================================================
+     英語【2年】未来表現・助動詞
+     ===================================================================== */
+  Q("eng2-future","思",4,"「私は明日、京都に行くつもりです」を be going to を使って英語にせよ。",{
+    accept:["I am going to go to Kyoto tomorrow"], formula:"<be動詞＋going to＋動詞の原形>",
+    explain:"あらかじめ決めていた予定を表すときはbe going toを使います。"}),
+  Q("eng2-future","思",4,"「明日は晴れるでしょう」を will を使って英語にせよ。",{
+    accept:["It will be sunny tomorrow"], formula:"<will＋動詞の原形>",
+    explain:"その場で決めたことや予想を表すときはwillを使います。willのあとは動詞の原形です。"}),
+  Q("eng2-future","思",4,"「あなたは今すぐ家に帰らなければなりません」を英語にせよ。",{
+    accept:["You must go home right now","You must go home now"], formula:"<主語＋must＋動詞の原形>",
+    explain:"「～しなければならない」という義務はmustで表し、あとに動詞の原形を続けます。"}),
+  Q("eng2-future","思",4,"「彼女は毎日、宿題をしなければなりません」を have to を使って英語にせよ。",{
+    accept:["She has to do her homework every day"], formula:"<3人称単数の主語＋has to＋動詞の原形>",
+    explain:"主語sheは3人称単数なので、have toはhas toになります。"}),
+  Q("eng2-future","知",2,"「You ( ) run in the library.」（禁止：図書館で走ってはいけない）に入る語句を選べ。",{
+    choices:["must not","don't have to","may not","should not"], answer:0, formula:"<must not＋動詞の原形>（～してはいけない）",
+    explain:"「～してはいけない」という禁止はmust notで表します。don't have toは「～する必要はない」という意味なので注意しましょう。"}),
+  Q("eng2-future","思",4,"「あなたはもっと勉強すべきです」を英語にせよ。",{
+    accept:["You should study harder","You should study more"], formula:"<主語＋should＋動詞の原形>",
+    explain:"「～すべきだ」という助言はshouldで表します。"}),
+  Q("eng2-future","思",4,"「入ってもいいですか」を英語にせよ。",{
+    accept:["May I come in"], formula:"<May＋主語＋動詞の原形~?>",
+    explain:"許可を求めるときはMay I ~?を使います。"}),
+  Q("eng2-future","知",2,"「( ) it rain tomorrow?」に入る語を選べ。",{
+    choices:["Will","Does","Is","Do"], answer:0, formula:"<Will＋主語＋動詞の原形~?>",
+    explain:"willの疑問文はWillを主語の前に出します。"}),
+
+  /* =====================================================================
+     英語【2年】不定詞・動名詞
+     ===================================================================== */
+  Q("eng2-infgen","思",4,"「私は医者になりたいです」を英語にせよ。（不定詞の名詞的用法）",{
+    accept:["I want to be a doctor"], formula:"<to＋動詞の原形>（～すること）",
+    explain:"不定詞の名詞的用法<to＋動詞の原形>は「～すること」という意味でwantの目的語になります。"}),
+  Q("eng2-infgen","思",4,"「彼は宿題をするために図書館に行きました」を英語にせよ。（不定詞の副詞的用法）",{
+    accept:["He went to the library to do his homework"], formula:"<to＋動詞の原形>（～するために）",
+    explain:"不定詞の副詞的用法は「目的（～するために）」を表します。"}),
+  Q("eng2-infgen","思",4,"「私には今日やるべきことがたくさんあります」を英語にせよ。（不定詞の形容詞的用法）",{
+    accept:["I have a lot of things to do today","I have many things to do today"], formula:"<名詞＋to＋動詞の原形>（～するための、すべき）",
+    explain:"不定詞の形容詞的用法は名詞のあとに置かれ、その名詞を説明します。"}),
+  Q("eng2-infgen","思",4,"「音楽を聴くことは楽しいです」を英語にせよ。（動名詞）",{
+    accept:["Listening to music is fun"], formula:"<動詞のing形>（～すること：主語や目的語になる）",
+    explain:"動名詞<動詞のing形>は「～すること」という意味で、文の主語にもなります。"}),
+  Q("eng2-infgen","思",4,"「彼女は写真を撮ることを楽しみました」を英語にせよ。",{
+    accept:["She enjoyed taking pictures","She enjoyed taking photos"], formula:"<enjoy＋動詞のing形>",
+    explain:"enjoyのあとには動名詞（動詞のing形）を続けます。不定詞は続けられないので注意しましょう。"}),
+  Q("eng2-infgen","思",4,"「英語を勉強することは大切です」を It is ... for A to do の形を使わずに英語にせよ。",{
+    accept:["It is important to study English"], formula:"<It is ... to＋動詞の原形>",
+    explain:"形式主語Itを使い、本当の主語である不定詞は後ろに置きます。"}),
+  Q("eng2-infgen","知",2,"「I finished ( ) my homework.」（doを適切な形に）",{
+    accept:["doing"], formula:"<finish＋動詞のing形>",
+    explain:"finishのあとには動名詞を続けます。不定詞ではなく動名詞をとる動詞として覚えましょう。"}),
+  Q("eng2-infgen","知",2,"「I hope ( ) you again.」（seeを適切な形に）",{
+    accept:["to see"], formula:"<hope＋to＋動詞の原形>",
+    explain:"hopeのあとには不定詞（to＋動詞の原形）を続けます。"}),
+  Q("eng2-infgen","思",4,"「何をすればよいか私に教えてください」を英語にせよ。",{
+    accept:["Please tell me what to do","Tell me what to do please"], formula:"<疑問詞＋to＋動詞の原形>",
+    explain:"<what to do>で「何をすればよいか」という意味になります。"}),
+
+  /* =====================================================================
+     英語【2年】比較・受け身
+     ===================================================================== */
+  Q("eng2-comppass","知",2,"「This book is ( ) than that one.」（interestingを適切な形に）",{
+    accept:["more interesting"], formula:"<形容詞/副詞のer、または more＋形容詞/副詞＋than>",
+    explain:"つづりの長い形容詞interestingはmoreを前に付けて比較級にします。"}),
+  Q("eng2-comppass","知",2,"「Tokyo is the ( ) city in Japan.」（largeを適切な形に）",{
+    accept:["largest"], formula:"<the＋形容詞/副詞のest、または the most＋形容詞/副詞>",
+    explain:"largeは語尾にstを付けて最上級largestにします。"}),
+  Q("eng2-comppass","思",4,"「この山はあの山と同じくらい高いです」を英語にせよ。",{
+    accept:["This mountain is as high as that one","This mountain is as high as that mountain"], formula:"<as＋原級＋as>",
+    explain:"程度が同じであることを表すときは<as＋原級＋as>を使います。"}),
+  Q("eng2-comppass","知",2,"「Which is ( ), this or that?」（bigを適切な形に）",{
+    accept:["bigger"], formula:"<形容詞/副詞のer＋than>（bigはgを重ねてer）",
+    explain:"bigは語尾のgを重ねてerを付け、biggerにします。"}),
+  Q("eng2-comppass","思",4,"「この歌は多くの人々に愛されています」を英語にせよ。（受け身）",{
+    accept:["This song is loved by many people"], formula:"<be動詞＋過去分詞(＋by ~)>",
+    explain:"受け身は<be動詞＋過去分詞>で表し、動作をする人はbyのあとに置きます。"}),
+  Q("eng2-comppass","思",4,"「この本は夏目漱石によって書かれました」を英語にせよ。",{
+    accept:["This book was written by Natsume Soseki"], formula:"<be動詞の過去形＋過去分詞＋by ~>",
+    explain:"過去の受け身はbe動詞を過去形にします。writeの過去分詞はwrittenです。"}),
+  Q("eng2-comppass","知",2,"「( ) this room cleaned every day?」に入る語を選べ。",{
+    choices:["Is","Does","Do","Are"], answer:0, formula:"<be動詞＋主語＋過去分詞~?>",
+    explain:"受け身の疑問文はbe動詞を主語の前に出します。"}),
+  Q("eng2-comppass","思",4,"「この教室は今、使われていません」を英語にせよ。",{
+    accept:["This room is not used now"], formula:"<be動詞＋not＋過去分詞>",
+    explain:"受け身の否定文はbe動詞のあとにnotを置きます。"}),
+  Q("eng2-comppass","知",2,"「good」の比較級を答えよ。",{
+    accept:["better"], formula:"不規則変化：good/well→better→best",
+    explain:"goodとwellは不規則変化で、比較級はbetter、最上級はbestになります。"}),
+
+  /* =====================================================================
+     英語【2年】接続詞・現在完了
+     ===================================================================== */
+  Q("eng2-conjperf","思",4,"「私は彼が正しいと思います」を英語にせよ。（接続詞that）",{
+    accept:["I think that he is right","I think he is right"], formula:"<動詞＋that＋主語＋動詞>",
+    explain:"「～ということ」を表す接続詞thatは、しばしば省略されます。"}),
+  Q("eng2-conjperf","思",4,"「私が家に着いたとき、雨が降っていました」を英語にせよ。",{
+    accept:["It was raining when I got home"], formula:"<when＋主語＋動詞>（～するとき）",
+    explain:"「～するとき」を表す接続詞whenを使います。"}),
+  Q("eng2-conjperf","思",4,"「もし明日晴れたら、私たちは公園に行きます」を英語にせよ。",{
+    accept:["If it is sunny tomorrow we will go to the park"], formula:"<If＋主語＋動詞(現在形), 主語＋will＋動詞の原形>",
+    explain:"未来のことでもif節の中は現在形で表すのがポイントです。"}),
+  Q("eng2-conjperf","思",4,"「私は疲れていたので早く寝ました」を英語にせよ。",{
+    accept:["I went to bed early because I was tired"], formula:"<because＋主語＋動詞>（～なので）",
+    explain:"理由を表す接続詞becauseを使います。"}),
+  Q("eng2-conjperf","思",4,"「私はちょうど宿題を終えたところです」を英語にせよ。（現在完了：完了）",{
+    accept:["I have just finished my homework"], formula:"<have/has＋過去分詞>",
+    explain:"「ちょうど～したところだ」という完了はhave just＋過去分詞で表します。"}),
+  Q("eng2-conjperf","思",4,"「私は3回、京都を訪れたことがあります」を英語にせよ。（現在完了：経験）",{
+    accept:["I have visited Kyoto three times"], formula:"<have/has＋過去分詞>（経験）",
+    explain:"回数を表すthree timesなどとともに使う現在完了は「経験」を表します。"}),
+  Q("eng2-conjperf","思",4,"「私は5年間ここに住んでいます」を英語にせよ。（現在完了：継続）",{
+    accept:["I have lived here for five years"], formula:"<have/has＋過去分詞＋for/since ~>（継続）",
+    explain:"forやsinceとともに使う現在完了は「継続」を表します。"}),
+  Q("eng2-conjperf","知",2,"「( ) you ever been to Okinawa?」に入る語を選べ。",{
+    choices:["Have","Has","Did","Do"], answer:0, formula:"<Have/Has＋主語＋過去分詞~?>",
+    explain:"現在完了の疑問文はHave（またはHas）を主語の前に出します。"}),
+  Q("eng2-conjperf","思",4,"「彼女はまだ昼食を食べていません」を英語にせよ。",{
+    accept:["She has not eaten lunch yet","She hasnt eaten lunch yet"], formula:"<have/has not＋過去分詞＋yet>",
+    explain:"現在完了の否定文はhave（has）のあとにnotを置き、文末にyetを付けます。"}),
+
+  /* =====================================================================
+     英語【3年】受け身・現在完了進行形
+     ===================================================================== */
+  Q("eng3-passperf","思",4,"「この部屋は明日、掃除されるでしょう」を英語にせよ。（助動詞を含む受け身）",{
+    accept:["This room will be cleaned tomorrow"], formula:"<助動詞＋be＋過去分詞>",
+    explain:"助動詞を含む受け身は<助動詞＋be＋過去分詞>の形になります。"}),
+  Q("eng3-passperf","思",4,"「この山は雪でおおわれています」を英語にせよ。",{
+    accept:["This mountain is covered with snow"], formula:"<be動詞＋過去分詞＋with/in などの前置詞>",
+    explain:"be covered withで「～でおおわれている」という意味になります。受け身にはbyを使わない表現もあります。"}),
+  Q("eng3-passperf","思",4,"「私は2時間ずっと勉強し続けています」を英語にせよ。（現在完了進行形）",{
+    accept:["I have been studying for two hours"], formula:"<have/has been＋動詞のing形>",
+    explain:"動作の継続を強調する現在完了進行形は<have/has been＋動詞のing形>で表します。"}),
+  Q("eng3-passperf","知",2,"「( ) you been waiting long?」に入る語を選べ。",{
+    choices:["Have","Has","Are","Do"], answer:0, formula:"<Have/Has＋主語＋been＋動詞のing形~?>",
+    explain:"現在完了進行形の疑問文はHave（Has）を主語の前に出します。"}),
+  Q("eng3-passperf","思",4,"「彼は3時間ずっとテレビを見ています」を英語にせよ。",{
+    accept:["He has been watching TV for three hours"], formula:"<have/has been＋動詞のing形＋for ~>",
+    explain:"3人称単数heなのでhasを使い、has been watchingとします。"}),
+  Q("eng3-passperf","思",4,"「この歌はあなたの国で知られていますか」を英語にせよ。",{
+    accept:["Is this song known in your country"], formula:"<be動詞＋主語＋過去分詞~?>",
+    explain:"受け身の疑問文はbe動詞を主語の前に出します。knowの過去分詞はknownです。"}),
+  Q("eng3-passperf","思",4,"「Many people speak English.」を受け身の文に書きかえよ。",{
+    accept:["English is spoken by many people"], formula:"<能動態の目的語＋be動詞＋過去分詞＋by＋もとの主語>",
+    explain:"能動態の目的語Englishを主語にし、動詞をbe動詞＋過去分詞（is spoken）にして、もとの主語をbyのあとに置きます。"}),
+
+  /* =====================================================================
+     英語【3年】分詞の後置修飾
+     ===================================================================== */
+  Q("eng3-participle","思",4,"「あそこで走っている少年は私の弟です」を英語にせよ。（現在分詞の後置修飾）",{
+    accept:["The boy running over there is my brother"], formula:"<名詞＋現在分詞(～ing)＋語句>",
+    explain:"現在分詞runningが後ろからboyを修飾し、「走っている少年」という意味になります。"}),
+  Q("eng3-participle","思",4,"「これは日本で作られたカメラです」を英語にせよ。（過去分詞の後置修飾）",{
+    accept:["This is a camera made in Japan"], formula:"<名詞＋過去分詞＋語句>",
+    explain:"過去分詞madeが後ろからcameraを修飾し、「作られたカメラ」という受け身の意味になります。"}),
+  Q("eng3-participle","知",2,"「The language ( ) in Australia is English.」（speakを適切な形に）",{
+    accept:["spoken"], formula:"<名詞＋過去分詞＋語句>（受け身の意味）",
+    explain:"「話されている言語」という受け身の意味なので過去分詞spokenを使います。"}),
+  Q("eng3-participle","知",2,"「Look at the cat ( ) on the sofa.」（sleepを適切な形に）",{
+    accept:["sleeping"], formula:"<名詞＋現在分詞＋語句>（～している）",
+    explain:"「眠っているねこ」という能動の意味なので現在分詞sleepingを使います。"}),
+  Q("eng3-participle","思",4,"「The girl who is singing on the stage is Mika.」を分詞を使って書きかえよ。",{
+    accept:["The girl singing on the stage is Mika"], formula:"<関係代名詞＋be動詞＋ing形 → 現在分詞＋語句>に書きかえられる",
+    explain:"<who is singing>のような<関係代名詞＋be動詞＋ing形>は、現在分詞singingだけの形に書きかえられます。"}),
+  Q("eng3-participle","思",4,"「彼によって撮られた写真はとても美しいです」を英語にせよ。",{
+    accept:["The pictures taken by him are very beautiful","The photos taken by him are very beautiful"], formula:"<名詞＋過去分詞＋by ~>",
+    explain:"過去分詞takenが後ろからpicturesを修飾し、「彼によって撮られた写真」という意味になります。"}),
+  Q("eng3-participle","知",2,"「Do you know the boy ( ) tennis over there?」（playを適切な形に）",{
+    accept:["playing"], formula:"<名詞＋現在分詞＋語句>",
+    explain:"「テニスをしている少年」という能動の意味なので現在分詞playingを使います。"}),
+
+  /* =====================================================================
+     英語【3年】関係代名詞
+     ===================================================================== */
+  Q("eng3-relative","思",4,"「私には東京に住んでいる友達がいます」を英語にせよ。（主格who）",{
+    accept:["I have a friend who lives in Tokyo"], formula:"<名詞(人)＋who＋動詞~>",
+    explain:"先行詞が人（friend）なので主格の関係代名詞whoを使います。"}),
+  Q("eng3-relative","思",4,"「速く走る犬は人気があります」を英語にせよ。（主格which）",{
+    accept:["A dog which runs fast is popular"], formula:"<名詞(もの・動物)＋which＋動詞~>",
+    explain:"先行詞が動物（dog）なので主格の関係代名詞whichを使います。"}),
+  Q("eng3-relative","思",4,"「向こうで泣いている女の子を知っていますか」を英語にせよ。（主格that）",{
+    accept:["Do you know the girl that is crying over there"], formula:"<名詞＋that＋動詞~>（人にも、ものにも使える）",
+    explain:"関係代名詞thatはwhoやwhichの代わりに使うことができます。"}),
+  Q("eng3-relative","思",4,"「これは私が昨日買ったペンです」を英語にせよ。（目的格which）",{
+    accept:["This is the pen which I bought yesterday"], formula:"<名詞＋(which/that)＋主語＋動詞~>（省略可能）",
+    explain:"先行詞penが関係代名詞節の中で目的語になっているので、目的格の関係代名詞whichを使います。"}),
+  Q("eng3-relative","思",4,"「This is the pen which I bought yesterday.」からwhichを省略した文を答えよ。",{
+    accept:["This is the pen I bought yesterday"], formula:"目的格の関係代名詞は省略できる",
+    explain:"目的格の関係代名詞（who(m)/which/that）は省略することができます。"}),
+  Q("eng3-relative","知",2,"「This is the book ( ) I read last week.」に入る語を選べ。",{
+    choices:["which","who","whose","whom"], answer:0, formula:"先行詞がもの（book）＋目的格 → which/that",
+    explain:"先行詞bookは「もの」で、関係代名詞節の中で目的語になっているのでwhichを使います。"}),
+  Q("eng3-relative","知",2,"「I know a boy ( ) can speak three languages.」に入る語を選べ。",{
+    choices:["who","which","whom","what"], answer:0, formula:"先行詞が人（boy）＋主格 → who",
+    explain:"先行詞boyは「人」で、関係代名詞節の中で主語になっているのでwhoを使います。"}),
+  Q("eng3-relative","思",4,"先行詞に人と動物（もの）の両方が含まれるとき、どの関係代名詞を使うとよいか答えよ。",{
+    accept:["that"], formula:"先行詞が「人＋もの/動物」のときはthatを使う",
+    explain:"whoは人だけ、whichはもの・動物だけに使いますが、thatはどちらにも使えるので、人とものの両方が先行詞のときに使われます。"}),
+  Q("eng3-relative","思",4,"「I have a sister. She lives in Nagoya.」の2文を関係代名詞を使って1文にせよ。",{
+    accept:["I have a sister who lives in Nagoya"], formula:"<名詞＋who/which/that＋動詞~>で2文を1文にまとめる",
+    explain:"2つ目の文の主語SheをwhoでSisterに結びつけ、1つの文にまとめます。"}),
+
+  /* =====================================================================
+     英語【3年】間接疑問文・仮定法・原形不定詞など
+     ===================================================================== */
+  Q("eng3-others","思",4,"「彼がどこに住んでいるか知っていますか」を英語にせよ。（間接疑問文）",{
+    accept:["Do you know where he lives"], formula:"<疑問詞＋主語＋動詞>（文の中に疑問文を組みこむ）",
+    explain:"間接疑問文では、疑問詞のあとは<主語＋動詞>の語順になります（doesやdidは使いません）。"}),
+  Q("eng3-others","思",4,"「これが何であるか教えてください」を英語にせよ。",{
+    accept:["Please tell me what this is","Tell me what this is please"], formula:"<疑問詞＋主語＋動詞>（間接疑問文）",
+    explain:"「what this is」のように、疑問詞のあとは<主語＋動詞>の語順になります。"}),
+  Q("eng3-others","思",4,"「もし私があなたなら、そうしません」を英語にせよ。（仮定法過去）",{
+    accept:["If I were you I would not do that","If I were you I wouldnt do that"], formula:"<If＋主語＋過去形, 主語＋would/could＋動詞の原形>",
+    explain:"現実とは違う仮定を表す仮定法過去では、be動詞はwereを使うのが基本です。"}),
+  Q("eng3-others","思",4,"「母は私にお皿を洗わせました」を英語にせよ。（使役動詞make）",{
+    accept:["My mother made me wash the dishes"], formula:"<make/let/have＋目的語＋動詞の原形>",
+    explain:"使役動詞makeは<make＋目的語＋動詞の原形>の形で「（人）に～させる」という意味になります。"}),
+  Q("eng3-others","思",4,"「私は彼が歌っているのを見ました」を英語にせよ。（知覚動詞）",{
+    accept:["I saw him singing"], formula:"<知覚動詞(see/hearなど)＋目的語＋動詞のing形/原形>",
+    explain:"知覚動詞seeは<see＋目的語＋動詞のing形>の形で「（人）が～しているのを見る」という意味になります。"}),
+  Q("eng3-others","思",4,"「この問題はとても難しいので私には解けません」を英語にせよ。（so...that）",{
+    accept:["This question is so difficult that I cant solve it"], formula:"<so＋形容詞/副詞＋that＋主語＋動詞>",
+    explain:"<so ... that ~>で「とても…なので～だ」という意味になります。"}),
+  Q("eng3-others","思",4,"「彼は一人で旅行できるほど年をとっています」を英語にせよ。（enough to）",{
+    accept:["He is old enough to travel alone"], formula:"<形容詞/副詞＋enough to＋動詞の原形>",
+    explain:"<形容詞＋enough to ~>で「～できるほど十分…だ」という意味になります。"}),
+
+  /* =====================================================================
+     理科：身近な生物の観察（双眼実体顕微鏡）
+     ===================================================================== */
+  Q("obs-micro","思",4,"双眼実体顕微鏡の正しい操作の順は、イ（接眼レンズを目の幅に合わせる）→ウ（右目でピントを合わせる）→ア（左目で視度調節リングを調節する）である。この中で最後に行う操作を選べ。",{
+    svg:svgMicroscope, choices:["ア（視度調節リングで調節する）","イ（接眼レンズを目の幅に合わせる）","ウ（微動ねじでピントを合わせる）"], answer:0,
+    explain:"双眼実体顕微鏡はまず接眼レンズの幅を合わせ、右目でピントを合わせたあと、最後に左目で視度調節リングを使ってピントを合わせます。"}),
+  Q("obs-micro","知",2,"双眼実体顕微鏡で、観察するものをのせる台を何というか。",{
+    accept:["ステージ"], explain:"標本や観察するものをのせる台をステージといいます。"}),
+  Q("obs-micro","知",2,"双眼実体顕微鏡で、大まかにピントを合わせるときに回すねじを何というか。",{
+    accept:["粗動ねじ","そどうねじ"], explain:"大きくピントを合わせるときは粗動ねじを、細かく合わせるときは微動ねじを使います。"}),
+  Q("obs-micro","知",2,"双眼実体顕微鏡で、細かくピントを合わせるときに回すねじを何というか。",{
+    accept:["微動ねじ","びどうねじ"], explain:"微動ねじを回して、細かくピントを合わせます。"}),
+  Q("obs-micro","思",4,"接眼レンズの倍率が4倍、対物レンズの倍率が10倍のとき、双眼実体顕微鏡の倍率は何倍か。",{
+    formula:"顕微鏡の倍率＝接眼レンズの倍率×対物レンズの倍率",
+    accept:["40倍","40"], explain:"顕微鏡全体の倍率は、接眼レンズの倍率×対物レンズの倍率で求められるので、4×10=40倍になります。"}),
+  Q("obs-micro","思",4,"双眼実体顕微鏡の利点を、プレパラートとの関係にふれて答えよ。",{
+    accept:["プレパラートを作らなくても、そのまま立体的に観察できる","プレパラートをつくらずに立体的に観察できる"],
+    explain:"双眼実体顕微鏡は、プレパラートを作らずに観察物をそのままステージにのせて、立体的に観察できるのが特徴です。"}),
+  Q("obs-micro","知",2,"顕微鏡で視野の明るさを調節するために使う、光を反射させる部分を何というか。",{
+    accept:["反射鏡","はんしゃきょう"], explain:"反射鏡を動かして、視野に光を取り入れる量を調節します。"}),
+  Q("obs-micro","知",2,"双眼実体顕微鏡は、両目で見ることで観察物をどのように見ることができるか。",{
+    accept:["立体的に","立体的にみることができる"], explain:"双眼実体顕微鏡は両目で観察するため、観察物を立体的に見ることができます。"}),
+
+  /* =====================================================================
+     理科：植物の分類
+     ===================================================================== */
+  Q("plant-class","知",2,"図で、柱頭に花粉がつくことを何というか。",{
+    svg:svgFlowerDetail, accept:["受粉","じゅふん"], explain:"おしべのやくでつくられた花粉が、めしべの柱頭につくことを受粉といいます。"}),
+  Q("plant-class","知",2,"受粉ののち、図のP（胚珠）はやがて何になるか。",{
+    svg:svgFlowerDetail, accept:["種子","しゅし"], explain:"受粉後、胚珠は成長して種子になります。"}),
+  Q("plant-class","知",2,"受粉ののち、図のQ（子房）はやがて何になるか。",{
+    svg:svgFlowerDetail, accept:["果実","かじつ"], explain:"受粉後、子房は成長して果実になります。"}),
+  Q("plant-class","知",2,"種子植物のうち、胚珠が子房の中にある植物を何というか。",{
+    accept:["被子植物","ひししょくぶつ"], explain:"胚珠が子房の中に包まれている種子植物を被子植物といいます。"}),
+  Q("plant-class","知",2,"種子植物のうち、子房がなく胚珠がむき出しになっている植物を何というか。",{
+    accept:["裸子植物","らししょくぶつ"], explain:"マツやスギのように子房がなく、胚珠がむき出しになっている植物を裸子植物といいます。"}),
+  Q("plant-class","知",2,"被子植物のうち、子葉が1枚の植物を何類というか。",{
+    accept:["単子葉類","たんしようるい"], explain:"発芽したときの子葉が1枚の植物を単子葉類といいます。"}),
+  Q("plant-class","知",2,"単子葉類の葉に見られる、葉脈の通り方の特徴を答えよ。",{
+    choices:["平行に通る（平行脈）","網目状に通る（網状脈）","放射状に通る","通っていない"], answer:0,
+    explain:"単子葉類の葉脈は、たがいに平行に通る平行脈です。"}),
+  Q("plant-class","知",2,"単子葉類の根のつくりの特徴を答えよ。",{
+    choices:["ひげ根","主根と側根","根毛だけ","根がない"], answer:0,
+    explain:"単子葉類の根は、たくさんの細い根が広がるひげ根です。"}),
+  Q("plant-class","知",2,"双子葉類の葉に見られる、葉脈の通り方の特徴を答えよ。",{
+    choices:["網目状に通る（網状脈）","平行に通る（平行脈）","放射状に通る","通っていない"], answer:0,
+    explain:"双子葉類の葉脈は、網の目のように広がる網状脈です。"}),
+  Q("plant-class","知",2,"シダ植物やコケ植物は、何によってなかまをふやすか。",{
+    accept:["胞子","ほうし"], explain:"シダ植物やコケ植物は種子をつくらず、胞子によってなかまをふやします。"}),
+
+  /* =====================================================================
+     理科：動物の分類
+     ===================================================================== */
+  Q("animal-class","知",2,"背骨がある動物を何というか。",{
+    accept:["セキツイ動物","せきついどうぶつ"], explain:"体の中に背骨をもつ動物をセキツイ動物といいます。"}),
+  Q("animal-class","知",2,"背骨がない動物を何というか。",{
+    accept:["無セキツイ動物","むせきついどうぶつ"], explain:"体の中に背骨をもたない動物を無セキツイ動物といいます。"}),
+  Q("animal-class","知",2,"セキツイ動物のうち、一生の間におもな呼吸器官がえらから肺に変わるのは何類か。",{
+    choices:["両生類","魚類","ハチュウ類","鳥類"], answer:0,
+    explain:"両生類は幼生のときはえら（と皮膚）で、成体になると肺（と皮膚）で呼吸するように変わります。"}),
+  Q("animal-class","知",2,"子を、親の体内である程度育ててからうむ、子のうまれ方を何というか。",{
+    accept:["胎生","たいせい"], explain:"ホニュウ類に見られる、子が母体内である程度育ってから生まれるふえ方を胎生といいます。"}),
+  Q("animal-class","知",2,"無セキツイ動物のうち、体が硬い殻でおおわれ、体やあしに節のあるなかまを何動物というか。",{
+    accept:["節足動物","せっそくどうぶつ"], explain:"体やあしに節があり、外骨格でおおわれているなかまを節足動物といいます。"}),
+  Q("animal-class","知",2,"節足動物の体をおおう、硬い殻を何というか。",{
+    accept:["外骨格","がいこっかく"], explain:"節足動物の体表をおおう硬い殻を外骨格といい、体を支えたり保護したりするはたらきがあります。"}),
+  Q("animal-class","知",2,"無セキツイ動物のうち、内臓が特別な膜におおわれ、節のないやわらかいあしをもつなかまを何動物というか。",{
+    accept:["軟体動物","なんたいどうぶつ"], explain:"イカ・タコ・貝のなかまのように、節のないやわらかいあしをもつなかまを軟体動物といいます。"}),
+  Q("animal-class","知",2,"軟体動物の内臓をおおう、特別な膜を何というか。",{
+    accept:["外とう膜","がいとうまく"], explain:"軟体動物の内臓は、外とう膜という膜でおおわれています。"}),
+  Q("animal-class","知",2,"次のうち、軟体動物にあてはまるものをすべて選べ。ア　イカ　イ　カニ　ウ　ミミズ　エ　ムカデ　オ　アサリ",{
+    accept:["アとオ","イカとアサリ","アサリとイカ","ア、オ"], explain:"イカ（ア）とアサリ（オ）が軟体動物です。カニとムカデは節足動物、ミミズはどちらにも属さない環形動物です。"}),
+  Q("animal-class","知",2,"節足動物のうち、エビやカニのようにえらで呼吸し、体が頭胸部と腹部などに分かれるなかまを何類というか。",{
+    accept:["甲殻類","こうかくるい"], explain:"エビ・カニのなかまは甲殻類とよばれ、多くは水中で生活し、えらで呼吸します。"}),
+
+  /* =====================================================================
+     理科：生物と細胞
+     ===================================================================== */
+  Q("cell-bio","知",2,"細胞のつくりで、染色液によく染まる部分を何というか。",{
+    accept:["核","かく"], explain:"酢酸カーミンなどの染色液によく染まる、細胞の中心にある丸い部分を核といいます。"}),
+  Q("cell-bio","知",2,"動物と植物の細胞に共通するつくりで、細胞質の一番外側にあるうすい膜を何というか。",{
+    accept:["細胞膜","さいぼうまく"], explain:"細胞質の一番外側をおおう、うすい膜を細胞膜といいます。"}),
+  Q("cell-bio","知",2,"体が1つの細胞でできている生物を何というか。",{
+    accept:["単細胞生物","たんさいぼうせいぶつ"], explain:"ゾウリムシやアメーバのように、体が1つの細胞だけでできている生物を単細胞生物といいます。"}),
+  Q("cell-bio","知",2,"形やはたらきが同じ細胞が集まったものを何というか。",{
+    accept:["組織","そしき"], explain:"形やはたらきが同じ細胞の集まりを組織といいます。"}),
+  Q("cell-bio","知",2,"いくつかの種類の組織が集まって、特定のはたらきをするものを何というか。",{
+    accept:["器官","きかん"], explain:"いくつかの組織が集まり、特定のはたらきをするまとまりを器官といいます（例：葉、胃など）。"}),
+  Q("cell-bio","知",2,"植物の細胞だけに見られる、光合成を行う緑色の粒を何というか。",{
+    accept:["葉緑体","ようりょくたい"], explain:"葉緑体は植物の細胞に見られる緑色の粒で、光合成を行う場所です。"}),
+  Q("cell-bio","知",2,"植物の細胞だけに見られる、細胞質の中にある液で満たされた袋状の部分を何というか。",{
+    accept:["液胞","えきほう"], explain:"液胞には、細胞の活動でできた物質などがとけた液が入っています。"}),
+  Q("cell-bio","知",2,"植物の細胞の一番外側にある、細胞を支えるじょうぶなつくりを何というか。",{
+    accept:["細胞壁","さいぼうへき"], explain:"細胞膜の外側にある、じょうぶな細胞壁は植物の体を支えるのに役立っています。"}),
+
+  /* =====================================================================
+     理科：光合成
+     ===================================================================== */
+  Q("photosynthesis","思",4,"アサガオの葉を、実験の前に一昼夜暗室に置いておく理由を答えよ。",{
+    accept:["葉の中のデンプンをなくすため","葉にあったデンプンを使い切らせるため"],
+    explain:"実験前に葉のデンプンを使い切らせておくことで、その後の光合成によってできたデンプンだけを調べることができます。"}),
+  Q("photosynthesis","知",2,"ヨウ素液で調べる前に、葉の緑色を脱色するために使う薬品は何か。",{
+    accept:["エタノール"], explain:"葉を熱湯であたためたあと、あたためたエタノールにひたして緑色を脱色します。"}),
+  Q("photosynthesis","知",2,"脱色した葉をヨウ素液につけたとき、光合成によってデンプンができた部分は何色に変わるか。",{
+    accept:["青紫色","あおむらさきいろ"], explain:"デンプンがあるとヨウ素液は青紫色に変化します。"}),
+  Q("photosynthesis","思",4,"アルミニウムはくでおおった部分（B）とおおわなかった部分（A）を比較する実験からわかる、光合成に必要な条件は何か。",{
+    svg:svgPhotoExp, accept:["光"], explain:"光を当てた部分だけがヨウ素液に反応するので、光合成には光が必要だとわかります。"}),
+  Q("photosynthesis","思",4,"緑色の部分（A）とふ（緑色でない部分C）を比較する実験からわかる、光合成に必要なものは何か。",{
+    svg:svgPhotoVariegated, accept:["葉緑体"], explain:"緑色の部分（葉緑体がある部分）だけがヨウ素液に反応するので、光合成には葉緑体が必要だとわかります。"}),
+  Q("photosynthesis","知",2,"緑色にしたBTB溶液にオオカナダモを入れて光を当てると、溶液が青色に変化した。このことから、光合成によって何という気体が使われたと考えられるか。",{
+    accept:["二酸化炭素"], explain:"二酸化炭素が減ると溶液はアルカリ性に近づき、BTB溶液は青色に変化します。"}),
+  Q("photosynthesis","知",2,"光を当てたオオカナダモから出る泡に多くふくまれる、光合成でできた気体は何か。",{
+    accept:["酸素"], explain:"光合成によって酸素がつくられ、泡となって出てきます。"}),
+  Q("photosynthesis","知",2,"光を当てずに置いたオオカナダモの呼吸によって、緑色のBTB溶液は何色に変化するか。",{
+    accept:["黄色","きいろ"], explain:"呼吸によって二酸化炭素が増えると溶液は酸性に近づき、BTB溶液は黄色に変化します。"}),
+  Q("photosynthesis","思",4,"植物のはたらきにおいて、呼吸より光合成の方がさかんに行われている昼間、植物全体としてはどんな気体を放出しているように見えるか。",{
+    accept:["酸素"], explain:"昼間は光合成による酸素の放出量が呼吸による酸素の吸収量を上回るため、全体としては酸素を放出しているように見えます。"}),
+  Q("photosynthesis","知",2,"光合成を行う場所である、植物の細胞の中にある緑色の粒を何というか。",{
+    accept:["葉緑体"], explain:"葉緑体は光合成を行う細胞小器官です。"}),
+
+  /* =====================================================================
+     理科：植物の体のつくり
+     ===================================================================== */
+  Q("plant-structure","知",2,"根の先端付近にある、綿毛のような小さな毛を何というか。",{
+    accept:["根毛","こんもう"], explain:"根の先端近くには根毛という細い毛のようなつくりがあります。"}),
+  Q("plant-structure","思",4,"根毛があることで、根はどのような点で都合がよいか。",{
+    accept:["表面積が大きくなり、水や養分を効率よく吸収できる","根の表面積が大きくなるから"],
+    explain:"根毛があることで根の表面積が非常に大きくなり、水や養分を効率よく吸収できます。"}),
+  Q("plant-structure","知",2,"茎の中にある、根から吸収した水や、水に溶けた養分が通る管を何というか。",{
+    accept:["道管","どうかん"], explain:"根から吸い上げた水や養分は道管を通って全身に運ばれます。"}),
+  Q("plant-structure","知",2,"茎の中にある、葉でつくられた栄養分が通る管を何というか。",{
+    accept:["師管","しかん"], explain:"葉でつくられた栄養分（デンプンなど）は師管を通って全身に運ばれます。"}),
+  Q("plant-structure","知",2,"道管と師管が集まって、束のようになっている部分を何というか。",{
+    accept:["維管束","いかんそく"], explain:"道管と師管が集まった部分を維管束といいます。"}),
+  Q("plant-structure","知",2,"葉の裏側に多く見られる、酸素や二酸化炭素、水蒸気の出入り口となる小さな穴を何というか。",{
+    svg:svgLeafCross, accept:["気孔","きこう"], explain:"気孔は葉の表皮に見られる小さな穴で、気体の出入り口となります。"}),
+  Q("plant-structure","知",2,"気孔を囲む、2つの三日月形をした細胞を何というか。",{
+    accept:["孔辺細胞","こうへんさいぼう"], explain:"気孔は2つの孔辺細胞に囲まれており、その開閉を行っています。"}),
+  Q("plant-structure","知",2,"水が水蒸気として気孔から空気中に出ていくことを何というか。",{
+    accept:["蒸散","じょうさん"], explain:"根から吸収された水は、最終的に蒸散によって気孔から水蒸気として出ていきます。"}),
+  Q("plant-structure","知",2,"葉の表側に近い部分にある、細胞がすき間なく並んだ組織を何というか。",{
+    accept:["柵状組織","さくじょうそしき"], explain:"葉の表側に近い部分には、細胞がすき間なく並んだ柵状組織があります。"}),
+  Q("plant-structure","知",2,"葉の裏側に近い部分にある、細胞の間にすき間が多い組織を何というか。",{
+    accept:["海綿状組織","かいめんじょうそしき"], explain:"葉の裏側に近い部分には、細胞の間にすき間の多い海綿状組織があります。"}),
+
+  /* =====================================================================
+     理科：消化と吸収
+     ===================================================================== */
+  Q("digestion","知",2,"口から肛門へと続く、1本の長い管を何というか。",{
+    accept:["消化管","しょうかかん"], explain:"口・食道・胃・小腸・大腸・肛門とつながる1本の長い管を消化管といいます。"}),
+  Q("digestion","知",2,"食物を分解して、体の中に吸収しやすい物質に変えるはたらきを何というか。",{
+    accept:["消化","しょうか"], explain:"食物を吸収されやすい物質に変えるはたらきを消化といいます。"}),
+  Q("digestion","知",2,"消化液に含まれ、養分を分解するはたらきをするものを何というか。",{
+    accept:["消化酵素","しょうかこうそ"], explain:"消化液には消化酵素が含まれており、それぞれ決まった養分を分解します。"}),
+  Q("digestion","知",2,"消化酵素のはたらきによって、タンパク質は最終的に何という物質に分解されるか。",{
+    accept:["アミノ酸"], explain:"タンパク質は消化酵素によって、最終的に吸収されやすいアミノ酸に分解されます。"}),
+  Q("digestion","知",2,"消化酵素のはたらきによって、デンプンは最終的に何という物質に分解されるか。",{
+    accept:["ブドウ糖"], explain:"デンプンは消化酵素によって、最終的に吸収されやすいブドウ糖に分解されます。"}),
+  Q("digestion","知",2,"小腸の内側にある、たくさんのひだの表面に見られる小さな突起を何というか。",{
+    svg:svgVillus, accept:["柔毛","じゅうもう"], explain:"小腸の内側の壁には柔毛という小さな突起がたくさんあります。"}),
+  Q("digestion","思",4,"柔毛のようなつくりがあることで、小腸はどのような点で都合がよいか。",{
+    accept:["表面積が大きくなり、養分を効率よく吸収できる","小腸の表面積が大きくなるから"],
+    explain:"柔毛があることで小腸の表面積が非常に大きくなり、養分を効率よく吸収できます。"}),
+  Q("digestion","知",2,"柔毛で吸収された脂肪は、脂肪酸ともう1つの物質に分解されたあと再び脂肪になってリンパ管に入る。もう1つの物質は何か。",{
+    accept:["モノグリセリド"], explain:"脂肪は消化酵素によって脂肪酸とモノグリセリドに分解され、柔毛に吸収されたあと再び脂肪になってリンパ管に入ります。"}),
+  Q("digestion","知",2,"ブドウ糖とアミノ酸は、柔毛の中の何という管に吸収されるか。",{
+    accept:["毛細血管","もうさいけっかん"], explain:"ブドウ糖とアミノ酸は柔毛内の毛細血管に吸収され、血液によって肝臓などに運ばれます。"}),
+
+  /* =====================================================================
+     理科：呼吸・血液・排出
+     ===================================================================== */
+  Q("circulation","知",2,"ヒトが呼吸を行う器官は何か。",{
+    accept:["肺","はい"], explain:"ヒトは肺で酸素と二酸化炭素の交換（ガス交換）を行います。"}),
+  Q("circulation","知",2,"血液の成分のうち、酸素を運ぶはたらきをするものの名称を答えよ。",{
+    accept:["赤血球","せっけっきゅう"], explain:"赤血球にふくまれるヘモグロビンが酸素と結びつき、全身に酸素を運びます。"}),
+  Q("circulation","知",2,"細胞のまわりを満たしている液を何というか。",{
+    accept:["組織液","そしきえき"], explain:"血しょうが毛細血管からしみ出て、細胞のまわりを満たす組織液になります。"}),
+  Q("circulation","知",2,"組織液のもとになる、血液の成分は何か。",{
+    accept:["血しょう","けっしょう"], explain:"血しょうが毛細血管の壁からしみ出て組織液になります。"}),
+  Q("circulation","知",2,"図で、二酸化炭素を最も多くふくむ血液が流れる血管はどれか、a～eから選べ（bは心臓から肺に向かう血管）。",{
+    svg:svgBloodCirc, accept:["b"], explain:"心臓から肺に向かう血管（肺動脈）には、二酸化炭素を最も多くふくむ血液が流れています。"}),
+  Q("circulation","知",2,"図で、養分を最も多くふくむ血液が流れる血管はどれか、a～eから選べ（dは小腸から肝臓に向かう血管）。",{
+    svg:svgBloodCirc, accept:["d"], explain:"小腸で吸収された養分は、門脈（d）を通って肝臓に運ばれるため、dの血管に養分が最も多くふくまれます。"}),
+  Q("circulation","知",2,"血液中から尿素などの不要な物質をこしとる器官は何か。",{
+    accept:["じん臓","腎臓","じんぞう"], explain:"じん臓は血液中の不要な物質をこしとり、尿として排出するはたらきをしています。"}),
+  Q("circulation","知",2,"血液中の有害な物質であるアンモニアを、無害な尿素に変える器官は何か。",{
+    accept:["肝臓","かんぞう"], explain:"肝臓は有害なアンモニアを、害の少ない尿素につくり変えるはたらきをしています。"}),
+  Q("circulation","知",2,"血液の成分のうち、出血したときに血液を固めるはたらきをするものは何か。",{
+    accept:["血小板","けっしょうばん"], explain:"血小板は出血したときに血液を固め、止血するはたらきをします。"}),
+  Q("circulation","知",2,"血液の成分のうち、体内に入った細菌などを分解するはたらきをするものは何か。",{
+    accept:["白血球","はっけっきゅう"], explain:"白血球は体内に侵入した細菌などを分解し、体を守るはたらきをします。"}),
+
+  /* =====================================================================
+     理科：刺激と反応
+     ===================================================================== */
+  Q("nervous","知",2,"外界からのさまざまな刺激を受けとる部分を何というか。",{
+    accept:["感覚器官","かんかくきかん"], explain:"目・耳・鼻・舌・皮膚などの、刺激を受けとる部分を感覚器官といいます。"}),
+  Q("nervous","知",2,"感覚器官のうち、においを感じる器官は何か。",{
+    accept:["鼻","はな"], explain:"においは鼻の中の細胞で感じとります。"}),
+  Q("nervous","知",2,"図で、脳とともに中枢神経をつくる、Bの部分の名称を答えよ。",{
+    svg:svgReflexArc, accept:["脊髄","せきずい"], explain:"脳と脊髄を合わせて中枢神経といいます。"}),
+  Q("nervous","知",2,"図のaのように、感覚器官が受けとった刺激を脳や脊髄に伝える神経を何というか。",{
+    svg:svgReflexArc, accept:["感覚神経","かんかくしんけい"], explain:"感覚器官からの刺激は感覚神経によって脳や脊髄に伝えられます。"}),
+  Q("nervous","知",2,"図のbのように、脳や脊髄からの命令を運動器官に伝える神経を何というか。",{
+    svg:svgReflexArc, accept:["運動神経","うんどうしんけい"], explain:"脳や脊髄からの命令は運動神経によって筋肉などに伝えられます。"}),
+  Q("nervous","知",2,"脳と脊髄を合わせて何神経というか。",{
+    accept:["中枢神経","ちゅうすうしんけい"], explain:"判断や命令を行う脳と脊髄を合わせて中枢神経といいます。"}),
+  Q("nervous","思",4,"熱いものにさわってしまい、意識せずに手を引っこめるという反応で、命令を出しているのはどこか。",{
+    accept:["脊髄","せきずい"], explain:"このような反射では、脳ではなく脊髄が命令を出すため、意識するよりも速く反応できます。"}),
+  Q("nervous","知",2,"刺激を受けとってすぐに、無意識に起こり、危険から身を守るのに役立っている反応を何というか。",{
+    accept:["反射","はんしゃ"], explain:"意識とは無関係に、刺激に対してすぐに起こる反応を反射といいます。"}),
+
+  /* =====================================================================
+     理科：物質の性質と実験器具
+     ===================================================================== */
+  Q("matter-lab","知",2,"炭素をふくみ、燃やすと二酸化炭素と水が発生する物質を何というか。",{
+    accept:["有機物","ゆうきぶつ"], explain:"砂糖やろうそくなど、炭素をふくむ物質を有機物といいます。"}),
+  Q("matter-lab","知",2,"炭素をふくまない物質（有機物以外の物質）を何というか。",{
+    accept:["無機物","むきぶつ"], explain:"金属や食塩、水など、炭素をふくまない物質を無機物といいます。"}),
+  Q("matter-lab","知",2,"金属に共通する性質を1つ答えよ。",{
+    accept:["電気をよく通す","みがくと光る","たたくとのびる（広がる）","熱をよく伝える"],
+    explain:"金属には、電気や熱をよく通す、みがくと特有の光沢が出る、たたくとうすく広がるなどの共通の性質があります。"}),
+  Q("matter-lab","思",4,"物質の密度の求め方を式で表せ。",{
+    formula:"密度[g/cm³]＝質量[g]÷体積[cm³]",
+    accept:["密度=質量÷体積","質量÷体積"], explain:"密度は、物質1cm³あたりの質量で表され、質量を体積で割って求めます。"}),
+  Q("matter-lab","知",2,"ガスバーナーに火をつけるとき、マッチに火をつけたあと、先に開けるねじはどちらか。",{
+    choices:["ガス調節ねじ","空気調節ねじ","元栓","コック"], answer:0,
+    explain:"マッチに火をつけたあと、ガス調節ねじを開けて点火し、そのあと空気調節ねじを開けて炎の色を調節します。"}),
+  Q("matter-lab","知",2,"ガスバーナーの炎の色が赤い（オレンジ）とき、青い炎にするために回すねじはどちらか。",{
+    choices:["空気調節ねじ","ガス調節ねじ","元栓","コック"], answer:0,
+    explain:"空気調節ねじを開けて空気の量を増やすと、炎は青色になります。"}),
+  Q("matter-lab","知",2,"電子てんびんで物質の質量をはかるとき、薬包紙などをのせたあとに表示を0にする操作を何というか。",{
+    accept:["0点調整","ぜろてんちょうせい","風袋引き","ふうたいびき"], explain:"薬包紙などの質量を差し引くために、0点調整（風袋引き）を行ってからはかりたい物質をのせます。"}),
+  Q("matter-lab","知",2,"メスシリンダーで液体の体積をはかるとき、目もりは液面のどの位置を、どの向きから読むか。",{
+    accept:["液面の最も低い位置を、水平の方向から読む","液面の中央を真横から水平に読む"],
+    explain:"メスシリンダーの目もりは、液面の最も低い位置を、真横から水平に見て読みます。"}),
+  Q("matter-lab","知",2,"上皿てんびんで薬品の質量をはかるとき、分銅は軽いものと重いもの、どちらからのせるか。",{
+    choices:["重いものから順にのせる","軽いものから順にのせる","どちらでもよい","一度にすべてのせる"], answer:0,
+    explain:"上皿てんびんで分銅を使うときは、重い分銅から順にのせていき、つり合うように調整します。"}),
+
+  /* =====================================================================
+     理科：水溶液
+     ===================================================================== */
+  Q("solution","知",2,"溶媒が水である溶液を何というか。",{
+    accept:["水溶液","すいようえき"], explain:"水にものが溶けた溶液を水溶液といいます。"}),
+  Q("solution","知",2,"溶質の質量が、溶液の質量の何％にあたるかで表した濃度を何というか。",{
+    accept:["質量パーセント濃度","しつりょうぱーせんとのうど"], explain:"溶質の質量が溶液全体の質量の何％かで表した濃度を質量パーセント濃度といいます。"}),
+  Q("solution","思",4,"質量パーセント濃度を求める式を答えよ。",{
+    formula:"質量パーセント濃度[%]＝\\frac{溶質の質量}{溶液の質量}×100",
+    accept:["質量パーセント濃度=溶質の質量÷溶液の質量×100","溶質の質量÷溶液の質量×100"],
+    explain:"質量パーセント濃度は、溶質の質量を溶液（溶質＋溶媒）の質量で割って100をかけて求めます。"}),
+  Q("solution","思",4,"砂糖50gを水150gに溶かした。この砂糖水の質量パーセント濃度は何％か。",{
+    formula:"質量パーセント濃度[%]＝\\frac{溶質の質量}{溶液の質量}×100",
+    accept:["25%","25"], explain:"溶液の質量は50+150=200g。50÷200×100=25%になります。"}),
+  Q("solution","思",4,"20％の砂糖水300gをつくるには、水と砂糖をそれぞれ何gずつ混ぜればよいか。",{
+    accept:["水240g砂糖60g","砂糖60g水240g","水240g、砂糖60g"],
+    explain:"砂糖の質量は300×0.2=60g。水の質量は300-60=240gになります。"}),
+  Q("solution","知",2,"一定量の水に溶ける物質の限度の量を何というか。",{
+    accept:["溶解度","ようかいど"], explain:"100gの水に溶ける物質の最大量を溶解度といい、物質や温度によって値が決まっています。"}),
+  Q("solution","知",2,"溶解度に達し、それ以上物質を溶かすことができなくなった水溶液を何というか。",{
+    accept:["飽和水溶液","ほうわすいようえき"], explain:"限度いっぱいまで物質が溶けた水溶液を飽和水溶液といいます。"}),
+  Q("solution","知",2,"温度による溶解度の差を利用して、水溶液から溶けている物質を再び結晶として取り出す方法を何というか。",{
+    accept:["再結晶","さいけっしょう"], explain:"温度による溶解度の差を利用し、溶液を冷やすなどして結晶を取り出す方法を再結晶といいます。"}),
+  Q("solution","知",2,"液体と、その液体に溶けない固体を分けるときに使う操作を何というか。",{
+    accept:["ろ過","ろか"], explain:"ろ紙などを使って、液体と溶けない固体を分ける操作をろ過といいます。"}),
+  Q("solution","知",2,"水を蒸発させることで、水溶液に溶けている固体をすべて取り出す方法を何というか。",{
+    accept:["蒸発乾固","じょうはつかんこ","水を蒸発させる"], explain:"水溶液を加熱するなどして水をすべて蒸発させると、溶けていた固体をすべて取り出すことができます。"}),
+  Q("solution","思",4,"水100gに20gの物質を溶かしてできる水溶液の質量パーセント濃度は約何％か。（小数第2位を四捨五入）",{
+    formula:"質量パーセント濃度[%]＝\\frac{溶質の質量}{溶液の質量}×100",
+    accept:["約16.7%","16.7%","16.7"], explain:"溶液の質量は100+20=120g。20÷120×100=16.66…より、約16.7%になります。"}),
+  Q("solution","知",2,"ろ過を行うとき、ろうとの先のとがった方はどのようにするか。",{
+    accept:["ビーカーの内側の壁につける","ビーカーの壁にあてる"],
+    explain:"液が飛び散らないように、ろうとの先はビーカーの内側の壁につけておきます。"}),
+
+  /* =====================================================================
+     理科：状態変化
+     ===================================================================== */
+  Q("state-change","知",2,"温度によって物質の状態（固体・液体・気体）が変わることを何というか。",{
+    accept:["状態変化","じょうたいへんか"], explain:"温度が変わることで物質の状態が変化することを状態変化といいます。"}),
+  Q("state-change","知",2,"状態変化するとき、物質全体の質量は変わるか、変わらないか。",{
+    choices:["変わらない","変わる（増える）","変わる（減る）","場合による"], answer:0,
+    explain:"状態が変化しても、物質をつくる粒子の数は変わらないため、質量は変わりません。"}),
+  Q("state-change","知",2,"状態変化するとき、物質の体積はふつうどうなるか。",{
+    choices:["変わる","変わらない","必ず増える","必ず減る"], answer:0,
+    explain:"状態変化では、粒子の運動のようすや粒子どうしの間隔が変わるため、ふつう体積は変化します。"}),
+  Q("state-change","知",2,"固体が液体に変わるときの温度を何というか。",{
+    accept:["融点","ゆうてん"], explain:"物質が固体から液体に変化する温度を融点といいます。"}),
+  Q("state-change","知",2,"液体が沸騰して気体に変わるときの温度を何というか。",{
+    accept:["沸点","ふってん"], explain:"液体が沸騰して気体に変化する温度を沸点といいます。"}),
+  Q("state-change","知",2,"液体を加熱して沸騰させ、出てくる気体を冷やして再び液体にして取り出す方法を何というか。",{
+    accept:["蒸留","じょうりゅう"], explain:"沸点の違いを利用して混合物から純粋な物質を取り出す方法を蒸留といいます。"}),
+  Q("state-change","知",2,"2種類以上の物質が混ざり合ったものを何というか。",{
+    accept:["混合物","こんごうぶつ"], explain:"2種類以上の物質が混じり合ったものを混合物といいます。"}),
+  Q("state-change","知",2,"混合物の沸点や融点は、1種類の物質のときのように一定の温度になるか、ならないか。",{
+    choices:["ならない","なる","物質によって異なる","必ずなる"], answer:0,
+    explain:"混合物では成分によって沸点や融点が異なるため、加熱・冷却しても一定の温度にはなりません。"}),
+
+  /* =====================================================================
+     理科：気体の性質
+     ===================================================================== */
+  Q("gas","知",2,"水に溶けにくい気体を集めるのに適した集め方を何というか。",{
+    svg:svgGasCollect, accept:["水上置換法","すいじょうちかんほう"], explain:"水に溶けにくい気体は、水と置きかえるようにして集める水上置換法で集めます。"}),
+  Q("gas","知",2,"空気より密度が小さい（軽い）気体を集めるのに適した集め方を何というか。",{
+    accept:["上方置換法","じょうほうちかんほう"], explain:"空気より軽い気体は、容器の上の方にたまるので上方置換法で集めます。"}),
+  Q("gas","知",2,"空気より密度が大きい（重い）気体を集めるのに適した集め方を何というか。",{
+    accept:["下方置換法","かほうちかんほう"], explain:"空気より重い気体は、容器の下の方にたまるので下方置換法で集めます。"}),
+  Q("gas","知",2,"石灰石にうすい塩酸を加えたときに発生する気体は何か。",{
+    accept:["二酸化炭素"], explain:"石灰石（炭酸カルシウム）にうすい塩酸を加えると、二酸化炭素が発生します。"}),
+  Q("gas","知",2,"二酸化炭素を石灰水に通すと、石灰水はどうなるか。",{
+    accept:["白くにごる"], explain:"二酸化炭素を石灰水に通すと、白い沈殿ができて白くにごります。"}),
+  Q("gas","知",2,"亜鉛にうすい塩酸を加えたときに発生する、空気中で火をつけると音を立てて燃える気体は何か。",{
+    accept:["水素"], explain:"亜鉛や鉄などの金属にうすい塩酸を加えると水素が発生します。"}),
+  Q("gas","知",2,"塩化アンモニウムと水酸化カルシウムの混合物を加熱すると発生する、水に非常に溶けやすい気体は何か。",{
+    accept:["アンモニア"], explain:"アンモニアは水に非常に溶けやすく、空気より密度が小さい気体です。"}),
+  Q("gas","知",2,"アンモニアのように、水に溶けやすく空気より軽い気体を集めるのに適した方法は何か。",{
+    choices:["上方置換法","下方置換法","水上置換法","どの方法でもよい"], answer:0,
+    explain:"アンモニアは水に非常に溶けやすいため水上置換法は使えず、空気より軽いので上方置換法で集めます。"}),
+  Q("gas","知",2,"二酸化マンガンにオキシドール（うすい過酸化水素水）を加えると発生する、ものを燃やすはたらきがある気体は何か。",{
+    accept:["酸素"], explain:"二酸化マンガンは触媒としてはたらき、過酸化水素水から酸素が発生します。"}),
+  Q("gas","知",2,"酸素にはどのような性質があるか、1つ答えよ。",{
+    accept:["ものを燃やすはたらき（助燃性）がある","ものを燃やすはたらきがある","無色無臭である","水に溶けにくい"],
+    explain:"酸素はそれ自体は燃えませんが、ものを燃やすはたらき（助燃性）をもつ気体です。"}),
+
+  /* =====================================================================
+     理科：物質をつくっているもの
+     ===================================================================== */
+  Q("atom-molecule","知",2,"化学変化で、それ以上分けることのできない小さな粒子を何というか。",{
+    accept:["原子","げんし"], explain:"化学変化によってそれ以上分けることができない最小の粒子を原子といいます。"}),
+  Q("atom-molecule","知",2,"原子がいくつか結びついてできた、物質の性質を示す最小の粒子を何というか。",{
+    accept:["分子","ぶんし"], explain:"いくつかの原子が結びついてできた、物質の性質を示す最小の粒子を分子といいます。"}),
+  Q("atom-molecule","知",2,"物質を構成している原子の種類を何というか。",{
+    accept:["元素","げんそ"], explain:"原子の種類のことを元素といいます。"}),
+  Q("atom-molecule","知",2,"元素を表す、種類ごとの記号を何というか。",{
+    accept:["元素記号","げんそきごう"], explain:"元素をアルファベット1文字または2文字で表したものを元素記号といいます。"}),
+  Q("atom-molecule","知",2,"元素の性質を、原子番号の順に整理した表を何というか。",{
+    accept:["周期表","しゅうきひょう"], explain:"元素を原子番号の順に並べ、性質が似た元素が同じ列に並ぶように整理した表を周期表といいます。"}),
+  Q("atom-molecule","知",2,"1種類の元素だけでできている物質を何というか。",{
+    accept:["単体","たんたい"], explain:"酸素や鉄のように、1種類の元素だけでできている物質を単体といいます。"}),
+  Q("atom-molecule","知",2,"2種類以上の元素からできている物質を何というか。",{
+    accept:["化合物","かごうぶつ"], explain:"水や二酸化炭素のように、2種類以上の元素からできている物質を化合物といいます。"}),
+  Q("atom-molecule","知",2,"すべての物質は分子をつくっているといえるか。",{
+    choices:["いえない","いえる","気体だけいえる","固体だけいえる"], answer:0,
+    explain:"金属や塩化ナトリウムなどのように、分子をつくらない物質もあるため、すべての物質が分子をつくるとはいえません。"}),
+
+  /* =====================================================================
+     理科：化学変化：分解
+     ===================================================================== */
+  Q("chem-decompose","知",2,"1種類の物質が、加熱などによって2種類以上の別の物質に分かれる化学変化を何というか。",{
+    accept:["分解","ぶんかい"], explain:"1つの物質が2種類以上の物質に分かれる化学変化を分解といいます。"}),
+  Q("chem-decompose","知",2,"炭酸水素ナトリウムを加熱すると、炭酸ナトリウムと水のほかに何という気体が発生するか。",{
+    accept:["二酸化炭素"], explain:"炭酸水素ナトリウムを加熱すると、炭酸ナトリウム・水・二酸化炭素に分解されます。"}),
+  Q("chem-decompose","知",2,"炭酸水素ナトリウムを加熱してできた液体を、青色の塩化コバルト紙につけると何色に変化するか。",{
+    accept:["赤色","桃色","うすい赤色"], explain:"水にふれると、青色の塩化コバルト紙は赤色（桃色）に変化します。これは、できた液体が水であることの確認に使われます。"}),
+  Q("chem-decompose","知",2,"酸化銀を加熱すると、何色から何色に変わるか。",{
+    accept:["黒色から白色","黒色から銀色"], explain:"黒色の酸化銀を加熱すると、白色（銀色）の銀に変化します。"}),
+  Q("chem-decompose","知",2,"酸化銀を加熱したときにできる固体は何か。",{
+    accept:["銀"], explain:"酸化銀を加熱すると、銀と酸素に分解されます。"}),
+  Q("chem-decompose","知",2,"酸化銀を加熱したときに発生する気体は何か。",{
+    accept:["酸素"], explain:"酸化銀は加熱によって銀と酸素に分解されます。"}),
+  Q("chem-decompose","知",2,"物質を、元素記号と数字を使って表したものを何というか。",{
+    accept:["化学式","かがくしき"], explain:"物質を元素記号と数字で表したものを化学式といいます。"}),
+  Q("chem-decompose","知",2,"化学反応式では、矢印の左右で原子の種類と何が同じになるようにするか。",{
+    accept:["数","原子の数"], explain:"化学反応式では、矢印の左右で原子の種類と数がそれぞれ同じになるように係数を調整します。"}),
+  Q("chem-decompose","思",4,"次の化学反応式の空欄にあてはまる物質の化学式をかき、反応式を完成させよ。　2NaHCO3 → Na2CO3 + H2O + （　　）",{
+    accept:["CO2","co2"], explain:"炭酸水素ナトリウムの分解では、炭酸ナトリウム・水・二酸化炭素（CO2）ができます。"}),
+  Q("chem-decompose","思",4,"次の化学反応式のa,bにあてはまる数字をそれぞれ答えよ。　a Ag2O → b Ag + O2",{
+    accept:["a=2b=4","2,4","a2b4"], explain:"銀原子・酸素原子の数を左右で合わせると、2Ag2O→4Ag+O2となり、a=2、b=4になります。"}),
+
+  /* =====================================================================
+     理科：化学変化と熱・質量
+     ===================================================================== */
+  Q("chem-heat-mass","知",2,"化学変化のときに温度が上がる反応を何というか。",{
+    accept:["発熱反応","はつねつはんのう"], explain:"化学変化にともなって熱が発生し、まわりの温度が上がる反応を発熱反応といいます。"}),
+  Q("chem-heat-mass","知",2,"化学変化のときに、まわりの熱を吸収して温度が下がる反応を何というか。",{
+    accept:["吸熱反応","きゅうねつはんのう"], explain:"化学変化にともなってまわりの熱を吸収し、温度が下がる反応を吸熱反応といいます。"}),
+  Q("chem-heat-mass","知",2,"鉄粉と活性炭に食塩水を加えて混ぜると温度が上がる。これは、鉄が何と結びつく反応か。",{
+    accept:["酸素"], explain:"鉄が空気中の酸素と結びつく（酸化する）ときに熱が発生し、温度が上がります。"}),
+  Q("chem-heat-mass","知",2,"化学変化の前後で、物質全体の質量は変わるか。",{
+    choices:["変わらない","増える","減る","反応による"], answer:0,
+    explain:"化学変化の前後で原子の組み合わせは変わっても、原子の種類と数は変わらないため、全体の質量は変わりません。"}),
+  Q("chem-heat-mass","知",2,"化学変化の前後で物質全体の質量が変わらないという法則を何というか。",{
+    accept:["質量保存の法則","しつりょうほぞんのほうそく"], explain:"化学変化の前後で、反応に関係した物質全体の質量は変わらないという法則を質量保存の法則といいます。"}),
+  Q("chem-heat-mass","思",4,"密閉容器内でうすい塩酸と炭酸水素ナトリウムを反応させたときと、ふたを開けたまま反応させたときとで、反応後の質量に違いがあるかを、理由とともに答えよ。",{
+    accept:["ふたを開けると発生した二酸化炭素が空気中に逃げるため、質量は軽くなる","開けた方は発生した気体が逃げるため軽くなる"],
+    explain:"密閉容器内では発生した気体が容器の外に出ないため質量は変化しませんが、ふたを開けると発生した二酸化炭素が空気中に逃げるため、反応後の質量は軽くなります。"}),
+  Q("chem-heat-mass","知",2,"金属を空気中で加熱すると質量が増加するのは、金属が何と結びつくからか。",{
+    accept:["酸素"], explain:"金属が空気中の酸素と結びついて酸化物になるため、質量が増加します。"}),
+  Q("chem-heat-mass","思",4,"3.0gのマグネシウムを加熱して完全に酸化させると、5.0gの酸化マグネシウムができた。このとき、マグネシウムと結びついた酸素の質量は何gか。",{
+    formula:"結びついた酸素の質量＝酸化物の質量－もとの金属の質量",
+    accept:["2.0g","2.0"], explain:"酸化マグネシウムの質量（5.0g）からもとのマグネシウムの質量（3.0g）を引くと、結びついた酸素の質量2.0gが求められます。"}),
+  Q("chem-heat-mass","思",4,"銅の質量と、それに化合する酸素の質量の比はおよそ4：1である。8.0gの銅が完全に酸化したときにできる酸化銅は何gか。",{
+    formula:"銅：酸素＝4：1 の比を利用する",
+    accept:["10.0g","10g","10"], explain:"銅8.0gに化合する酸素は8.0×(1/4)=2.0gなので、できる酸化銅は8.0+2.0=10.0gになります。"}),
+
+  /* =====================================================================
+     理科：光の性質と凸レンズ
+     ===================================================================== */
+  Q("lens-light","知",2,"光が物体の表面ではね返ることを何というか。",{
+    accept:["反射","はんしゃ"], explain:"光が物体の表面に当たってはね返る現象を反射といいます。"}),
+  Q("lens-light","知",2,"光が異なる物質の境界面で、進む方向を変えることを何というか。",{
+    accept:["屈折","くっせつ"], explain:"光が種類の異なる物質の境界面を通るとき、進む方向が変わることを屈折といいます。"}),
+  Q("lens-light","知",2,"光が水中から空気中へ進むとき、入射角と屈折角では、どちらが大きいか。",{
+    choices:["屈折角の方が大きい","入射角の方が大きい","常に等しい","場合による"], answer:0,
+    explain:"光が水中（密な物質）から空気中（疎な物質）へ進むとき、屈折角は入射角より大きくなります。"}),
+  Q("lens-light","知",2,"光が水中から空気中へ進むとき、入射角がある角度より大きくなると、光がすべて反射する現象を何というか。",{
+    accept:["全反射","ぜんはんしゃ"], explain:"入射角が一定以上大きくなると、光は空気中に出られずすべて反射します。これを全反射といいます。"}),
+  Q("lens-light","知",2,"凸レンズで、レンズの軸に平行に入った光が屈折して集まる点を何というか。",{
+    svg:svgConvexLens, accept:["焦点","しょうてん"], explain:"レンズの軸に平行に入った光は、屈折して焦点という1点に集まります。"}),
+  Q("lens-light","知",2,"凸レンズを通った光が実際に集まってできる、スクリーンにうつすことができる像を何というか。",{
+    accept:["実像","じつぞう"], explain:"光が実際に集まってできる像を実像といい、スクリーンにうつすことができます。"}),
+  Q("lens-light","知",2,"物体を焦点の内側に置いたときに見える、スクリーンにはうつせない、物体より大きく見える像を何というか。",{
+    accept:["虚像","きょぞう"], explain:"物体を焦点の内側に置くと、凸レンズを通して物体より大きい虚像が見えます。"}),
+  Q("lens-light","知",2,"物体を焦点距離の2倍の位置に置いたとき、できる実像の大きさは実物と比べてどうか。",{
+    choices:["同じ大きさ","実物より大きい","実物より小さい","像はできない"], answer:0,
+    explain:"焦点距離の2倍の位置に物体を置くと、反対側の焦点距離の2倍の位置に実物と同じ大きさの実像ができます。"}),
+  Q("lens-light","知",2,"物体を焦点距離の2倍より外側に置いたとき、できる実像の大きさは実物と比べてどうか。",{
+    choices:["実物より小さい","実物より大きい","同じ大きさ","像はできない"], answer:0,
+    explain:"焦点距離の2倍より外側に物体を置くと、焦点距離の2倍の位置より内側に、実物より小さい実像ができます。"}),
+  Q("lens-light","知",2,"物体を焦点距離の2倍の位置より内側（焦点の外側）に置いたとき、できる実像の大きさは実物と比べてどうか。",{
+    choices:["実物より大きい","実物より小さい","同じ大きさ","像はできない"], answer:0,
+    explain:"焦点と焦点距離の2倍の位置の間に物体を置くと、実物より大きい実像ができます。"}),
+
+  /* =====================================================================
+     理科：音
+     ===================================================================== */
+  Q("sound","知",2,"音源（発音体）が振動するようすが次々と伝わっていく現象を何というか。",{
+    accept:["波","なみ"], explain:"音は、音源の振動が波として次々と空気中などを伝わっていく現象です。"}),
+  Q("sound","知",2,"音は、空気などの物質がない真空中でも伝わるか。",{
+    choices:["伝わらない","伝わる","一部だけ伝わる","気体の種類による"], answer:0,
+    explain:"音は物質の振動が伝わる現象なので、物質がない真空中では音は伝わりません。"}),
+  Q("sound","知",2,"1秒間に音源が振動する回数を何というか。",{
+    accept:["振動数","しんどうすう"], explain:"1秒間あたりの振動の回数を振動数といいます。"}),
+  Q("sound","知",2,"振動数の単位は何か。",{
+    accept:["ヘルツ","Hz","hz"], explain:"振動数の単位はヘルツ（Hz）です。"}),
+  Q("sound","知",2,"弦の振動で、振幅が大きいとき、音の大きさはどうなるか。",{
+    choices:["大きくなる","小さくなる","変わらない","高くなる"], answer:0,
+    explain:"振幅（振動のふれはば）が大きいほど、音は大きくなります。"}),
+  Q("sound","知",2,"弦の振動数が多いとき、音の高さはどうなるか。",{
+    choices:["高くなる","低くなる","変わらない","大きくなる"], answer:0,
+    explain:"振動数が多いほど、音は高くなります。"}),
+  Q("sound","知",2,"弦を短く、細く、強く張ると、音は高くなるか、低くなるか。",{
+    choices:["高くなる","低くなる","変わらない","音が出ない"], answer:0,
+    explain:"弦を短く、細く、強く張ると振動数が多くなり、音は高くなります。"}),
+  Q("sound","知",2,"空気中を音が伝わる速さは、およそ何m/sか。",{
+    accept:["約340m/s","340m/s","340"], explain:"空気中を音が伝わる速さは、気温などにもよりますがおよそ340m/sです。"}),
+
+  /* =====================================================================
+     理科：力のはたらき
+     ===================================================================== */
+  Q("force","知",2,"力のはたらきは3つに分けられる。「物体の形を変える」「物体を支える」ともう1つは何か。",{
+    accept:["物体の運動のようす（速さや向き）を変える","物体の動きを変える"],
+    explain:"力のはたらきには、物体の形を変える、物体の運動のようす（速さや向き）を変える、物体を支える、の3つがあります。"}),
+  Q("force","知",2,"面が上にある物体に押されたとき、その力に逆らって面が物体を垂直に押し返す力を何というか。",{
+    accept:["垂直抗力","すいちょくこうりょく"], explain:"物体が面をおす力に逆らって、面が物体を垂直に押し返す力を垂直抗力といいます。"}),
+  Q("force","知",2,"力を加えて変形した物体が、もとの形にもどろうとするときにはたらく力を何というか。",{
+    accept:["弾性力","だんせいりょく"], explain:"変形した物体がもとにもどろうとするときにはたらく力を弾性力といいます。"}),
+  Q("force","知",2,"地球上のすべての物体にはたらいている、地球がその中心に向かって物体を引く力を何というか。",{
+    accept:["重力","じゅうりょく"], explain:"地球がその中心に向かって物体を引く力を重力といいます。"}),
+  Q("force","知",2,"ばねの弾性を利用して、ばねののびで力の大きさをはかれるようにした道具を何というか。",{
+    accept:["ばねばかり"], explain:"ばねののびが力の大きさに比例することを利用した道具をばねばかりといいます。"}),
+  Q("force","思",4,"ばねののびは、ばねを引く力の大きさに比例する。この関係を何の法則というか。",{
+    svg:svgSpringGraph, accept:["フックの法則"], explain:"ばねののびが加えた力の大きさに比例するという関係をフックの法則といいます。"}),
+  Q("force","知",2,"場所によって変わらない、物体そのものの分量を何というか。",{
+    accept:["質量","しつりょう"], explain:"場所が変わっても変化しない、物体そのものの量を質量といいます。"}),
+  Q("force","知",2,"月面で、物体にはたらく重力の大きさは地球上の約何倍か。",{
+    accept:["約6分の1","6分の1","1/6"], explain:"月の重力は地球の約6分の1のため、同じ物体でも月面では重力が小さくなります。"}),
+  Q("force","知",2,"物体に2つの力がはたらいていても物体が動かないとき、この2つの力はどうなっているというか。",{
+    accept:["つり合っている"], explain:"2つの力がはたらいていても物体が静止したままのとき、これらの力はつり合っているといいます。"}),
+  Q("force","思",4,"力がつり合っているとき、2つの力の大きさ・向き・作用線（一直線上にあるか）についてそれぞれ答えよ。",{
+    accept:["大きさは等しく、向きは反対で、一直線上にある","大きさが等しく向きが反対で一直線上にある"],
+    explain:"つり合っている2つの力は、大きさが等しく、向きが反対で、一直線上にあるという関係があります。"}),
+
+  /* =====================================================================
+     理科：電流・電圧・抵抗
+     ===================================================================== */
+  Q("circuit","知",2,"電流の流れにくさを表す量を何というか。",{
+    accept:["抵抗","ていこう"], explain:"電流の流れにくさを表す量を電気抵抗（抵抗）といいます。"}),
+  Q("circuit","知",2,"電流の流れる道すじを何というか。",{
+    accept:["回路","かいろ"], explain:"電流が流れる一続きの道すじを回路といいます。"}),
+  Q("circuit","知",2,"電流の単位は何か。（記号も含めて答えよ）",{
+    accept:["アンペア","A","あんぺあ"], explain:"電流の単位はアンペア（記号A）です。"}),
+  Q("circuit","知",2,"電圧の単位は何か。（記号も含めて答えよ）",{
+    accept:["ボルト","V","ぼると"], explain:"電圧の単位はボルト（記号V）です。"}),
+  Q("circuit","知",2,"抵抗の単位は何か。（記号も含めて答えよ）",{
+    accept:["オーム","Ω","おーむ"], explain:"抵抗の単位はオーム（記号Ω）です。"}),
+  Q("circuit","知",2,"電圧・電流・抵抗の関係を表す法則を何というか。",{
+    accept:["オームの法則"], explain:"電圧は電流と抵抗の積で表されるという関係をオームの法則といいます。"}),
+  Q("circuit","思",4,"オームの法則の式を、電圧V、電流I、抵抗Rを使って表せ。",{
+    formula:"V＝I×R",
+    accept:["V=IR","V=I×R"], explain:"オームの法則より、電圧[V]＝電流[A]×抵抗[Ω]の関係が成り立ちます。"}),
+  Q("circuit","思",4,"2Ωの電熱線に1.5Aの電流が流れているとき、電熱線の両端に加わる電圧は何Vか。",{
+    formula:"V＝I×R",
+    accept:["3V","3"], explain:"V=I×R=1.5×2=3Vになります。"}),
+  Q("circuit","思",4,"10Ωの電熱線の両端に15.0Vの電圧を加えると、流れる電流は何Aか。",{
+    formula:"I＝\\frac{V}{R}",
+    accept:["1.5A","1.5"], explain:"I=V÷R=15.0÷10=1.5Aになります。"}),
+  Q("circuit","知",2,"直列回路と並列回路のうち、回路のどの点でも電流の大きさが等しいのはどちらか。",{
+    choices:["直列回路","並列回路","どちらも等しい","どちらも異なる"], answer:0,
+    explain:"直列回路では、回路のどの点でも電流の大きさは等しくなります。並列回路では枝分かれした電流の和がもとの電流と等しくなります。"}),
+
+  /* =====================================================================
+     理科：電流のはたらき
+     ===================================================================== */
+  Q("elec-power","知",2,"1秒あたりに消費する電気エネルギーの量を何というか。",{
+    accept:["電力","でんりょく"], explain:"電気器具が1秒間に消費する電気エネルギーの量を電力といいます。"}),
+  Q("elec-power","知",2,"電力の単位は何か。（記号も含めて答えよ）",{
+    accept:["ワット","W","わっと"], explain:"電力の単位はワット（記号W）です。"}),
+  Q("elec-power","思",4,"電力を求める式を、電力P、電圧V、電流Iを使って表せ。",{
+    formula:"P＝V×I",
+    accept:["P=VI","P=V×I"], explain:"電力[W]＝電圧[V]×電流[A]の関係が成り立ちます。"}),
+  Q("elec-power","知",2,"電気器具を使用した時間と、その間に消費した電力の積を何というか。",{
+    accept:["電力量","でんりょくりょう"], explain:"電力量は、電力と使用時間の積で求められる、消費した電気エネルギーの総量です。"}),
+  Q("elec-power","知",2,"電力量の単位を1つ答えよ。",{
+    accept:["ジュール","J","ワット時","Wh","じゅーる"], explain:"電力量の単位にはジュール（J）やワット時（Wh）が使われます。"}),
+  Q("elec-power","思",4,"100Vの電圧で10Aの電流が流れる電熱線の消費電力は何Wか。",{
+    formula:"P＝V×I",
+    accept:["1000W","1000"], explain:"P=V×I=100×10=1000Wになります。"}),
+  Q("elec-power","思",4,"1000Wの電気ポットを3分間使用したときの電力量は何Jか。",{
+    formula:"電力量[J]＝電力[W]×時間[秒]",
+    accept:["180000J","180000"], explain:"3分は180秒なので、電力量=1000×180=180000Jになります。"}),
+  Q("elec-power","知",2,"電流によって物質から発生する熱の量を何というか。",{
+    accept:["熱量","ねつりょう"], explain:"電流によって発生する熱の量を熱量といい、電力量と同じジュール（J）で表されます。"}),
+];
+
+/* ======================================================================
+   STATE & PERSISTENCE
+   ====================================================================== */
+let selectedUnits = new Set();
+let currentSubject = "science";
+let currentMode = "normal"; // "normal" | "weak"
+let quizQueue = [];
+let currentIndex = 0;
+let correctCount = 0;
+let answered = false;
+let results = [];
+let lastWasWeakSession = false;
+
+const LS_PLAYER = "benkyou_player_v1";
+const LS_SEEN = "benkyou_seen_v1";
+const TIER_GOLD = {easy:80, medium:200, hard:500, legendary:1000};
+
+const NOTE_COLORS = [
+  {id:"cream", name:"クリーム", bg:"#fffef8", cost:0},
+  {id:"mint", name:"ミント", bg:"#eef8f4", cost:100},
+  {id:"sky", name:"スカイ", bg:"#eef4fc", cost:150},
+  {id:"rose", name:"ローズ", bg:"#fdf0f2", cost:200},
+  {id:"lemon", name:"レモン", bg:"#fdfae8", cost:250},
+];
+const PEN_COLORS = [
+  {id:"ink", color:"#22242e", cost:0},
+  {id:"navy", color:"#1f3b57", cost:80},
+  {id:"red", color:"#c23b2e", cost:100},
+  {id:"teal", color:"#1f6f6a", cost:120},
+  {id:"purple", color:"#6a4a9c", cost:150},
+  {id:"gold", color:"#b3892f", cost:200},
+];
+
+function loadPlayer(){
+  try{
+    return JSON.parse(localStorage.getItem(LS_PLAYER)) || {
+      gold:0, achievements:[], totalAnswered:0, totalCorrect:0, sessions:0,
+      perfectSessions:0, streak:0, bestStreak:0, noteColor:"cream", penColor:"ink",
+      subjectAnswered:{science:0,social:0,math:0,english:0},
+      subjectCorrect:{science:0,social:0,math:0,english:0},
+      unitCorrect:{}, weakClears:0
+    };
+  }catch(e){
+    return {gold:0,achievements:[],totalAnswered:0,totalCorrect:0,sessions:0,perfectSessions:0,streak:0,bestStreak:0,noteColor:"cream",penColor:"ink",subjectAnswered:{},subjectCorrect:{},unitCorrect:{},weakClears:0};
+  }
+}
+function savePlayer(){ localStorage.setItem(LS_PLAYER, JSON.stringify(PLAYER)); }
+let PLAYER = loadPlayer();
+
+function loadSeen(){ try{ return JSON.parse(localStorage.getItem(LS_SEEN))||[]; }catch(e){ return []; } }
+function saveSeen(arr){ localStorage.setItem(LS_SEEN, JSON.stringify(arr)); }
+function markQuestionSeen(qid){
+  const seen = loadSeen();
+  if(!seen.includes(qid)){ seen.push(qid); saveSeen(seen); }
+}
+
+function getUnitIndex(unitId){ return UNITS.findIndex(u=>u.id===unitId); }
+function getQuestionSubject(q){ return UNITS.find(u=>u.id===q.unit)?.subject||""; }
+
+function buildAchievements(){
+  const list = [];
+  let n = 0;
+  const add = (name, desc, tier, checkFn) => list.push({id:++n, name, desc, tier, gold:TIER_GOLD[tier], check:checkFn});
+
+  [1,5,10,25,50,100,200,300,500,750,1000].forEach(v=>{
+    add(`累計${v}問`, `${v}問に挑戦`, v<=10?"easy":v<=100?"medium":v<=500?"hard":"legendary", p=>p.totalAnswered>=v);
+  });
+  [1,5,10,25,50,100,200,300,500].forEach(v=>{
+    add(`正解${v}問`, `累計${v}問正解`, v<=10?"easy":v<=100?"medium":"hard", p=>p.totalCorrect>=v);
+  });
+  [1,3,5,10,20,30,50].forEach(v=>{
+    add(`${v}回テスト`, `${v}回テスト完了`, v<=3?"easy":v<=10?"medium":"hard", p=>p.sessions>=v);
+  });
+  [1,3,5,10,15,20].forEach(v=>{
+    add(`パーフェクト${v}回`, `全問正解を${v}回`, v<=1?"medium":v<=5?"hard":"legendary", p=>p.perfectSessions>=v);
+  });
+  [3,5,10,15,20,30].forEach(v=>{
+    add(`連続正解${v}`, `${v}問連続で正解`, v<=5?"easy":v<=15?"medium":"hard", p=>p.bestStreak>=v);
+  });
+  SUBJECTS.forEach(s=>{
+    [5,10,25,50,100].forEach(v=>{
+      add(`${s.name}${v}問`, `${s.name}で${v}問回答`, v<=10?"easy":v<=25?"medium":"hard", p=>(p.subjectAnswered[s.id]||0)>=v);
+    });
+    [5,10,25,50].forEach(v=>{
+      add(`${s.name}正解${v}`, `${s.name}で${v}問正解`, v<=10?"easy":v<=25?"medium":"hard", p=>(p.subjectCorrect[s.id]||0)>=v);
+    });
+  });
+  UNITS.forEach(u=>{
+    add(`${u.name}マスター`, `${u.name}で5問以上正解`, "medium", p=>(p.unitCorrect[u.id]||0)>=5);
+  });
+  [100,300,500,1000,2000,5000].forEach(v=>{
+    add(`ゴールド${v}`, `ゴールドを${v}枚所持`, v<=500?"medium":v<=2000?"hard":"legendary", p=>p.gold>=v);
+  });
+  [1,5,10,20].forEach(v=>{
+    add(`ニガテ克服${v}`, `ニガテ改善モード${v}回`, v<=3?"easy":"medium", p=>p.weakClears>=v);
+  });
+  add("初ゴールド","称号で初めてゴールド獲得","easy", p=>p.achievements.length>=1);
+  add("称号10個","称号を10個獲得","medium", p=>p.achievements.length>=10);
+  add("称号30個","称号を30個獲得","hard", p=>p.achievements.length>=30);
+  add("称号50個","称号を50個獲得","legendary", p=>p.achievements.length>=50);
+  add("色コレクター","ノート色を3色以上購入","medium", p=>NOTE_COLORS.filter(c=>c.cost>0 && p.unlockedNoteColors?.includes(c.id)).length>=3);
+  add("ペンコレクター","ペン色を4色以上購入","medium", p=>PEN_COLORS.filter(c=>c.cost>0 && p.unlockedPenColors?.includes(c.id)).length>=4);
+  return list;
+}
+const ACHIEVEMENTS = buildAchievements();
+
+function checkAchievements(){
+  let earned = 0;
+  ACHIEVEMENTS.forEach(a=>{
+    if(PLAYER.achievements.includes(a.id)) return;
+    if(a.check(PLAYER)){
+      PLAYER.achievements.push(a.id);
+      PLAYER.gold += a.gold;
+      earned++;
+    }
+  });
+  if(earned>0) savePlayer();
+  return earned;
+}
+
+function updateGoldUI(){
+  document.getElementById("gold-display").textContent = PLAYER.gold;
+  const unlocked = PLAYER.achievements.length;
+  document.getElementById("ach-count").textContent = `${unlocked}/${ACHIEVEMENTS.length}`;
+  const grid = document.getElementById("ach-grid");
+  grid.innerHTML = "";
+  ACHIEVEMENTS.forEach(a=>{
+    const el = document.createElement("div");
+    el.className = "ach-item" + (PLAYER.achievements.includes(a.id)?" unlocked":"");
+    el.innerHTML = `<div class="ach-name">${a.name}</div><div>${a.desc}</div><div class="ach-reward">🪙 ${a.gold}</div>`;
+    grid.appendChild(el);
+  });
+  renderShop();
+}
+
+function renderShop(){
+  if(!PLAYER.unlockedNoteColors) PLAYER.unlockedNoteColors = ["cream"];
+  if(!PLAYER.unlockedPenColors) PLAYER.unlockedPenColors = ["ink"];
+  const noteEl = document.getElementById("note-colors");
+  const penEl = document.getElementById("pen-colors");
+  noteEl.innerHTML = ""; penEl.innerHTML = "";
+  NOTE_COLORS.forEach(c=>{
+    const sw = document.createElement("span");
+    sw.className = "color-swatch" + (PLAYER.noteColor===c.id?" active":"");
+    sw.style.background = c.bg;
+    sw.title = c.name + (c.cost?` (${c.cost}G)`:"");
+    sw.addEventListener("click", ()=>{
+      if(!PLAYER.unlockedNoteColors.includes(c.id)){
+        if(PLAYER.gold<c.cost){ alert(`ゴールドが足りません（${c.cost}G必要）`); return; }
+        PLAYER.gold -= c.cost; PLAYER.unlockedNoteColors.push(c.id); savePlayer();
+      }
+      PLAYER.noteColor = c.id; savePlayer(); updateGoldUI(); applyNoteColors();
+    });
+    noteEl.appendChild(sw);
+  });
+  PEN_COLORS.forEach(c=>{
+    const sw = document.createElement("span");
+    sw.className = "color-swatch" + (PLAYER.penColor===c.id?" active":"");
+    sw.style.background = c.color;
+    sw.title = (c.cost?`${c.cost}G`:"");
+    sw.addEventListener("click", ()=>{
+      if(!PLAYER.unlockedPenColors.includes(c.id)){
+        if(PLAYER.gold<c.cost){ alert(`ゴールドが足りません（${c.cost}G必要）`); return; }
+        PLAYER.gold -= c.cost; PLAYER.unlockedPenColors.push(c.id); savePlayer();
+      }
+      PLAYER.penColor = c.id; savePlayer(); updateGoldUI();
+    });
+    penEl.appendChild(sw);
+  });
+}
+
+document.getElementById("ach-toggle-btn").addEventListener("click", ()=>{
+  document.getElementById("ach-panel").classList.toggle("open");
+});
+
+// in-memory weak-point tracker (persists only while this tab stays open)
+// key: question id -> {wrongCount, seenCount, lastWrong:boolean}
+const WEAK_STATS = {};
+
+function recordAttempt(q, wasCorrect){
+  if(!WEAK_STATS[q.id]) WEAK_STATS[q.id] = {wrongCount:0, seenCount:0, lastWrong:false};
+  const s = WEAK_STATS[q.id];
+  s.seenCount++;
+  s.lastWrong = !wasCorrect;
+  if(!wasCorrect) s.wrongCount++;
+  else if(s.wrongCount>0 && wasCorrect) { /* keep history but mark as improved this round */ }
+}
+
+function getWeakQueue(){
+  // any question ever marked wrong, still counted as weak until answered correctly on the most recent attempt
+  const weakIds = Object.keys(WEAK_STATS).filter(id => {
+    const s = WEAK_STATS[id];
+    return s.wrongCount > 0 && s.lastWrong;
+  });
+  const list = weakIds.map(id => QUESTIONS.find(q=>q.id===Number(id))).filter(Boolean);
+  // sort by most wrong first
+  list.sort((a,b)=> (WEAK_STATS[b.id].wrongCount - WEAK_STATS[a.id].wrongCount));
+  return list;
+}
+
+function updateWeakBadge(){
+  const n = getWeakQueue().length;
+  const badge = document.getElementById("weak-badge");
+  if(n>0){ badge.textContent = n; badge.classList.remove("hidden"); }
+  else{ badge.classList.add("hidden"); }
+}
+
+/* ======================================================================
+   HOME SCREEN RENDER
+   ====================================================================== */
+document.getElementById("total-q-count").textContent = `全${QUESTIONS.length}問収録`;
+
+const subjectTabsEl = document.getElementById("subject-tabs");
+SUBJECTS.forEach(s=>{
+  const tab = document.createElement("button");
+  tab.className = "subject-tab" + (s.id===currentSubject ? " active":"");
+  if(s.id===currentSubject){ tab.style.background = s.color; tab.style.borderColor = s.color; }
+  const cnt = QUESTIONS.filter(q=>UNITS.find(u=>u.id===q.unit).subject===s.id).length;
+  tab.innerHTML = `<span class="dot" style="background:${s.id===currentSubject ? '#fff':s.color}"></span>${s.name}<span class="cnt">(${cnt}問)</span>`;
+  tab.dataset.subject = s.id;
+  tab.addEventListener("click", ()=>{
+    currentSubject = s.id;
+    document.querySelectorAll(".subject-tab").forEach(t=>{
+      const sub = SUBJECTS.find(x=>x.id===t.dataset.subject);
+      const active = t.dataset.subject===currentSubject;
+      t.classList.toggle("active", active);
+      t.style.background = active ? sub.color : "#fff";
+      t.style.borderColor = active ? sub.color : "var(--ink)";
+      t.querySelector(".dot").style.background = active ? "#fff" : sub.color;
+    });
+    renderUnitGrid();
+  });
+  subjectTabsEl.appendChild(tab);
+});
+
+const unitGrid = document.getElementById("unit-grid");
+function renderUnitGrid(){
+  unitGrid.innerHTML = "";
+  const unitsForSubject = UNITS.filter(u=>u.subject===currentSubject);
+  unitsForSubject.forEach((u,i)=>{
+    const count = QUESTIONS.filter(q=>q.unit===u.id).length;
+    const card = document.createElement("div");
+    card.className = "unit-card" + (selectedUnits.has(u.id) ? " selected":"");
+    card.style.animationDelay = (i*0.05)+"s";
+    card.dataset.unit = u.id;
+    card.innerHTML = `
+      <span class="unit-count">${count}問</span>
+      <div class="unit-num" style="background:${u.color}">${i+1}</div>
+      <h3>${u.name}</h3>
+      <p>${u.sub}</p>
+      <div class="check-mark"></div>
+    `;
+    card.addEventListener("click", ()=>{
+      if(selectedUnits.has(u.id)){
+        selectedUnits.delete(u.id);
+        card.classList.remove("selected");
+      } else {
+        selectedUnits.add(u.id);
+        card.classList.add("selected");
+      }
+    });
+    unitGrid.appendChild(card);
+  });
+}
+renderUnitGrid();
+
+document.getElementById("select-all-btn").addEventListener("click", ()=>{
+  UNITS.filter(u=>u.subject===currentSubject).forEach(u=>selectedUnits.add(u.id));
+  renderUnitGrid();
+});
+document.getElementById("select-none-btn").addEventListener("click", ()=>{
+  const unitsForSubject = UNITS.filter(u=>u.subject===currentSubject).map(u=>u.id);
+  const remaining = [...selectedUnits].filter(id=>!unitsForSubject.includes(id));
+  if(remaining.length===0){ renderUnitGrid(); return; } // keep at least one unit overall
+  unitsForSubject.forEach(id=>selectedUnits.delete(id));
+  renderUnitGrid();
+});
+
+/* ---- mode switching ---- */
+document.getElementById("mode-normal-btn").addEventListener("click", ()=>setMode("normal"));
+document.getElementById("mode-weak-btn").addEventListener("click", ()=>setMode("weak"));
+function setMode(mode){
+  currentMode = mode;
+  document.getElementById("mode-normal-btn").classList.toggle("active", mode==="normal");
+  document.getElementById("mode-weak-btn").classList.toggle("active", mode==="weak");
+  document.getElementById("normal-mode-ui").classList.toggle("hidden", mode!=="normal");
+  document.getElementById("weak-mode-ui").classList.toggle("hidden", mode!=="weak");
+  if(mode==="weak") renderWeakPanel();
+}
+
+function renderWeakPanel(){
+  const list = getWeakQueue();
+  const wrap = document.getElementById("weak-list");
+  const startBtn = document.getElementById("weak-start-btn");
+  wrap.innerHTML = "";
+  if(list.length===0){
+    wrap.innerHTML = `<div class="weak-empty">まだニガテな問題がありません。通常モードに挑戦して、間違えた問題をここに集めましょう！</div>`;
+    startBtn.disabled = true;
+  } else {
+    startBtn.disabled = false;
+    list.forEach(q=>{
+      const unit = UNITS.find(u=>u.id===q.unit);
+      const row = document.createElement("div");
+      row.className = "weak-row";
+      row.innerHTML = `<span class="w-text">【${unit.name}】${q.text.length>34 ? q.text.slice(0,34)+"…" : q.text}</span><span class="w-badge">×${WEAK_STATS[q.id].wrongCount}</span>`;
+      wrap.appendChild(row);
+    });
+  }
+  updateWeakBadge();
+}
+
+document.getElementById("weak-start-btn").addEventListener("click", ()=>{
+  const list = getWeakQueue();
+  if(list.length===0) return;
+  quizQueue = shuffle(list);
+  currentIndex = 0; correctCount = 0; results = []; answeredLog = {};
+  lastWasWeakSession = true;
+  showScreen("quiz");
+  renderQuestion();
+});
+
+document.getElementById("start-btn").addEventListener("click", startQuiz);
+document.getElementById("retry-btn").addEventListener("click", ()=>{
+  buildQueue();
+  lastWasWeakSession = false;
+  showScreen("quiz");
+  renderQuestion();
+});
+document.getElementById("retry-wrong-btn").addEventListener("click", ()=>{
+  const wrongQs = results.filter(r=>!r.wasCorrect).map(r=>r.q);
+  if(wrongQs.length===0) return;
+  quizQueue = shuffle(wrongQs);
+  currentIndex = 0; correctCount = 0; results = []; answeredLog = {};
+  lastWasWeakSession = false;
+  showScreen("quiz");
+  renderQuestion();
+});
+document.getElementById("home-btn").addEventListener("click", ()=>{
+  showScreen("home");
+  updateWeakBadge();
+});
+document.getElementById("next-btn").addEventListener("click", ()=>{
+  if(!answeredLog[currentIndex]) return; // must answer (or already have) before moving on
+  if(currentIndex >= quizQueue.length-1){
+    showResults();
+  } else {
+    currentIndex++;
+    renderQuestion();
+  }
+});
+document.getElementById("prev-btn").addEventListener("click", ()=>{
+  if(currentIndex===0) return;
+  currentIndex--;
+  renderQuestion();
+});
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+function buildQueue(){
+  const pool = QUESTIONS.filter(q=>selectedUnits.has(q.unit));
+  const orderMode = document.getElementById("order-input").value;
+  const repeatMode = document.getElementById("repeat-input").value;
+  const countVal = parseInt(document.getElementById("count-input").value,10);
+  const seenSet = new Set(loadSeen());
+
+  let list = pool.slice();
+  if(repeatMode === "exclude"){
+    list = list.filter(q => !seenSet.has(q.id));
+  } else if(repeatMode === "hard"){
+    const unseen = shuffle(list.filter(q => !seenSet.has(q.id)));
+    const seenQs = shuffle(list.filter(q => seenSet.has(q.id)));
+    list = unseen.concat(seenQs);
+  } else if(orderMode === "random"){
+    list = shuffle(list);
+  }
+
+  if(orderMode === "order"){
+    list.sort((a,b)=>getUnitIndex(a.unit)-getUnitIndex(b.unit));
+  }
+
+  if(countVal < list.length) list = list.slice(0, countVal);
+  quizQueue = list;
+  currentIndex = 0;
+  correctCount = 0;
+  results = [];
+  answeredLog = {};
+}
+
+function startQuiz(){
+  if(selectedUnits.size===0){ alert("単元を1つ以上選んでください。"); return; }
+  buildQueue();
+  if(quizQueue.length===0){ alert("選んだ範囲に問題がありません。単元を見直してください。"); return; }
+  lastWasWeakSession = false;
+  showScreen("quiz");
+  renderQuestion();
+}
+
+function showScreen(name){
+  document.getElementById("home-screen").classList.toggle("hidden", name!=="home");
+  document.getElementById("quiz-screen").classList.toggle("hidden", name!=="quiz");
+  document.getElementById("result-screen").classList.toggle("hidden", name!=="result");
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+
+/* ======================================================================
+   MATH / FRACTION FORMATTER
+   ====================================================================== */
+function mathFormat(str){
+  if(str===undefined || str===null) return "";
+  let out = String(str);
+  // 1) explicit \frac{a}{b} markup
+  out = out.replace(/\\frac\{([^{}]+)\}\{([^{}]+)\}/g,
+    '<span class="frac"><span class="num">$1</span><span class="den">$2</span></span>');
+  // 2) auto-detect simple inline fractions like 5/6, 4/√18, 2√2/3 (not inside tags)
+  out = out.replace(/([0-9a-zA-Zぁ-んァ-ヶ√²³]+)\/([0-9a-zA-Zぁ-んァ-ヶ√²³]+)/g,
+    '<span class="frac"><span class="num">$1</span><span class="den">$2</span></span>');
+  return out;
+}
+
+/* ======================================================================
+   QUIZ RENDER  (with prev/next navigation + reviewed mode)
+   ====================================================================== */
+let answeredLog = {}; // index -> {wasCorrect, userAnswer, chosenIdx (for choice types)}
+
+function renderQuestion(){
+  const q = quizQueue[currentIndex];
+  const unitInfo = UNITS.find(u=>u.id===q.unit);
+  const already = answeredLog[currentIndex];
+  answered = !!already;
+
+  document.getElementById("progress-label").textContent = `${currentIndex+1} / ${quizQueue.length}`;
+  document.getElementById("progress-fill").style.width = `${(currentIndex/quizQueue.length)*100}%`;
+  document.getElementById("score-live").textContent = `正解 ${correctCount}`;
+
+  document.getElementById("qnum").textContent = currentIndex+1;
+  document.getElementById("qpts").textContent = `${q.pts}点`;
+  const tagEl = document.getElementById("qtag");
+  tagEl.textContent = q.tag;
+  tagEl.className = "tag " + (q.tag==="知" ? "chi":"shi");
+
+  const weakFlag = document.getElementById("qweakflag");
+  const prevWrong = WEAK_STATS[q.id] && WEAK_STATS[q.id].wrongCount>0;
+  weakFlag.classList.toggle("hidden", !prevWrong);
+
+  document.getElementById("qreviewedflag").classList.toggle("hidden", !already);
+
+  document.getElementById("qunit").textContent = unitInfo.name;
+  document.getElementById("qunit").style.background = unitInfo.color;
+  document.getElementById("qtext").innerHTML = mathFormat(q.text);
+
+  const svgWrap = document.getElementById("qsvg-wrap");
+  if(q.svg){ svgWrap.innerHTML = q.svg; svgWrap.classList.remove("hidden"); }
+  else { svgWrap.innerHTML = ""; svgWrap.classList.add("hidden"); }
+
+  const answerArea = document.getElementById("answer-area");
+  answerArea.innerHTML = "";
+
+  const qcard = document.getElementById("qcard");
+  qcard.classList.remove("enter");
+  void qcard.offsetWidth;
+  qcard.classList.add("enter");
+
+  if(q.choices){
+    const box = document.createElement("div");
+    box.className = "choices";
+    const letters = ["ア","イ","ウ","エ"];
+    q.choices.forEach((choiceText, idx)=>{
+      const btn = document.createElement("button");
+      btn.className = "choice-btn";
+      btn.innerHTML = `<span class="letter">${letters[idx]}</span><span>${mathFormat(choiceText)}</span>`;
+      if(already){
+        btn.disabled = true;
+        if(idx===q.answer) btn.classList.add("correct");
+        else if(idx===already.chosenIdx) btn.classList.add("wrong");
+      } else {
+        btn.addEventListener("click", ()=>handleChoiceAnswer(idx, box, q));
+      }
+      box.appendChild(btn);
+    });
+    answerArea.appendChild(box);
+  } else {
+    const row = document.createElement("div");
+    row.innerHTML = `
+      <div class="text-input-row">
+        <input type="text" id="text-answer" placeholder="ここに答えを入力…（ひらがなでもOK）" autocomplete="off">
+        <button class="judge-btn" id="judge-btn">丸つけ</button>
+      </div>
+      <div class="hint-row">わからないときは、何も入力せずに「丸つけ」を押すと答えが見られます。</div>
+    `;
+    answerArea.appendChild(row);
+    const input = row.querySelector("#text-answer");
+    const btn = row.querySelector("#judge-btn");
+    const subj = getQuestionSubject(q);
+    if(subj === "math"){
+      answerArea.appendChild(renderMathPad(input));
+    }
+    if(already){
+      input.value = already.userAnswer==="（未回答）" ? "" : already.userAnswer;
+      input.placeholder = already.userAnswer==="（未回答）" ? "（未回答）" : "";
+      input.disabled = true; btn.disabled = true;
+    } else {
+      const submit = ()=>handleTextAnswer(input.value, btn, input, q);
+      btn.addEventListener("click", submit);
+      input.addEventListener("keydown", e=>{ if(e.key==="Enter") submit(); });
+      setTimeout(()=>input.focus(), 50);
+    }
+  }
+
+  const panel = document.getElementById("answer-panel");
+  if(already){
+    showAnswerPanel(q, already.wasCorrect, false);
+  } else {
+    panel.classList.add("hidden");
+  }
+
+  document.getElementById("prev-btn").disabled = currentIndex===0;
+  const nextBtn = document.getElementById("next-btn");
+  const isLast = currentIndex === quizQueue.length-1;
+  nextBtn.textContent = isLast ? "結果を見る ▶" : "次の問題 ▶";
+  nextBtn.disabled = !already;
+}
+
+function toHalfWidth(str){
+  return String(str)
+    .replace(/[\uff01-\uff5e]/g, ch => String.fromCharCode(ch.charCodeAt(0)-0xFEE0))
+    .replace(/　/g," ");
+}
+
+function normalizeSpecialTerms(s){
+  return s
+    .replace(/し(しょ|そ)(ち|と)う/g,"シソチョウ")
+    .replace(/ししょちょう/g,"シソチョウ")
+    .replace(/始祖鳥/g,"シソチョウ");
+}
+
+function normalize(str){
+  let s = toHalfWidth(String(str));
+  try{ s = s.normalize("NFKC"); }catch(e){}
+  s = normalizeSpecialTerms(s);
+  return s.replace(/\s+/g,"")
+    .replace(/[＋]/g,"+").replace(/[－―ー−]/g,"-").replace(/[：]/g,":")
+    .replace(/[，、]/g,",").replace(/[×✕ｘX]/g,"x").replace(/[÷]/g,"/")
+    .replace(/[＝]/g,"=").replace(/[（]/g,"(").replace(/[）]/g,")")
+    .replace(/[．]/g,".").replace(/[，]/g,",")
+    .replace(/ルート/g,"√")
+    .replace(/\^2/g,"²").replace(/\^3/g,"³")
+    .replace(/[.,!?'’"”"。]/g,"")
+    .replace(/cm²/g,"cm2").replace(/cm³/g,"cm3")
+    .toLowerCase();
+}
+
+function expandMathVariants(s){
+  const n = normalize(s);
+  const variants = new Set([n]);
+  variants.add(n.replace(/²/g,"^2").replace(/³/g,"^3"));
+  variants.add(n.replace(/\^2/g,"²").replace(/\^3/g,"³"));
+  if(n.includes("√")) variants.add(n.replace(/√(\d+)/g,"ルート$1"));
+  return [...variants];
+}
+
+function checkTextAnswer(q, trimmed){
+  if(!trimmed) return false;
+  const norm = normalize(trimmed);
+  const accepts = q.accept.flatMap(a => expandMathVariants(a));
+  if(accepts.some(a => a === norm)) return true;
+
+  if(accepts.some(a => /シソチョウ|ししょちょう|しそちょう/.test(a))){
+    if(/^(シソチョウ|し(しょ|そ)(ち|と)う|始祖鳥)$/.test(trimmed.replace(/\s/g,""))) return true;
+  }
+
+  if(q.tag === "思"){
+    if(accepts.some(a => a.length >= 2 && (norm.includes(a) || a.includes(norm)))) return true;
+    const keywords = accepts.flatMap(a =>
+      normalize(a).split(/[、,・/\s]+/).filter(w => w.length >= 2)
+    );
+    if(keywords.length > 0){
+      const matched = keywords.filter(k => norm.includes(k)).length;
+      if(matched >= Math.ceil(keywords.length * 0.45)) return true;
+    }
+    const strip = s => s.replace(/[のをがはにでと]/g,"");
+    if(accepts.some(a => strip(norm) === strip(a) || (strip(a).length>=3 && strip(norm).includes(strip(a))))) return true;
+  }
+  return false;
+}
+
+const MATH_PAD_KEYS = [
+  ["7","8","9","÷","²"],["4","5","6","×","³"],["1","2","3","-","√"],
+  ["0",".","+","=","±"],["x","y","a","b","("],[")","/","π","≤","≥"],["≠","^2","^3","±","∞"]
+];
+
+function insertAtCursor(input, text){
+  const start = input.selectionStart ?? input.value.length;
+  const end = input.selectionEnd ?? input.value.length;
+  input.value = input.value.slice(0,start) + text + input.value.slice(end);
+  const pos = start + text.length;
+  input.setSelectionRange(pos, pos);
+  input.focus();
+}
+
+function renderMathPad(input){
+  const pad = document.createElement("div");
+  pad.className = "math-pad";
+  pad.id = "math-pad";
+  MATH_PAD_KEYS.flat().forEach(key=>{
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "math-key" + (key.length>1?" wide":"");
+    btn.textContent = key === "^2" ? "x²" : key === "^3" ? "x³" : key;
+    btn.addEventListener("click", ()=>{
+      const insert = key === "^2" ? "²" : key === "^3" ? "³" : key;
+      insertAtCursor(input, insert);
+    });
+    pad.appendChild(btn);
+  });
+  return pad;
+}
+
+function handleChoiceAnswer(idx, box, q){
+  if(answered) return;
+  answered = true;
+  const buttons = box.querySelectorAll(".choice-btn");
+  buttons.forEach((b,i)=>{
+    b.disabled = true;
+    if(i===q.answer) b.classList.add("correct");
+    else if(i===idx) b.classList.add("wrong");
+  });
+  const wasCorrect = idx===q.answer;
+  finalizeAnswer(q, wasCorrect, q.choices[idx], idx);
+}
+
+function handleTextAnswer(value, btn, input, q){
+  if(answered) return;
+  answered = true;
+  input.disabled = true; btn.disabled = true;
+  document.querySelectorAll(".math-key").forEach(b=>b.disabled=true);
+  const trimmed = (value||"").trim();
+  let wasCorrect = false;
+  if(trimmed){
+    wasCorrect = checkTextAnswer(q, trimmed);
+  }
+  if(!trimmed){
+    input.placeholder = "（未回答）";
+  }
+  finalizeAnswer(q, wasCorrect, trimmed || "（未回答）", null);
+}
+
+function finalizeAnswer(q, wasCorrect, userAnswer, chosenIdx){
+  if(wasCorrect) correctCount++;
+  results.push({q, wasCorrect, userAnswer});
+  recordAttempt(q, wasCorrect);
+  markQuestionSeen(q.id);
+  answeredLog[currentIndex] = {wasCorrect, userAnswer, chosenIdx};
+
+  // プレイヤー統計
+  PLAYER.totalAnswered++;
+  if(wasCorrect){
+    PLAYER.totalCorrect++;
+    PLAYER.streak++;
+    if(PLAYER.streak > PLAYER.bestStreak) PLAYER.bestStreak = PLAYER.streak;
+    const subj = getQuestionSubject(q);
+    if(subj){
+      PLAYER.subjectAnswered[subj] = (PLAYER.subjectAnswered[subj]||0)+1;
+      PLAYER.subjectCorrect[subj] = (PLAYER.subjectCorrect[subj]||0)+1;
+    }
+    PLAYER.unitCorrect[q.unit] = (PLAYER.unitCorrect[q.unit]||0)+1;
+  } else {
+    PLAYER.streak = 0;
+    const subj = getQuestionSubject(q);
+    if(subj) PLAYER.subjectAnswered[subj] = (PLAYER.subjectAnswered[subj]||0)+1;
+  }
+  savePlayer();
+  checkAchievements();
+  updateGoldUI();
+
+  const qcard = document.getElementById("qcard");
+  if(!wasCorrect){
+    qcard.classList.remove("shake"); void qcard.offsetWidth; qcard.classList.add("shake");
+  }
+
+  showAnswerPanel(q, wasCorrect, true);
+  document.getElementById("score-live").textContent = `正解 ${correctCount}`;
+  document.getElementById("next-btn").disabled = false;
+  const isLast = currentIndex === quizQueue.length-1;
+  document.getElementById("next-btn").textContent = isLast ? "結果を見る ▶" : "次の問題 ▶";
+}
+
+function showAnswerPanel(q, wasCorrect, animateStamp){
+  const panel = document.getElementById("answer-panel");
+  panel.classList.remove("hidden");
+  const oldStamp = panel.querySelector(".stamp");
+  if(oldStamp) oldStamp.remove();
+
+  const stamp = document.createElement("div");
+  stamp.className = "stamp" + (wasCorrect ? "" : " wrong");
+  if(!animateStamp) stamp.style.animation = "none";
+  stamp.textContent = wasCorrect ? "○" : "✕";
+  panel.appendChild(stamp);
+
+  const correctText = q.choices ? q.choices[q.answer] : (q.display || q.accept[0]);
+  document.getElementById("correct-answer").innerHTML = mathFormat(correctText);
+  document.getElementById("explain").innerHTML = mathFormat(q.explain);
+
+  const fbox = document.getElementById("formula-box");
+  const fbody = document.getElementById("formula-body");
+  if(q.formula){
+    fbody.innerHTML = mathFormat(q.formula);
+    fbox.classList.remove("hidden");
+  } else {
+    fbox.classList.add("hidden");
+  }
+}
+
+/* ======================================================================
+   RESULTS
+   ====================================================================== */
+function animateCount(el, target, suffix){
+  let cur = 0;
+  const step = Math.max(1, Math.round(target/24));
+  const timer = setInterval(()=>{
+    cur += step;
+    if(cur>=target){ cur=target; clearInterval(timer); }
+    el.textContent = cur + (suffix||"");
+  }, 22);
+}
+
+function launchConfetti(){
+  const colors = ["#c23b2e","#3c5c78","#b3892f","#2c6e49","#7a4a2b"];
+  for(let i=0;i<44;i++){
+    const piece = document.createElement("div");
+    piece.className = "confetti-piece";
+    const size = 6+Math.random()*6;
+    piece.style.width = size+"px";
+    piece.style.height = (size*0.4)+"px";
+    piece.style.left = (Math.random()*100)+"vw";
+    piece.style.background = colors[Math.floor(Math.random()*colors.length)];
+    piece.style.animation = `confettiFall ${1.6+Math.random()*1.2}s ease-in forwards`;
+    piece.style.animationDelay = (Math.random()*0.4)+"s";
+    document.body.appendChild(piece);
+    setTimeout(()=>piece.remove(), 3200);
+  }
+}
+
+function showResults(){
+  showScreen("result");
+  const total = quizQueue.length;
+  let chiCorrect=0, chiTotal=0, shiCorrect=0, shiTotal=0;
+  results.forEach(r=>{
+    if(r.q.tag==="知"){ chiTotal += r.q.pts; if(r.wasCorrect) chiCorrect += r.q.pts; }
+    else { shiTotal += r.q.pts; if(r.wasCorrect) shiCorrect += r.q.pts; }
+  });
+
+  const chiEl = document.getElementById("score-chi");
+  const shiEl = document.getElementById("score-shi");
+  const totalEl = document.getElementById("score-total");
+  chiEl.textContent = "0/"+chiTotal; shiEl.textContent = "0/"+shiTotal; totalEl.textContent = "0/"+(chiTotal+shiTotal);
+  setTimeout(()=>{
+    animateCount(chiEl, chiCorrect, "/"+chiTotal);
+    animateCount(shiEl, shiCorrect, "/"+shiTotal);
+    animateCount(totalEl, chiCorrect+shiCorrect, "/"+(chiTotal+shiTotal));
+  }, 150);
+
+  document.getElementById("result-sub").textContent = `全${total}問中 ${correctCount}問正解${lastWasWeakSession ? "（ニガテ改善モード）":""}`;
+
+  const pct = total>0 ? correctCount/total : 0;
+  const badge = document.getElementById("result-badge");
+  if(pct===1){ badge.textContent="パーフェクト！"; badge.style.background="var(--ok)"; badge.style.color="#fff"; launchConfetti(); }
+  else if(pct>=0.8){ badge.textContent="よくできました"; badge.style.background="var(--navy)"; badge.style.color="#fff"; launchConfetti(); }
+  else if(pct>=0.5){ badge.textContent="もう少し！"; badge.style.background="var(--gold)"; badge.style.color="#fff"; }
+  else{ badge.textContent="ニガテ改善モードで復習しよう"; badge.style.background="var(--red)"; badge.style.color="#fff"; }
+
+  const breakdown = document.getElementById("unit-breakdown");
+  breakdown.innerHTML = "";
+  UNITS.forEach(u=>{
+    const unitResults = results.filter(r=>r.q.unit===u.id);
+    if(unitResults.length===0) return;
+    const correct = unitResults.filter(r=>r.wasCorrect).length;
+    const p = Math.round((correct/unitResults.length)*100);
+    const row = document.createElement("div");
+    row.className = "ub-row";
+    row.innerHTML = `
+      <span class="ub-name">${u.name}</span>
+      <div class="ub-bar-track"><div class="ub-bar-fill" style="background:${u.color};"></div></div>
+      <span class="ub-frac">${correct}/${unitResults.length}</span>
+    `;
+    breakdown.appendChild(row);
+    setTimeout(()=>{ row.querySelector(".ub-bar-fill").style.width = p+"%"; }, 100);
+  });
+
+  const missWrap = document.getElementById("miss-list");
+  const missListSection = document.getElementById("miss-list-wrap");
+  const retryWrongBtn = document.getElementById("retry-wrong-btn");
+  missWrap.innerHTML = "";
+  const misses = results.filter(r=>!r.wasCorrect);
+  if(misses.length===0){
+    missListSection.classList.add("hidden");
+    retryWrongBtn.classList.add("hidden");
+  } else {
+    missListSection.classList.remove("hidden");
+    retryWrongBtn.classList.remove("hidden");
+    misses.forEach(r=>{
+      const item = document.createElement("div");
+      item.className = "miss-item";
+      const correctText = r.q.choices ? r.q.choices[r.q.answer] : (r.q.display || r.q.accept[0]);
+      item.innerHTML = `<div class="q">${mathFormat(r.q.text)}</div><div class="a">正解：${mathFormat(correctText)}</div>`;
+      missWrap.appendChild(item);
+    });
+  }
+
+  PLAYER.sessions++;
+  if(pct===1) PLAYER.perfectSessions++;
+  if(lastWasWeakSession && pct>=0.8) PLAYER.weakClears++;
+  savePlayer();
+  const newAch = checkAchievements();
+  updateGoldUI();
+  if(newAch>0){
+    setTimeout(()=>alert(`🏅 新しい称号を${newAch}個獲得しました！`), 400);
+  }
+  updateWeakBadge();
+}
+
+/* ======================================================================
+   NOTE PAD (handwriting)
+   ====================================================================== */
+let noteDrawing = false;
+let noteErasing = false;
+let noteCtx = null;
+
+function applyNoteColors(){
+  const nc = NOTE_COLORS.find(c=>c.id===PLAYER.noteColor) || NOTE_COLORS[0];
+  const popup = document.getElementById("note-popup");
+  if(popup) popup.style.background = nc.bg;
+  const canvas = document.getElementById("note-canvas");
+  if(canvas) canvas.style.background = nc.bg;
+}
+
+function initNotePad(){
+  const canvas = document.getElementById("note-canvas");
+  noteCtx = canvas.getContext("2d");
+  noteCtx.lineCap = "round";
+  noteCtx.lineJoin = "round";
+  noteCtx.lineWidth = 2.5;
+  applyNoteColors();
+
+  function getPos(e){
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    const src = e.touches ? e.touches[0] : e;
+    return { x:(src.clientX-rect.left)*scaleX, y:(src.clientY-rect.top)*scaleY };
+  }
+  function startDraw(e){ e.preventDefault(); noteDrawing=true; const p=getPos(e); noteCtx.beginPath(); noteCtx.moveTo(p.x,p.y); }
+  function draw(e){
+    if(!noteDrawing) return;
+    e.preventDefault();
+    const pen = PEN_COLORS.find(c=>c.id===PLAYER.penColor) || PEN_COLORS[0];
+    noteCtx.strokeStyle = noteErasing ? (NOTE_COLORS.find(c=>c.id===PLAYER.noteColor)||NOTE_COLORS[0]).bg : pen.color;
+    noteCtx.lineWidth = noteErasing ? 14 : 2.5;
+    noteCtx.globalCompositeOperation = noteErasing ? "destination-out" : "source-over";
+    const p = getPos(e);
+    noteCtx.lineTo(p.x,p.y); noteCtx.stroke();
+  }
+  function endDraw(){ noteDrawing=false; noteCtx.globalCompositeOperation="source-over"; }
+
+  canvas.addEventListener("mousedown", startDraw);
+  canvas.addEventListener("mousemove", draw);
+  canvas.addEventListener("mouseup", endDraw);
+  canvas.addEventListener("mouseleave", endDraw);
+  canvas.addEventListener("touchstart", startDraw, {passive:false});
+  canvas.addEventListener("touchmove", draw, {passive:false});
+  canvas.addEventListener("touchend", endDraw);
+
+  document.getElementById("note-btn").addEventListener("click", ()=>{
+    document.getElementById("note-overlay").classList.remove("hidden");
+    applyNoteColors();
+  });
+  document.getElementById("note-close").addEventListener("click", ()=>{
+    document.getElementById("note-overlay").classList.add("hidden");
+  });
+  document.getElementById("note-overlay").addEventListener("click", e=>{
+    if(e.target.id==="note-overlay") document.getElementById("note-overlay").classList.add("hidden");
+  });
+  document.getElementById("note-pen").addEventListener("click", ()=>{
+    noteErasing=false;
+    document.getElementById("note-pen").classList.add("active");
+    document.getElementById("note-eraser").classList.remove("active");
+  });
+  document.getElementById("note-eraser").addEventListener("click", ()=>{
+    noteErasing=true;
+    document.getElementById("note-eraser").classList.add("active");
+    document.getElementById("note-pen").classList.remove("active");
+  });
+  document.getElementById("note-clear").addEventListener("click", ()=>{
+    noteCtx.clearRect(0,0,canvas.width,canvas.height);
+  });
+}
+
+updateGoldUI();
+initNotePad();
+updateWeakBadge();
+</script>
+</body>
+</html>
